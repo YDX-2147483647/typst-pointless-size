@@ -4,7 +4,7 @@
 Chinese size system (hào-system) and type-related measurements units.
 
 ```typst
-#import "@preview/zh:0.1.0": zh, zihao
+#import "@preview/zihao:0.1.0": zh, zihao
 
 #set text(size: zh(5)) // 五号（10.5pt）
 // or
@@ -25,7 +25,7 @@ Chinese size systems were not standardized. By default, this package is consiste
 如想覆盖定义：If you want to override:
 
 ```typst
-#import "@preview/zh:0.1.0": zh as _zh
+#import "@preview/zihao:0.1.0": zh as _zh
 
 #let zh = _zh.with(overrides: ((7, 5.25pt),))
 
