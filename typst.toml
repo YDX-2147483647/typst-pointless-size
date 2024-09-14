@@ -1,0 +1,7 @@
+[package]
+name = "zihao"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["Y.D.X."]
+license = "MIT"
+description = "中文字号的号数制及字体度量单位 Chinese size system (hào-system) and type-related measurements units"
