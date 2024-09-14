@@ -23,7 +23,7 @@
   if rule != none {
     rule.at(1)
   } else {
-    panic("expected one of a valid size (zìhào), found " + repr(size) + ". (All valid size: " + rules.map(r => repr(r.at(0))).join(", ") + ".)")
+    panic("expected a valid size (zìhào), found " + repr(size) + ". (All valid sizes: " + rules.map(r => repr(r.at(0))).join(", ") + ".)")
   }
 }
 
