@@ -19,6 +19,37 @@ Chinese size system (hào-system) and type-related measurements units.
 #zh(0) // 初号（42pt）
 ```
 
+![zihao](https://github.com/user-attachments/assets/585d3016-5e7e-46fe-8e16-befcfe1ee6a3)
+<!--
+#import "@preview/pointless-size:0.1.0": zh
+
+#set page(width: auto, height: auto, margin: 1em)
+
+#table(
+  columns: 3,
+  align: left + horizon,
+  stroke: none,
+  table.hline(),
+  [号数], [点数], [意义],
+  table.hline(stroke: 0.5pt),
+  ..(
+    (0, "初号"),
+    ("-0", "小初"),
+    ..range(1, 9).map(n => (
+      (n, numbering("一号", n)),
+      ..if n < 7 {
+        (-n, numbering("小一", n))
+      },
+    )),
+  ).flatten().chunks(2).map(((n, t)) => (
+    raw("zh(" + repr(n) + ")", lang: "typst"),
+    [#zh(n)],
+    text(zh(n), t),
+  )).flatten(),
+  table.hline(),
+)
+-->
+
 字号没有统一规定，本包默认与 CTeX、MS Word、WPS、Adobe 的中文规则一致。
 Chinese size systems were not standardized. By default, this package is consistent with Chinese rules of CTeX, MS Word, WPS, Adobe.
 
