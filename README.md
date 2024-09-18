@@ -102,6 +102,10 @@ Chinese size systems were not standardized. By default, this package is consiste
 
   #543 ctextsize: Redesign the font size system (Chinese)
 
+- ✅[CY/T 154—2017 中文出版物夹用英文的编辑规范 - 行业标准 | 全国标准信息公共服务平台](https://std.samr.gov.cn/hb/search/stdHBDetailed?id=8B1827F23645BB19E05397BE0A0AB44A)（中文）\[2017-04-17\]
+
+  > 11.2.1 中文文本中夹用英文时，英文字号应与中文字号匹配。常用的为：中文“小五号”与英文“9P”相对应，中文“五号”与“10.5P”相对应。
+
 - ✅[GB 40070–2021 儿童青少年学习用品近视防控卫生要求 - 国家标准 | 全国标准信息公共服务平台](https://std.samr.gov.cn/gb/search/gbDetailed?id=BBE32B661B7E8FC8E05397BE0A0AB906)（中文）\[2021-02-20\]
 
   其中用到了号数制，例如4.3.1“小学一、二年级用字应不小于16P（3号）字”。总结下来是三号 16pt、四号 14pt、小四 12pt、五号 10.5pt、小五 9pt。
