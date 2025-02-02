@@ -2,6 +2,7 @@
 # - https://just.systems
 # - mkdir, ln, etc.
 # - https://mikefarah.gitbook.io/yq
+# - https://github.com/chmln/sd
 
 INSTALL_NAME := replace(data_directory(), '\', '/') + "/typst/packages/local/pointless-size"
 VERSION := `yq .package.version typst.toml`
@@ -31,3 +32,8 @@ check-install:
 # Run tests
 test:
     typst compile src/zihao.test.typ - --format svg > /dev/null
+
+# Create package.7z for submission
+package:
+    sd --fixed-strings './' 'https://github.com/YDX-2147483647/typst-pointless-size/blob/main/' README.md
+    7z a package.7z LICENSE README.md typst.toml src/ -x!src/*test*
