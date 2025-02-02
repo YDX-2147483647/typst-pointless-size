@@ -17,4 +17,4 @@ jobs:
       - uses: typst-community/setup-typst@v3
 
       - run: just install
-      - run: just check
+      - run: just test

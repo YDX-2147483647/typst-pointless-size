@@ -14,7 +14,7 @@ INSTALL_DIR := INSTALL_NAME + '/' + VERSION
     just --list
 
 # Install the library to @local by creating a symlink
-install:
+install: && check-install
     mkdir --parents {{ INSTALL_NAME }}
     ln --symbolic {{ replace(source_directory(), '\', '/') }} {{ INSTALL_DIR }}
 
@@ -23,5 +23,11 @@ uninstall:
     rm --interactive {{ INSTALL_DIR }}
 
 # Check the library is importable
-check:
-    echo '#import "@local/pointless-size:{{ VERSION }}"' | typst compile - - --format svg
+[private]
+check-install:
+    echo '#import "@local/pointless-size:{{ VERSION }}"' \
+    | typst compile - - --format svg > /dev/null
+
+# Run tests
+test:
+    typst compile src/zihao.test.typ - --format svg > /dev/null
