@@ -21,3 +21,7 @@ install:
 # Remove the library installed to @local
 uninstall:
     rm --interactive {{ INSTALL_DIR }}
+
+# Check the library is importable
+check:
+    echo '#import "@local/pointless-size:{{ VERSION }}"' | typst compile - - --format svg
