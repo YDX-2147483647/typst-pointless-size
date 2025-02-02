@@ -47,7 +47,6 @@ jobs:
           token: ${{ secrets.REGISTRY_TOKEN }}
           commit-message: ${{ steps.prepare.outputs.TITLE }}
           title: ${{ steps.prepare.outputs.TITLE }}
-          push-to-fork: YDX-2147483647/packages
       - name: Summary
         run: |
           echo "Created [PR #${{ steps.pr.outputs.pull-request-number }}](${{ steps.pr.outputs.pull-request-url }})." >> "$GITHUB_STEP_SUMMARY"
