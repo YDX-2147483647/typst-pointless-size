@@ -17,6 +17,11 @@ Chinese size system (hào-system) and type-related measurements units.
 #zh(-1) // 小一（24pt）
 #zh("-0") // 小初（36pt）
 #zh(0) // 初号（42pt）
+
+// 写汉字也可以 Han characters are also acceptable
+#zh("五号")
+#zh("五")
+#zh("小五")
 ```
 
 ![zihao](https://github.com/user-attachments/assets/585d3016-5e7e-46fe-8e16-befcfe1ee6a3)
