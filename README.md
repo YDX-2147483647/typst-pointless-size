@@ -1,5 +1,9 @@
 # Typst Pointless Size——字号 zìhào
 
+<a href="https://typst.app/universe/package/pointless-size">
+    <img src="https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Ftypst.app%2Funiverse%2Fpackage%2Fpointless-size&query=%2Fhtml%2Fbody%2Fdiv%2Fmain%2Fdiv%5B2%5D%2Faside%2Fsection%5B2%5D%2Fdl%2Fdd%5B3%5D&logo=typst&label=Universe&color=%23239DAE" />
+</a>
+
 中文字号的号数制及字体度量单位。
 Chinese size system (hào-system) and type-related measurements units.
 
