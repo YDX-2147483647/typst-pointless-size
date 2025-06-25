@@ -5,7 +5,7 @@
 /// - size name: "初号", "一号", "小五", …
 
 /// Map from size numbers to points.
-#let size_number_to_pt = (
+#let size-number-to-pt = (
   (8, 5pt),
   (7, 5.5pt),
   (-6, 6.5pt),
@@ -31,7 +31,7 @@
 ///
 /// - size(int | "-0"): size number
 /// -> str
-#let number_to_name(size) = {
+#let number-to-name(size) = {
   if size == "-0" {
     "小初"
   } else {
@@ -58,7 +58,7 @@
 ///
 /// - size (str): size name.
 /// -> int | "-0" | none
-#let name_to_number(size) = {
+#let name-to-number(size) = {
   if type(size) != str { return none }
 
   size = size.trim("号", at: end)
@@ -81,13 +81,13 @@
 ///
 /// -> length
 #let zh(size, overrides: ()) = {
-  let rules = (..overrides, ..size_number_to_pt)
+  let rules = (..overrides, ..size-number-to-pt)
   let rule = rules.find(((s, p)) => s == size)
   if rule != none {
     rule.at(1)
   } else {
     // Try parsing it as a name
-    let parsed = name_to_number(size)
+    let parsed = name-to-number(size)
     if parsed != none {
       zh(parsed, overrides: overrides)
     } else {
