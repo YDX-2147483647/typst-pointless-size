@@ -28,36 +28,8 @@ Chinese size system (hào-system) and type-related measurements units.
 #zh("小五")
 ```
 
-![zihao](https://github.com/user-attachments/assets/585d3016-5e7e-46fe-8e16-befcfe1ee6a3)
-<!--
-#import "@preview/pointless-size:0.1.0": zh
-
-#set page(width: auto, height: auto, margin: 1em)
-
-#table(
-  columns: 3,
-  align: left + horizon,
-  stroke: none,
-  table.hline(),
-  [号数], [点数], [意义],
-  table.hline(stroke: 0.5pt),
-  ..(
-    (0, "初号"),
-    ("-0", "小初"),
-    ..range(1, 9).map(n => (
-      (n, numbering("一号", n)),
-      ..if n < 7 {
-        (-n, numbering("小一", n))
-      },
-    )),
-  ).flatten().chunks(2).map(((n, t)) => (
-    raw("zh(" + repr(n) + ")", lang: "typst"),
-    [#zh(n)],
-    text(zh(n), t),
-  )).flatten(),
-  table.hline(),
-)
--->
+[![转换表 Conversion table](https://github.com/user-attachments/assets/1cbdcedd-9ab0-4f62-9e67-4d4ef222972e)](./docs/conversion-table.typ)
+[![倍数关系 Multiples](https://github.com/user-attachments/assets/d045ca93-7995-410e-bc35-782f976d4466)](./docs/multiples.typ)
 
 ## 覆盖定义 Override
 
