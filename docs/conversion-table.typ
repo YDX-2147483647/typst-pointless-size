@@ -1,4 +1,4 @@
-#import "@preview/pointless-size:0.1.1": zh
+#import "/src/lib.typ": zh
 
 #set page(width: auto, height: auto, margin: 1em)
 
