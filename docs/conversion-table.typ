@@ -17,21 +17,29 @@
   table.hline(stroke: 0.5pt),
   ..(
     (0, "初号"),
-    ("-0", "小初"),
-    ..range(1, 9).map(n => (
-      (n, numbering("一号", n)),
-      if n < 7 {
-        (-n, numbering("小一", n))
-      } else { (none, none) },
-    )),
+    (("-0", 0.5), "小初"),
+    ..range(1, 9)
+      .map(n => (
+        (n, numbering("一号", n)),
+        if n < 7 {
+          ((-n, n + 0.5), numbering("小一", n))
+        } else { (none, none) },
+      ))
+      .join(),
   )
-    .flatten()
-    .chunks(2)
-    .map(((n, t)) => if n != none {
+    .map(((number, name)) => if number != none {
+      let numbers = if type(number) == array { number } else { (number,) }
+      let n = numbers.first()
+      assert.eq(numbers.map(x => zh(x)).dedup(), (zh(n),))
+
       (
-        raw("zh(" + repr(n) + ")", lang: "typc"),
+        {
+          let fmt = x => raw("zh(x)".replace("x", repr(x)), lang: "typc")
+          set par(leading: 0.25em)
+          numbers.map(fmt).intersperse(linebreak()).join()
+        },
         [#zh(n)],
-        text(zh(n), t),
+        text(zh(n), name),
       )
     } else { (none,) * 3 })
     .flatten(),

@@ -27,7 +27,7 @@ Chinese size system (hào-system) and type-related measurements units.
 #zh("小五")
 ```
 
-[![转换表 Conversion table](https://github.com/user-attachments/assets/1cbdcedd-9ab0-4f62-9e67-4d4ef222972e)](./docs/conversion-table.typ)
+[![转换表 Conversion table](https://github.com/user-attachments/assets/72b28805-0767-40f5-a00f-212802c326a0)](./docs/conversion-table.typ)
 [![倍数关系 Multiples](https://github.com/user-attachments/assets/d045ca93-7995-410e-bc35-782f976d4466)](./docs/multiples.typ)
 
 ## 覆盖定义 Override
