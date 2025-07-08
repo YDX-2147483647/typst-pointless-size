@@ -45,6 +45,7 @@ jobs:
         id: pr
         with:
           token: ${{ secrets.REGISTRY_TOKEN }}
+          push-to-fork: YDX-2147483647/packages
           commit-message: ${{ steps.prepare.outputs.TITLE }}
           title: ${{ steps.prepare.outputs.TITLE }}
       - name: Summary
