@@ -32,6 +32,8 @@ check-install:
 # Run tests
 test:
     typst compile src/zihao.test.typ - --format svg > /dev/null
+    typst compile docs/conversion-table.typ - --format svg --root . > /dev/null
+    typst compile docs/multiples.typ - --format svg --root . > /dev/null
 
 # Create package.7z for submission
 package:

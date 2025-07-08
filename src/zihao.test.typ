@@ -21,14 +21,43 @@
 }
 
 #{
+  assert.eq(type(normalize-half(5)), int)
+  assert.eq(normalize-half(5), 5)
+  assert.eq(normalize-half(5.0), 5)
+  assert.eq(normalize-half(5.01), 5)
+  assert.eq(normalize-half(4.99), 5)
+
+  assert.eq(type(normalize-half(5.5)), float)
+  assert.eq(normalize-half(5.5), 5.5)
+  assert.eq(normalize-half(5.1), 5.5)
+  assert.eq(normalize-half(5.9), 5.5)
+}
+
+#{
+  assert.eq(number-to-half(5), 5)
+  assert.eq(number-to-half(-5), 5.5)
+  assert.eq(number-to-half(0), 0)
+  assert.eq(number-to-half("-0"), 0.5)
+
+  for size in (5, -5, 0, "-0") {
+    let number = number-to-half(size)
+    assert.eq(number, normalize-half(number))
+    assert.eq(half-to-number(number), size)
+  }
+}
+
+#{
   assert.eq(type(zh(5)), length)
   assert.eq(zh("五"), zh(5))
   assert.eq(zh("五号"), zh(5))
+  assert.eq(zh(5.0), zh(5))
 
   assert.eq(zh("小五"), zh(-5))
+  assert.eq(zh(5.5), zh(-5))
   assert(zh(-5) < zh(5))
 
   assert.eq(zh("小初"), zh("-0"))
+  assert.eq(zh(0.5), zh("-0"))
   assert(zh(5) < zh("-0"))
 }
 
@@ -37,7 +66,6 @@
   // Override the existing definition
   let _zh = zh.with(overrides: ((7, 5.25pt),))
   assert.eq(_zh(7), 5.25pt)
-
 }
 
 #{
