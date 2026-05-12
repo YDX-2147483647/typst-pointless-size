@@ -12,7 +12,7 @@
 
   > 11.2.1 中文文本中夹用英文时，英文字号应与中文字号匹配。常用的为：中文“小五号”与英文“9P”相对应，中文“五号”与“10.5P”相对应。
 
-- ✅[GB 40070–2021 儿童青少年学习用品近视防控卫生要求 - 国家标准 | 全国标准信息公共服务平台](https://std.samr.gov.cn/gb/search/gbDetailed?id=BBE32B661B7E8FC8E05397BE0A0AB906)（中文）\[2021-02-20\]
+- ✅[GB 40070—2021 儿童青少年学习用品近视防控卫生要求 - 国家标准 | 全国标准信息公共服务平台](https://std.samr.gov.cn/gb/search/gbDetailed?id=BBE32B661B7E8FC8E05397BE0A0AB906)（中文）\[2021-02-20\]
 
   其中用到了号数制，例如4.3.1“小学一、二年级用字应不小于16P（3号）字”。总结下来是三号 16pt、四号 14pt、小四 12pt、五号 10.5pt、小五 9pt。
 
@@ -20,11 +20,11 @@
 
   The standard uses hào-system, e.g. 4.3.1 “texts for grade 1/2 of primary school should not be less than 16P (size 3)”. To summarize, size 3 = 16pt, size 4 = 14pt, size small 4 = 12pt, size 5 = 10.5pt, size small 5 = 9pt.
 
-- 🚸[§2.3.5 基本版式设计的注意事项 - 中文排版需求 | W3C 编辑草稿](https://www.w3.org/International/clreq/#considerations_in_designing_type_area)（中/英）\[2024-09-13\]
+- 🚸[§7.1.1.5 基本版式设计的注意事项 - 中文排版需求 | W3C 小组备忘草稿](https://www.w3.org/TR/clreq/#considerations_in_designing_type_area)（中/英）\[2026-05-03\]
 
   > “号”由于当年金属活字各地厂家的规范不一而不尽相同……不作为规范性规定。
 
-  §2.3.5 Considerations when Designing the Type Area - Requirements for Chinese Text Layout | W3C Editor's Draft (Chinese & English)
+  §7.1.1.5 Considerations when designing the type area - Requirements for Chinese Text Layout | W3C Group Draft Note (Chinese & English)
 
   > These hào-systems were not standardized by the various foundries in the past. …It is not normative information.
 
@@ -50,7 +50,7 @@
 
 ## 解释 Explanations
 
-- [#135 显明解行号号珍 - 字谈字畅 | The Type](https://www.thetype.com/typechat/ep-135/)（中文，带文字说明的播客）\[2020-09-09\] ([archive.today](https://archive.today/qaG8D))
+- [#135 显明解行号号珍 - 字谈字畅 | The Type](https://www.thetype.com/typechat/ep-135/)（中文，带文字说明的播客）\[2020-09-09\] ([web.archive.org](https://web.archive.org/web/20260512085232/https://www.thetype.com/typechat/ep-135/) / [archive.today](https://archive.today/qaG8D))
 
   (Chinese, podcast with show notes)
 
