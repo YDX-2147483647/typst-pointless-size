@@ -1,2 +1,4 @@
 *.pdf
-*.7z
+!/ref/assets/*.pdf
+
+/target/
