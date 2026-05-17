@@ -616,6 +616,140 @@
       ))
     ],
   ),
+  zhwiki: (
+    brief: [#link("https://zh.wikipedia.org/w/index.php?title=字号_(印刷)&oldid=92592966#相关换算")[相关换算 - 字号 (印刷) - 中文维基百科，2026-05-09版]以及更早版本],
+    notes: [
+      此词条经过多人编辑，目前比较混乱，只好忽略了。历史大概如下。（日期按UTC+8）
+
+      #import "visualize.typ": draw-as-log-period
+      #let draw(csv, width: 20em, height: 12em) = figure(draw-as-log-period(
+        std.csv(bytes(csv)).map(((g, p)) => (g, float(p))),
+        width: width,
+        height: height,
+      ))
+      #let link-diff(query, body) = link("https://zh.wikipedia.org/w/index.php?title=點_(印刷)&" + query, body)
+
+      + #link-diff("diff=7314482&oldid=7170428")[2008年6月20日Voidvector]向今日名为「點（印刷）」的词条添加了「中国相对」一节，其唯一内容是包含「印刷字号」「排版磅数」两列的表格。该表内容如下，有几点比较特殊：小五是 $9.13$ 而非 $9$，六号 $7.87$ 与小六 $7.78$ 十分接近，无小三、有小六、无八号。
+        #draw(
+          ```csv
+          七号,5.25
+          小六,7.78
+          六号,7.87
+          小五,9.13
+          五号,10.5
+          小四,12
+          四号,13.75
+          三号,15.75
+          小二,18
+          二号,21
+          小一,24
+          一号,27.5
+          小初,36
+          初号,42
+          ```.text,
+        )
+
+      + #link-diff("diff=9494225&oldid=8837213")[2009年3月5日小wing]修改了三号、四号、小五、六号、小六的数值，添加了小三；同时向表格添加了「毫米数」一列，不过七号的毫米数留空了。修改后内容如下。
+        #draw(
+          ```csv
+          七号,5.25
+          小六,6.5
+          六号,7.5
+          小五,9
+          五号,10.5
+          小四,12
+          四号,14
+          小三,15
+          三号,16
+          小二,18
+          二号,21
+          小一,24
+          一号,27.5
+          小初,36
+          初号,42
+          ```.text,
+        )
+
+
+      + #link-diff("diff=10766663&oldid=9494225")[2009年8月2日Lupeng1917]添加了特大号、大特号、特号、八号，并补充了七号的毫米数。修改后内容如下。
+        #draw(
+          ```csv
+          八号,4.5
+          七号,5.25
+          小六,6.5
+          六号,7.5
+          小五,9
+          五号,10.5
+          小四,12
+          四号,14
+          小三,15
+          三号,16
+          小二,18
+          二号,21
+          小一,24
+          一号,27.5
+          小初,36
+          初号,42
+          特号,54
+          大特号,63
+          特大号,72
+          ```.text,
+          width: 26em,
+        )
+
+      + #link-diff("diff=28417336&oldid=25433395")[2013年8月30日119.161.132.13]将小四的毫米数从 $4.32$ 修改为 $4.23$，但「排版磅数」保持 $12$ 不变。
+
+      + #link-diff("diff=31578373&oldid=28417336")[2014年6月13日Pengyanan]移动页面「點 (印刷)」至「字型大小」，随后又移回去。根据编辑摘要，「字型大小」会被繁简转换处理成「字号」，所以做了这番修改。今日「#link("https://zh.wikipedia.org/wiki/字号")[字号]」是个消歧义页，指向商业字号、老字号、字号（印刷）、表字与别号。
+
+      + #link-diff("diff=32801423&oldid=31578373")[2014年9月28日49.196.4.237]向「中国相对」一节添加了首段正文，并引用了 @source:Ken-2-JP 对应的 Adobe CJK Type Blog，尽管词条中的数值、定义范围与Adobe页面中日两列均有差异。
+
+      + #link-diff("diff=41317764&oldid=39615686")[2016年8月31日36.48.110.253]向表格添加了「示例」一列，内容是使用相应字号的示例文本。
+
+
+      + #link-diff("diff=43787308&oldid=42317616")[2017年3月29日Ryukei]删除了「示例」列，将表头「排版磅数」改成了「点数」，同时在「中国相对」一节添加了以下描述，尽管此时表中七号是 $5.25$，其它字号也不全与 MS Word（@source:基准）相同。
+
+        #quote[
+          ……參考下表。请注意，这并不能真实反应传统铅字大小的情况，而是出于软件制约，比如 Microsoft Word 就有「字号必须是 0.5 pt 的倍数」这样的制约，因此 Word 无法将七号字忠实再现为 5.25pt 而只能定为5.5 pt，这样的换算导致与「方正飞腾」等其他排版系统中的「号」大小不尽相同。
+        ]
+
+      + #link-diff("diff=45605151&oldid=43788362")[2017年8月10日Ryukei]删除了「点数」列，增加了以下三列，而「毫米数」一列保持不变。
+
+        - 「中国点数」如下。这列与原「点数」基本相同，保留了特大号、大特号、特号#footnote[我于2026年5月私下用邮件询问，Ryukei 表示这段是 Lupeng1917 加的，可以请求来源。]，将一号、四号分别改为了 $27.5\/28$、$14\/13.75$#footnote[原文顺序如此。]，将三号、六号分别改为了 $16\/15.75$、$8\/7.875$，将小六从 $6.5$ 改为了 $6.875$。这列与@source:CLReq-main、@source:CLReq-extra 相比，定义范围多了特大号、大特号、特号、小初、小三、小六、八号，二号是 $21$ 而非 $21\/22$，其余数值、定义范围一致。
+        - 「Word点数」与@source:基准\的数值、定义范围完全一致。未定义号数在此列留空。
+        - 「日本点数」与@source:Ken-2-JP 的数值、定义范围一致，除了初号是 $45$ 而非 $42$#footnote[我于2026年5月私下用邮件询问，Ryukei 表示手头各种资料显示初号是 $42 pt$，那我估计是当时笔误吧。]。未定义号数在此列填了短横线。
+        #draw(
+          ```csv
+          八号,4.5
+          七号,5.25
+          小六,6.875
+          六号,8
+          六号,7.875
+          小五,9
+          五号,10.5
+          小四,12
+          四号,14
+          四号,13.75
+          小三,15
+          三号,16
+          三号,15.75
+          小二,18
+          二号,21
+          小一,24
+          一号,27.5
+          一号,28
+          小初,36
+          初号,42
+          特号,54
+          大特号,63
+          特大号,72
+          ```.text,
+          width: 26em,
+          height: 20em,
+        )
+
+      + #link-diff("diff=59481676&oldid=49585017")[2020年5月3日Ryukei]从「#link("https://zh.wikipedia.org/wiki/點_(印刷)")[點（印刷）]」词条拆分出了「#link("https://zh.wikipedia.org/wiki/字级")[字级]」和「#link("https://zh.wikipedia.org/wiki/字号_(印刷)")[字号（印刷）]」。于是该表移动到了「字号（印刷）」的「相关换算」一节，不过内容无变化。
+    ],
+  ),
   enwiki: (
     brief: [Comparison table 的 Chinese system 一栏，#link("https://en.wikipedia.org/w/index.php?title=Traditional_point-size_names&oldid=1347503780")[Traditional point-size names - 英文Wikipedia，2026-04-07版]],
     notes: [
@@ -628,8 +762,6 @@
       #figure(image("assets/enwiki - Comparison table - Traditional point-size names.pdf"))
 
       #link("https://en.wikipedia.org/wiki/East_Asian_typography#Font_sizes")[Font sizes - East Asian typography - Wikipedia] 也列表展示了号数制，数值、定义范围完全相同，不过引用的是 @张小衡2006。
-
-      维基百科除了英文版、@source:jawiki-旧、@source:jawiki-新，还有中文版提及相关内容：#link("https://zh.wikipedia.org/w/index.php?title=字号_(印刷)&oldid=92592966#相关换算")[相关换算 - 字号 (印刷) - 中文维基百科，2026-05-09版]。此页面虽然是#link("https://zh.wikipedia.org/wiki/User:Ryukei")[CLReq 编辑之一]创建的，但前后描述混乱，表格引用了@source:Ken-2-JP 中的博客但之不符，实在莫名其妙，只好忽略了。
     ],
   ),
   jawiki-旧: (

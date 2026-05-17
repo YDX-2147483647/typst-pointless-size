@@ -50,3 +50,21 @@
     [- #it (#tags.join(", "))]
   }
 }
+
+= 附录：本文件的著作权情况
+
+生成本文件的代码采用 #link("https://choosealicense.com/licenses/mit/")[MIT 许可证]开源，可前往 #link("https://github.com/YDX-2147483647/typst-pointless-size/tree/main/ref")[GitHub 仓库 YDX-2147483647/typst-pointless-size 的`ref/`文件夹]查看。
+
+本文件引用的数据大约属于单纯事实或通用数表，没有独创性，不存在著作权。
+
+本文件为了说明汉字号数与点数的映射关系，摘录了很多资料原文、图像，其著作权属于原作者。由于映射关系容易出现传抄错误（例如 @刘岱伟2001 转录@source:叶重光1996），资料本身意见也容易与当代外推混合（例如#link("https://github.com/CTeX-org/ctex-kit/issues/543")[前期讨论]），讨论号数与点数映射关系不得不给出资料原貌。考虑到不少文献对映射关系的描述散落多处而且不完全一致（例如@source:小史1981），甚至还存在@source:曹洪奎1979、@source:周承民1988 这种题名相同、内容高度接近而数据却有差异的情况，本文件扩大了某些资料的摘录片段，有问题可#link("https://github.com/YDX-2147483647/typst-pointless-size/issues")[联系修改]。
+
+此外，本文件受到以下帮助。（因不确定署名方式，仅列出 GitHub 用户页 URL 的 SHA256。）
+
+- `f8e77f37a8a91148a394a39410233cc9899bb26d8aa3fc691004924be2bdda01`
+
+  对数据源详情的data图提出了改进意见。
+
+- `a4ac43b4e729f80e0f1b26241a190ed2e2a49dc0d035ecfdaf02638aaa583494`
+
+  提供了印刷厂的情况（北京新华厂一号 $27.5 "pt"$，上海新华厂、商务厂、中华厂一号 $28 "pt"$）；不过还没查证，故暂未列入数据源。

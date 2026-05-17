@@ -52,6 +52,7 @@
 
   outline(title: none, depth: 2)
 
+  v(1em)
   notes
 
   body
