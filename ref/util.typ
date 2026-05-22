@@ -32,6 +32,7 @@
   小特号,小特
   大号,一号
   小大号,小一
+  大一号,大一
   ```.text,
 )) {
   let actual = normalize-g(input)

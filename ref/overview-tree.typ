@@ -21,6 +21,8 @@
       $#a / #b$
     } else if v == auto {
       [其它]
+    } else if v == none {
+      [无]
     } else {
       assert(false, message: repr(type(v)) + " cannot be humanized")
     }
@@ -33,7 +35,8 @@
       (value: true),
       (
         value: false,
-        match: (name: [七号 $= 5.5$], fn: pairs => pairs.七号 == 5.5),
+        // 没有七号也算 false
+        match: (name: [七号 $= 5.5$], fn: pairs => pairs.at("七号", default: none) == 5.5),
         cases: (
           (
             value: false,
@@ -41,13 +44,20 @@
             cases: (
               (
                 value: false,
-                match: (name: [七号], fn: pairs => pairs.七号),
+                match: (name: [四号], fn: pairs => pairs.四号),
                 cases: (
                   (
-                    value: 6.,
-                    match: (name: [小初 $= 30$], fn: pairs => pairs.小初 == 30),
+                    value: 14.,
+                    match: (name: [特号 $= 45$], fn: pairs => pairs.特号 == 45),
                     cases: (
-                      (value: true),
+                      (
+                        value: true,
+                        match: (name: [有特初], fn: pairs => "特初" in pairs),
+                        cases: (
+                          (value: true),
+                          (value: false),
+                        ),
+                      ),
                       (
                         value: false,
                         match: (name: [六号], fn: pairs => pairs.六号),
@@ -58,7 +68,7 @@
                       ),
                     ),
                   ),
-                  (value: 5.25),
+                  (value: 13.75),
                 ),
               ),
               (
