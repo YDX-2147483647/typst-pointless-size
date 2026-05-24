@@ -70,3 +70,11 @@
 - `a4ac43b4e729f80e0f1b26241a190ed2e2a49dc0d035ecfdaf02638aaa583494`
 
   提供了部分印刷厂的情况（北京新华厂一号 $27.5 pt$#footnote[这未必是实际用的点数，详见@source:京新厂1981。]，上海新华厂、商务厂、中华厂一号 $28 pt$）；不过还没查证，故暂未列入数据源。
+
+#if "log" in sys.inputs [
+  = 附录：更新记录
+
+  #show raw: set text(lang: "zh", cjk-latin-spacing: auto)
+  #show raw: set strong(delta: 0) // Disable strong
+  #figure(raw(sys.inputs.log, lang: "gitlog", block: true))
+]

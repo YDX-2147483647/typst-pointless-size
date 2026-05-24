@@ -74,4 +74,7 @@ ref-check:
 # Export the document to PDF
 [group("docs")]
 ref-build: target-dir
-    typst compile --input revision=$(git describe --tags --dirty) ref/main.typ target/ref.pdf
+    typst compile \
+        --input revision=$(git describe --tags --dirty) \
+        --input log="$(git log --pretty=format:'commit %H%nAuthor: %an%nDate:   %ad%n%n%w(0,2,2)%B%w(0,0,0)' --date iso ref/)" \
+        ref/main.typ target/ref.pdf
