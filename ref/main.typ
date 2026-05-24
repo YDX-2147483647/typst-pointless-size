@@ -1,7 +1,7 @@
 // Compiled with Typst v0.14.2.
 #import "template.typ": link, template
 
-#show: template.with(title: [资料汇编：汉字号数与点数的映射关系], date: [2026年5月7–17日], notes: [
+#show: template.with(title: [资料汇编：汉字号数与点数的映射关系], date: [2026年5月7–17、22–24日], notes: [
   #for f in (
     "main.typ",
     "sources.typ",

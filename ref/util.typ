@@ -33,6 +33,7 @@
   大号,一号
   小大号,小一
   大一号,大一
+  \七,\七
   ```.text,
 )) {
   let actual = normalize-g(input)

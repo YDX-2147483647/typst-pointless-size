@@ -160,11 +160,23 @@
       #link("https://github.com/CTeX-org/ctex-kit/issues/543")[ctexsize: 重设各级字号大小 · ctex-kit\#543] 决定增加`experiment/font-size-system=traditional`，随后 #link("https://github.com/CTeX-org/ctex-kit/issues/813")[ctex-kit\#813] 从`traditional`改成了`letterpress`。
     ],
   ),
-  CCT: (
-    brief: [CCT所用规则],
+  新CCT: (
+    brief: [新版CCT所用规则],
     via: [#link("https://mirrors.cernet.edu.cn/ctex/cct/cct-0.618033-3-win32.zip")[从校园网联合镜像站下载`/ctex/cct/cct-0.618033-3-win32.zip`]，解压，查看`files/tex/latex/cct/CCT.cfg`],
     notes: [
-      CCT 是#link("https://zh.wikipedia.org/wiki/LaTeX#CCT")[「最早支持简体中文的TeX」，「由中国科学院数学与系统科学研究院的张林波研究员编写」]，#link("https://liam.page/2013/10/15/LaTeX-CCT-template/")[在2013年就已经过时]。根据镜像站文件系统数据和 #link("https://ctex.org/ctex/release-notes/")[CTeX 套装更新记录]，CCT 0.618033-3 发布于2024年5月；不过根据`CCT.cfg`中的注释，字号表从2005年8月开始就没改过了。
+      CCT 是#link("https://zh.wikipedia.org/wiki/LaTeX#CCT")[「最早支持简体中文的TeX」，「由中国科学院数学与系统科学研究院的张林波研究员编写」]，#link("https://liam.page/2013/10/15/LaTeX-CCT-template/")[在2013年左右就已经过时]。根据#link("http://maths.nju.edu.cn/~meijq/tex/NewCCTreadme.pdf")[张林波《关于新版CCT的说明》（2006年2月3日）]，CCT有新老两个版本，老版最终版本号为 5.14，新版版本号类似 0.6180-3。《说明》还指出，新版CCT支持以下两种排版流程。
+
+      - 第一种继承自老版，基于CCT自己的预处理程序`cct`，导出CCT专用格式的dvi文件。
+
+        这种方式调用CCT字库，字号设置源于`cct.dat`，其格式类似CSV/TSV。
+
+      - 第二种是新版新增，用TeX宏文件`CCT.sty`替代原有预处理程序，导出兼容于CJK宏包系统的普通dvi文件。
+
+        这种方式调用CJK宏包系统的字库，字号设置取决于`CCT.cfg`调用的`\CCTdefzihao`命令。
+
+      此处记录第二种，@source:老CCT 记录第一种。
+
+      根据镜像站文件系统数据和 #link("https://ctex.org/ctex/release-notes/")[CTeX 套装更新记录]，CCT 0.618033-3 发布于2024年5月；不过根据`CCT.cfg`中的注释，新版CCT的字号表从2005年8月开始就没改过了。
 
       以下是`CCT.cfg`中的相关内容。
 
@@ -193,12 +205,127 @@
       )
     ],
   ),
+  老CCT: (
+    brief: [老版CCT所用规则],
+    via: [同@source:新CCT，但查看`files/tex/latex/cct/cct.dat-dist`],
+    notes: [
+      CCT有新老两个版本，此处是老版。详见@source:新CCT。
+
+      与@source:新CCT 相比，老CCT的字号整体小一圈。不过新老CCT调用的字库不同，不排除印出来差不多大。
+
+      `cct.dat`文件内容如下。
+
+      #figure(
+        ```txt
+        10
+        8.5     8.5      0.06             0.2            -5
+        11.32   11.32    0.06             0.2            -4
+        34.0    34.0     0.06             0.2             0
+        26.0    26.0     0.06             0.2             1
+        20.0    20.0     0.06             0.2             2
+        15.0    15.0     0.06             0.2             3
+        13.0    13.0     0.06             0.2             4
+        9.9     9.9      0.06             0.2             5
+        7.5     7.5      0.06             0.2             6
+        5.0     5.0      0.06             0.2             7
+        -----------------------------------------------------------------
+        width   height   h_space_factor  v_space_factor  zihao
+
+          space=width*h_space_factor,
+          stretch=sapce*0.5,
+          shrink=space*0.3333333333,
+          depth=height*v_space_factor
+
+        $Id: cct.dat,v 1.2 2004/11/26 11:41:32 zlb Exp $
+        ```,
+      )
+
+      以上文件显示最后修改于2004年11月26日。根据#link("http://maths.nju.edu.cn/~meijq/tex/CCTmanual.pdf")[张林波《科技排版软件TeX中文接口——CCT DOS 版参考手册》（1997年11月）]中展示的`CCT.DAT`，当时CCT的宽高点数和号数定义范围就是以上这样了，只不过`-4`、`-5`两行分别排在`4`、`5`之后（而非排在`0`之前），同时行距与字高之比（`v_space_factor`）是`0.0`（而非`0.2`）。
+
+      《手册》还指出，此处字宽、字高的单位是 TeX `pt` $1/72.27 "in"$。
+
+      另外，根据以下邓建松、彭冉冉，陈长松《LaTeX2e科技排版指南》（科学出版社，2001年9月第一版，2001年9月第一次印刷，ISBN 7-03-009239-2）#footnote[拍摄于我校图书馆开架阅览TS8。]，`cct.dat`定义的点数并不绝对，还会按`\magnification`参数统一放缩。
+
+      #figure(grid(
+        columns: 2,
+        ..range(4).map(n => image("assets/LaTeX_CCT-邓建松2001.pdf", page: n + 1))
+      ))
+    ],
+  ),
+  天元: (
+    brief: [天元（TY）2.62 版所用规则],
+    via: [前往#link("https://web.archive.org/web/20210418112817/http://wims.math.ecnu.edu.cn/ty/tydownload.php")[「天元（TY）下载之页」网页存档]，下载「TYWIN (TY for Windows) 2.62 版」中的#link("https://web.archive.org/web/20210418112817/http://wims.math.ecnu.edu.cn/ty/tywin263.zip")[`tywin263.zip`]，解压，查看其中的`TYWIN.HLP`文件#footnote[#link("https://en.wikipedia.org/wiki/WinHelp")[WinHelp文件`*.hlp`]是微软的一种专有格式帮助文件，相关支持已于2015年Windows 10 移除。可以通过#link("https://www.herdsoft.com/ftp/downloads.html#hlp2rtf")[`hlp2rtflx-2.16.tar.gz`等软件]转为RTF查看。]],
+    notes: [
+      天元是和CCT同时代的中文TeX系统，同样早已过时。#link("https://ask.latexstudio.net/ask/article/92.html")[网传天元初始作者肖刚已于2014年病逝。]
+
+      `TYWIN.HLP`结尾标注「（2003年4月29日更新）」，不过在陈志杰、赵书钦、万福永《LaTeX 入门与提高》（高等教育出版社，2002年2月第1版，2002年2月第1次印刷，ISBN 7-04-010468-7）#footnote[
+        这是此书第一版，以天元为主，顺带介绍了CJK宏包与CCT。后来出了第二版（高等教育出版社，2006年5月第2版，2006年5月第1次印刷，ISBN 7-04-019379-5），题名不变，作者增多为陈志杰、赵书钦、李树钧、万福永，内容改为以CJK宏包为主，不再介绍天元与CCT。CJK宏包不支持号数制，作者在第二版30页「§3.2 中文字体」中表示：「中文书籍基本字号是五号字，大小为 $10.5$ 磅（$1$ 磅即`1bp`）， 很接近于西文基准尺寸之一的 $11 pt$（严格讲是 $10.9 pt$），即使不再另行定义汉字字号的尺寸，选择 $11 pt$ 的基准尺寸，排版输出的结果也是令人满意的。如果一定要全部使用各个汉字字号规定的尺寸，则需定义一系列的命令。」「现有的最大字体尺寸命令是`\Huge`, 略小于一号汉字（$28$ 磅）。如果需要更大的汉字，例如初号汉字（$42$ 磅），就需要自行定义一个字体尺寸命令。`\fontsize{字体尺寸}{行距}`」
+      ]中，已有数值、定义范围相同的字号规则。
+
+      以下是`TYWIN.HLP`相关内容节选。（标点符号码位和颜色等格式有改动）
+      #set raw(lang: "latex")
+
+      #quote(attribution: [概述])[
+        1999年6月……为了使用LaTeX 用户的方便，把汉字的尺寸作了改变,使得在`magnification=1000`时默认的汉字大小（对应于`\标`）为高`ht=8.07pt`，深`dp=1.807pt`，宽`wd=9.877pt`，相当于五号字的大小。而TYWIN 在`magnification=1095` 时默认的汉字大小为高`ht=8.191truept`，深`dp=1.927truept`，宽`wd=10.118truept`。为了区分，把修改后的软件称为“天元排版”（TYPB）。它与TYWIN 的唯一区别就是汉字大小不同。TYWIN适合在`magnification=1095`下使用，而TYPB 则适合在`magnification=1000`时使用。相应地TYWIN 使用的汉字表格文件是`TYCFNT.TAB`，而TYPB 使用的表格文件名为`TYPBFNT.TAB`。
+
+        2000年5月和8月又对TYWIN作了两次修改，使得用户可以自定义字体命令以及汉字大小。这样就使得TYPB失去了存在的必要。详情可参见配置节。新的版本也取消了对输出密度的限制，因此你只需把密度设为1016DPI，依次用天元和TeX处理后，把生成的DVI文件用DVIPS输出成PS文件，就可以在任何方正系统的照排机上出片，达到专业级的印刷质量。本人主编的《高等代数与解析几何》就是这样做的……
+      ]
+      #quote(attribution: [配置])[
+        *汉字大小：*本页供有特殊需要的用户使用。可以设定汉字的字宽、字深、字间距以及瘦体系数及阔体系数。汉字总是方的，字宽减去字深就是字高。框内数字置`0`意为取默认值。每次修改后所有的汉字会重新生成。当`magnification=1095`时默认值对应于原TYWIN的设定，当`magnification=1000`时默认值对应于原来的TYPB的设定。
+      ]
+      #quote(attribution: [天元中的汉字尺寸])[
+        天元中确定汉字尺寸的命令有：
+
+        ```
+        \半(=\五): 5 pt  \六: 6 pt  \七: 7 pt   \八(=\小): 8 pt
+        \九: 9 pt        \标(默认): 10 pt       \中: 12 pt
+        \大: 14 pt       \特: 17 pt \双: 20 pt  \巨: 25 pt
+        \叁: 30 pt       \肆: 40 pt \伍: 50 pt  \陆: 60 pt
+        ```
+
+        #set par(justify: false)
+        在`\magnification=1095`，或在LaTeX中设定`\documentclass[10pt]{article}`或`\documentstyle[10pt]{article}`的条件下，有以下的对应关系（第三列是相应的LaTeX命令，AMSTeX中不能用）：
+
+        ```
+        初号     \肆                    一号     \巨      \Huge
+        二号     \双      \huge         三号     \特      \LARGE
+        四号     \大      \Large        小四号   \中      \large
+        五号     \标      \normalsize   小五号   \九      \small
+        六号     \八(=\小)\footnotesize 七号     \五      \tiny
+                 \七      \scriptsize
+        ```
+      ]
+      #quote(attribution: [天元与CCT的转换])[
+        (1) 从天元转换成CCT时……程序按如下对应关系修改：
+
+        ```
+        \半\五\六\七  -> \zihao{7}                     \八\小       -> \zihao{6}
+        \九          -> \zihao{-5}                    \标          -> \zihao{5}
+        \中          -> \zihao{-4}                    \大          -> \zihao{4}
+        \特          -> \zihao{3}                     \双          -> \zihao{2}
+        \巨          -> \zihao{1}                     \叁\肆\伍\陆 -> \zihao{0}
+        ```
+
+        (2) 当把CCT源文件转换成天元源文件时……并按如下对应关系修改
+
+        ```
+        \zihao{7}   -> \七                            \zihao{6}   -> \小
+        \zihao{-5}  -> \九                            \zihao{5}   -> \标
+        \zihao{-4}  -> \中                            \zihao{4}   -> \大
+        \zihao{3}   -> \特                            \zihao{2}   -> \双
+        \zihao{1}   -> \巨                            \zihao{0}   -> \叁
+        ```
+      ]
+    ],
+  ),
   方正书版: (
     brief: [《方正书版9.1实用教程》],
     via: link(
       "https://github.com/CTeX-org/ctex-kit/issues/543#issuecomment-2848708469",
     )[「宁波，晓舟」提供照片，Explorer-cc 转发],
     notes: [
+      有可能是高萍2003年（中国环境科学出版社，ISBN 7-80163-577-9）版本。
+
       #figure({
         set image(width: 60%)
         image("assets/方正书版-a.png")
@@ -250,6 +377,28 @@
       #figure(image("assets/方正飞翔.png", width: 80%))
     ],
   ),
+  方正跨媒介: (
+    brief: [15页（PDF 23页）表1-2-1「常用号数对应的磅数」，#link("https://www.tup.tsinghua.edu.cn/upload/books/yz/095514-01.pdf")[杨雷鸣、贾皓、梅林、李谦《方正飞翔跨媒介出版实用教程》]，清华大学出版社，2022年12月第1版，2022年12月第1次印刷，ISBN 978-7-302-61595-8],
+    via: [#link("https://www.tup.tsinghua.edu.cn/booksCenter/book_09551401.html")[清华大学出版社图书详情] → 资源下载 → 样章下载；国家图书馆总馆北馆开架阅览TS8亦有],
+    notes: [
+      此书介绍方正飞翔，由北京北大方正电子有限公司组织编写，网传杨雷鸣曾任方正开发部部长。
+
+      此书虽然是官方资料，但未必靠谱。以下正文写「常用的号数」有九种，而表1-2-1也是「常用号数」，却不止九种。正文还写Word也如此称谓，但所给数值、定义范围与Word（@source:基准）均不完全一致，至少多了「特号」「大一号」等。
+
+      另外，此书所写一号 $28 pt$ 与@source:方正飞某\并不相同。
+
+      #quote[
+        号数制：以铅活字的大小用号来称谓的体制。常用的号数有九种：一号至七号，还有小五号和小四号。除了排版软件以外，在Word软件中，字号也是用号数制称谓的。
+
+        在排版过程中，偶尔也会涉及号数制与点数制的换算，这里提供常用号数对应的磅数，以便可以快速查询，如表1-2-1所示。
+      ]
+
+      #figure(grid(
+        columns: 2,
+        ..range(4).map(n => image("assets/方正跨媒介-节选.pdf", page: n + 1))
+      ))
+    ],
+  ),
   石家庄2001: (
     brief: [表一，#link("https://doi.org/10.3969/j.issn.1000-663X.2001.11.017")[刘韬、师彦茹《方正书版应用杂谈》]，2001年第11期《中国印刷》],
     via: [@刘韬2001],
@@ -272,11 +421,18 @@
       #set math.frac(style: "horizontal")
       注意表中磅数和「约合毫米」的比值并不一致，例如 $9.665 "mm" / 28.50"P" = 0.339 "mm/P"$，但 $14.761 "mm" / 42.0"P" = 0.351 "mm/P"$。不清楚作者是怎么算的。
 
+      另外，「约合毫米」为 $3.698$ 这行的「级数」「号数」「磅数」「字号」均为空，而 $3.25$ 这行同时有「13J」和「5号」。按常理推断，应该是「5行」从 $3.698$ 行错误地串到了 $3.25$ 行。以下胡宏芳《方正书版排版技术基础与实例教程》（电子工业出版社，2004年11月第1次印刷，ISBN 7-121-00457-7）#footnote[拍摄于我校图书馆开架阅览TS8。]123页表5-2「常用的汉字字号」介绍了方正书版的「字号」「注解写法」「毫米（mm）」「点阵数（字身）」对应关系，其中注解`5`也对应 $3.698 "mm"$。另外与以上相比，胡宏芳书还多了 $63$、$72$、$84$、$96$。
+
+      #figure(grid(
+        columns: 2,
+        ..range(4).map(n => image("assets/方正书版-飞思2004.pdf", page: n + 1))
+      ))
+
       #quote[
         我们以笔划最饱满的黑体字为例，通过仔细的对比发现，WPS2000系统的字号与方正书版系统的相应字号，无论提法或是尺寸基本上都是一致的。只是WPS2000系统字体的笔划更细，在视觉上显得字心略大一些。Word97系统的字号与方正书版系统的字号不太一致，通过我们对样张的测量发现，Word97的“初号”字为 $14.595 "mm"$、“一号”字为 $9.36 "mm"$、“小三号”字为 $5.15 "mm"$，它的“小初号”字与方正书版系统的“0号”字相同、“八号”字与方正书版系统的“7号”字相同，其他字号与相应的方正书版系统字号相同。也同WPS2000一样，因其字体的笔划略细，在视觉上字心显得更大一些。
       ]
 
-      此外，@刘岱伟2001 也整理了北大方正，除了六号对应7.75而非7.85，其余全部与以上一致，定义范围也相同。
+      此外，@刘岱伟2001 也整理了北大方正号数与点数的映射关系，除了六号对应7.75而非7.85，其余数值全部与以上一致，定义范围也相同。
     ],
   ),
   政府: (
@@ -601,19 +757,40 @@
     brief: [北京大学、潍坊电子计算机厂等于约1982年研发完成的计算机-激光汉字编辑排版系统的改进型#footnote[此前1979年有原理性样机。]],
     via: [《计算机学报》1982年12月23日收到、1984年11月发布的 @王选1984],
     notes: [
-      此文明确指出比例关系按照字心计算。按照 @林川1991#footnote[该文恐怕非常不靠谱。文中表一「对比4#super[[7]]」一列转录了《中国活字小史》（@source:小史1981），但将五号10.5点误作11.5，将特号45点、特初号48点、特中号56点乱作小特42,45、特48、特大56，且无任何说明。在此文末，参考文献列表还将文献 [7] 题名误作「汉字活字小史」，英文介绍更是出现了 theorelical、printting、calaulating 等多处拼写错误与 These foze the writer considers、by way of futes calculation 等莫名其妙的表达。]的说法，字身的比例关系略有不同。
-
       #figure(grid(
         columns: 2,
         image("assets/王选1984-节选.pdf", page: 1), image("assets/王选1984-节选.pdf", page: 2),
       ))
 
-      此文还引用了欧洲专利 #link("https://worldwide.espacenet.com/patent/search?q=pn%3DEP0095536A1")[EP0095536A1 The representation of character images in a compact form for computer storage]（1982年6月1日申请、1983年12月7日公告，登记号 82302816.2），王选是其唯一发明人。这份专利第2页有 character size（按点数、毫米#footnote[原文为 $"mm"^2$，应该是写错了。]数）和 dot matrix 的对应表格。专利表格中的 character size in point 和《计算机学报》上的「磅数」不全相同（初 35、特 49 在专利表格分别变成了 36、48），dot matrix 也比《计算机学报》上的「字心点阵」系统性地大一圈。
+      此文明确指出比例关系按照字心计算。按照 @林川1991#footnote[该文恐怕非常不靠谱。文中表一「对比4#super[[7]]」一列转录了《中国活字小史》（@source:小史1981），但将五号10.5点误作11.5，将特号45点、特初号48点、特中号56点乱作小特42,45、特48、特大56，且无任何说明。在此文末，参考文献列表还将文献 [7] 题名误作「汉字活字小史」，英文介绍更是出现了 theorelical、printting、calaulating 等多处拼写错误与 These foze the writer considers、by way of futes calculation 等莫名其妙的表达。]的说法，字身的比例关系略有不同。
+
+      @林川1991 的依据是#link("https://ss.zhizhen.com/detail_38502727e7500f2685813c708ce0786aa70a95c0efb4cab51921b0a3ea25510134114c969f2eae5cee61fba22a1d40b6bc023b74f5f06b6013b4623dba6cf47e255ac44419becabe9e23de8d5bbbe850?&apistrclassfy=0_18_17")[郭平欣、张淞芝《汉字信息处理技术》]（国防工业出版社，1985年12月第一版，1985年12月第一次印刷，统一书号#footnote[这个「统一书号」似乎是「全国统一书号」，并非ISBN。]15034·2973）中由王选、陈堃𨱇执笔的第十三章「精密汉字编辑排版系统」。此书节选如下，存在以下三处谈及字号。
+
+      - 433页表13-1「印刷用汉字字号与字身点阵的关系」的「字号」「磅数」与王选《计算机学报》文章上的数值、定义范围一致，但「字身点阵大小」比《计算机学报》上的「字心点阵」系统性地大一圈。此外前一页说该表是「按 $29.2 thick frac("线", "毫米", style: "skewed")$ 计算」得出的，似乎暗示还有其它可能。
+      - 443页表13-6「字号及其比例关系」与《计算机学报》上的表格雷同，只不过五号一行上方加了条横线。
+      - 460页例1提供了初号、头号与二、三、四、小四、五、小五、六、七号的示例，并说系统还允许特大号、特号、小特号、小初号、小二号、小六号。若将「头号」理解成一号，则与《计算机学报》上的定义范围一致。
+
+      #figure(grid(
+        columns: 2,
+        ..range(7).map(n => image("assets/汉字信息处理技术-1985-节选.pdf", page: n + 1)),
+      ))
+
+      王选《计算机学报》文章还引用了欧洲专利 #link("https://worldwide.espacenet.com/patent/search?q=pn%3DEP0095536A1")[EP0095536A1 The representation of character images in a compact form for computer storage]（1982年6月1日申请、1983年12月7日公告，登记号 82302816.2），王选是其唯一发明人。这份专利第2页有 character size（按点数、毫米#footnote[原文为 $"mm"^2$，应该是写错了。]数）和 dot matrix 的对应表格。专利表格中的 character size in point 和《计算机学报》上的「磅数」不全相同（初 35、特 49 在专利表格分别变成了 36、48），dot matrix 与《汉字信息处理技术》中的「字身点阵大小」一致（磅数不同的也一致）。
 
       #figure(grid(
         columns: 3,
         ..range(3).map(n => image("assets/EP_0095536_A1-节选.pdf", page: n + 1)),
       ))
+
+      《计算机学报》上表格的内容被很多教材直接或间接抄录了，例如：
+
+      - 85页「第3章　汉字字形存储与压缩技术 → 3. 汉字字形的变倍方法 → 表3-19　印刷用汉字的字号表」，李宝安、李燕、孟庆昌《中文信息处理技术——原理与应用》，清华大学出版社，2005年7月第1版，2005年7月第1次印刷，ISBN 7-302-11200-2 / TP·7394
+
+        该书将小二一行「五号的1.708倍」中的 $1.708$ 误作 $7.708$。
+
+      - 141页「第7章　汉字字形和字形库管理技术 → 7.4.1 汉字的字号 → 表7.4　印刷用汉字的字号表」，朱巧明、李培峰、吴娴《中文信息处理技术教程》，清华大学出版社，2005年9月第1版，2005年9月第1次印刷，ISBN 7-302-11761-6 / TP·7655
+
+        该书给表格每行上下都加了网格线，还在表格下方抄录了《计算机学报》文中「表中的小六号、小二号、小初号和小特号是现在铅字所没有的」这一与@source:沪一厂1978 矛盾的说法。
     ],
   ),
   zhwiki: (

@@ -4,9 +4,20 @@
 = 分支树
 树叶上小图的细节可单击数据源跳转到后页查看。
 
+#let excluded = (
+  "老CCT",
+  "天元",
+  "方正跨媒介",
+)
+未包含奇葩数据源（#excluded.map(s => ref(label("source:" + s))).join[、]）。
+
 #{
   // 补全 CLReq
   let data = data + (CLReq-extra: (data.CLReq-main.to-dict() + data.CLReq-extra.to-dict()).pairs())
+  // 移除奇葩
+  for s in excluded {
+    let _ = data.remove(s)
+  }
 
   // 声明允许的判据类型
   let humanize(v) = {
