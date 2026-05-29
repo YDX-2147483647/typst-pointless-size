@@ -1,5 +1,5 @@
-// Compiled with Typst v0.14.2.
-#import "template.typ": link, template
+// Compiled with Typst v0.15.0-rc.1.
+#import "template.typ": doc, link, template
 
 #show: template.with(title: [资料汇编：汉字号数与点数的映射关系], date: [2026年5月7–17、22–24、29日], notes: [
   #for f in (
@@ -11,6 +11,7 @@
     "main-matter.typ",
     "appendices.typ",
     "ref.bib",
+    "mode.typ",
     "template.typ",
     "util.typ",
     "visualize.typ",
@@ -31,7 +32,7 @@
 #metadata(data + (CLReq-extra: (data.CLReq-main.to-dict() + data.CLReq-extra.to-dict()).pairs()))<meta:data>
 #metadata(sources)<meta:sources>
 
-#include "overview.typ"
+#doc("overview.pdf", include "overview.typ")
 
 #include "main-matter.typ"
-#include "appendices.typ"
+#doc("appendices.pdf", include "appendices.typ")

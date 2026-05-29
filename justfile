@@ -45,6 +45,7 @@ package: target-dir
     7z a target/package.7z LICENSE README.md typst.toml src/ -x!src/*test*
 
 # Format *.typ and check for unused files
+[env("TYPST_FEATURES", "bundle")]
 [group("docs")]
 [working-directory("ref")]
 ref-check:
@@ -71,10 +72,23 @@ ref-check:
         '
     )
 
-# Export the document to PDF
+# Watch the document and recompile to one-pdf format on changes
+[env("TYPST_FEATURES", "bundle")]
+[group("docs")]
+ref-watch: target-dir
+    typst-dev watch ref/main.typ target/ref.pdf --open
+
+# Export the document to all supported formats
+[env("TYPST_FEATURES", "bundle")]
 [group("docs")]
 ref-build: target-dir
-    typst compile \
+    typst-dev compile \
         --input revision=$(git describe --tags --dirty) \
         --input log="$(git log --pretty=format:'commit %H%nAuthor: %an%nDate:   %ad%n%n%w(0,2,2)%B%w(0,0,0)' --date iso ref/)" \
         ref/main.typ target/ref.pdf
+    typst-dev compile \
+        --input revision=$(git describe --tags --dirty) \
+        --input log="$(git log --pretty=format:'commit %H%nAuthor: %an%nDate:   %ad%n%n%w(0,2,2)%B%w(0,0,0)' --date iso ref/)" \
+        --input mode=split-pdf \
+        --format bundle \
+        ref/main.typ target/ref/

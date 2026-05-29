@@ -362,5 +362,6 @@
     }
 
     hide(branches)
+    v(1em) // 避让页脚
   }
 }

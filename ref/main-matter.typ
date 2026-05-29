@@ -1,9 +1,9 @@
 #import "sources.typ": sources
 #import "data.typ": data
 #import "visualize.typ": build-table, draw-as-log-period
-#import "template.typ": title-page
+#import "template.typ": doc, title-page
 
-#title-page[
+#doc("source-title.pdf", title-page[
   = 数据源详情
   逐一展示每个数据源的字号定义范围与点数数值（data），介绍出处及来源（brief、via），并补充数据原貌、疑点等情况（notes）。
 
@@ -18,11 +18,13 @@
     #figure(build-table((初号: 42, 二号: 21, 五号: 10.5, 一号: 28, 四号: 14).pairs()))
 
     这些表大多提供了「*按倍数关系*」和「按点数大小」两种排列方式，前者会像上表这样将行分成几组。这种分组能方便检查对照，但*不代表数据源本身的意见*。同一组的点数也未必严格成倍数关系，未分组也不代表点数没有倍数关系。
-]
+])
 #set heading(offset: 1)
 #show heading.where(level: 2): it => pagebreak(weak: true) + it
 
 #for (source, fields) in sources.pairs() [
+  #show: doc.with("source-{}.pdf".replace("{}", source))
+
   #[= #source.replace("-", " ")] #label("source:" + source)
 
   == data

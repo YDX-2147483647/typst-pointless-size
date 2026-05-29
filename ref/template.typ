@@ -1,8 +1,55 @@
 #import "@preview/lure:0.2.0"
+#import "mode.typ": mode
+
+/// A wrapper of `document(path, body)`.
+#let doc(path, body) = if mode == "split-pdf" {
+  document(path, body)
+} else {
+  body
+}
+
+#let palette = (
+  // External links
+  link: blue.darken(20%),
+  // Internal links
+  ref: green.darken(30%),
+)
 
 #let template(title: [], date: [], notes: [], body) = {
+  let revision = sys.inputs.at("revision", default: none)
+
   set document(title: title)
-  set page(height: auto, numbering: "1 / 1", header: counter(footnote).update(0))
+  set page(height: auto, numbering: "1 / 1")
+
+  set page(
+    // `metadata("page counter")` is a workaround for sharing the same counter across the whole bundle
+    // https://github.com/typst/typst/issues/8389
+    header: metadata("page counter"),
+    numbering: (..nums) => {
+      let current = query(metadata.where(value: "page counter").before(here())).len()
+      let total = query(metadata.where(value: "page counter")).len()
+      numbering("1 / 1", ..(current, total).slice(0, nums.len()))
+    },
+    footer: context grid(
+      columns: (1fr, auto, 1fr),
+      align: (left, center, right),
+      {
+        let prev = query(selector(document).before(here())).at(-2, default: none)
+        if prev != none {
+          set text(font: "KaiTi")
+          link(prev.location())[前一文件]
+        }
+      },
+      link(<outline>, counter(page).display(both: true)),
+      {
+        let next = query(selector(document).after(here())).first(default: none)
+        if next != none {
+          set text(font: "KaiTi")
+          link(next.location())[后一文件]
+        }
+      },
+    ),
+  ) if mode == "split-pdf"
 
   set par(justify: true)
 
@@ -20,15 +67,16 @@
   show heading.where(level: 1): set text(1.2em)
   show heading.where(level: 1): set block(spacing: 1em)
 
-  show link: set text(blue.darken(20%))
-  show cite: set text(green.darken(30%))
+  show link: set text(palette.link)
+  show link: it => {
+    set text(palette.ref) if type(it.dest) != str
+    it
+  }
+  show cite: set text(palette.ref)
   show ref: it => {
     let el = it.element
     if el != none and el.func() == heading {
-      link(el.location(), {
-        set text(green.darken(30%))
-        el.body
-      })
+      link(el.location(), el.body)
     } else {
       it // Unchanged
     }
@@ -40,20 +88,37 @@
   set quote(block: true)
   show quote: block.with(width: 100%, stroke: (left: gray + 2pt), inset: (left: 0.5em), outset: (y: 0.5em))
 
-  align(center, {
-    std.title()
-    date
+  doc("index.pdf", {
+    align(center, {
+      [#std.title()<title>]
+      date
 
-    if "revision" in sys.inputs {
-      linebreak()
-      raw(sys.inputs.revision)
-    }
+      if revision != none {
+        linebreak()
+        raw(revision)
+      }
+    })
+
+    [#outline(title: none, depth: 2)<outline>]
+
+    v(1em)
+    notes
   })
 
-  outline(title: none, depth: 2)
+  set page(header: {
+    if mode == "split-pdf" {
+      set text(0.9em)
+      text(font: "KaiTi", link(<title>, title))
+      if revision != none {
+        h(1fr)
+        raw(revision)
+      }
 
-  v(1em)
-  notes
+      metadata("page counter")
+    }
+
+    counter(footnote).update(0)
+  })
 
   body
 }
