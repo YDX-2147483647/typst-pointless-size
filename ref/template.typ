@@ -2,7 +2,7 @@
 
 #let template(title: [], date: [], notes: [], body) = {
   set document(title: title)
-  set page(height: auto, numbering: "1 / 1")
+  set page(height: auto, numbering: "1 / 1", header: counter(footnote).update(0))
 
   set par(justify: true)
 
