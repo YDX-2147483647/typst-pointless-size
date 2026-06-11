@@ -439,7 +439,7 @@
   ),
   政府: (
     brief: [国家标准 #link("https://std.samr.gov.cn/gb/search/gbDetailed?id=BBE32B661B7E8FC8E05397BE0A0AB906")[GB 40070—2021《儿童青少年学习用品近视防控卫生要求》]和行业推荐性标准 #link("https://std.samr.gov.cn/hb/search/stdHBDetailed?id=8B1827F23645BB19E05397BE0A0AB44A")[CY/T 154—2017《中文出版物夹用英文的编辑规范》]],
-    via: [#link("https://std.samr.gov.cn")[全国标准信息公共服务平台] 可看],
+    via: [#link("https://std.samr.gov.cn")[全国标准信息公共服务平台]可看],
     notes: [
       #quote(attribution: [CY/T 154—2017])[
         11.2.1 中文文本中夹用英文时，英文字号应与中文字号匹配。常用的为：中文“小五号”与英文“9P”相对应，中文“五号”与“10.5P”相对应。
@@ -540,10 +540,10 @@
     ],
   ),
   Ken-1: (
-    brief: [342页 Table 7-2. The G Typographic Unit，Ken 2 JP 那本书的第一版（推测是1999年那版，但未验证）],
+    brief: [342页 Table 7-2. The G Typographic Unit，@source:Ken-2-JP 那本书的第一版（推测是1999年那版，但未验证）],
     via: [r 买过纸书，提供了照片],
     notes: [
-      与第二版相比，第一版没有区分中国和日本，并且7G、8G的位置、数值不同。
+      与第二版 @source:Ken-2-JP 相比，此处第一版没有区分中国和日本，并且7G、8G的位置、数值不同。
 
       #figure(image("assets/Ken 1.jpg", width: 80%))
     ],

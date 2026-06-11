@@ -83,6 +83,8 @@
   }
 
   set footnote(numbering: "①")
+  show footnote: it => sym.wj + it // Fix https://github.com/typst/typst/issues/3129
+
   set table(stroke: none, align: center + horizon)
 
   set quote(block: true)
