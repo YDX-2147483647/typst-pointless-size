@@ -53,7 +53,7 @@ ref-check:
     typstyle . --inplace --column 120
 
     let _ = (
-        typst-dev eval
+        typst eval
         --in main.typ
         --input assets=(ls assets/ --short-names | get name | to json)
         --input files=(ls | where type == file | get name | to json)
@@ -76,17 +76,17 @@ ref-check:
 [env("TYPST_FEATURES", "bundle")]
 [group("docs")]
 ref-watch: target-dir
-    typst-dev watch ref/main.typ target/ref.pdf --open
+    typst watch ref/main.typ target/ref.pdf --open
 
 # Export the document to all supported formats
 [env("TYPST_FEATURES", "bundle")]
 [group("docs")]
 ref-build: target-dir
-    typst-dev compile \
+    typst compile \
         --input revision=$(git describe --tags --dirty) \
         --input log="$(git log --pretty=format:'commit %H%nAuthor: %an%nDate:   %ad%n%n%w(0,2,2)%B%w(0,0,0)' --date iso ref/)" \
         ref/main.typ target/ref.pdf
-    typst-dev compile \
+    typst compile \
         --input revision=$(git describe --tags --dirty) \
         --input log="$(git log --pretty=format:'commit %H%nAuthor: %an%nDate:   %ad%n%n%w(0,2,2)%B%w(0,0,0)' --date iso ref/)" \
         --input mode=split-pdf \

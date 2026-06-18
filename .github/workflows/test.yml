@@ -14,7 +14,9 @@ jobs:
       - uses: taiki-e/install-action@v2
         with:
           tool: just
-      - uses: typst-community/setup-typst@v3
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: v0.15.0
 
       - run: just install
       - run: just test

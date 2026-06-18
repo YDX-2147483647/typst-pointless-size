@@ -1,4 +1,4 @@
-// Compiled with Typst v0.15.0-rc.1.
+// Compiled with Typst v0.15.
 #import "template.typ": doc, link, template
 
 #show: template.with(title: [资料汇编：汉字号数与点数的映射关系], date: [2026年5月7–17、22–24、29日，6月11日], notes: [

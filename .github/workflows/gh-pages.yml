@@ -33,13 +33,7 @@ jobs:
       - uses: hustcer/setup-nu@v3
       - uses: typst-community/setup-typst@v5
         with:
-          typst-version: v0.14.2
-      - name: Setup typst-dev
-        run: |
-          curl -LO https://github.com/typst/typst/releases/download/v0.15.0-rc.1/typst-x86_64-unknown-linux-musl.tar.xz
-          tar -xf typst-x86_64-unknown-linux-musl.tar.xz
-          mkdir -p ~/.local/bin/
-          mv ./typst-x86_64-unknown-linux-musl/typst ~/.local/bin/typst-dev
+          typst-version: v0.15.0
 
       - name: Restore cached fonts
         uses: actions/cache@v5
