@@ -1043,4 +1043,33 @@
       ))
     ],
   ),
+  沪新厂TTK: (
+    brief: [末页表格的「新华厂」列，#link("https://www.thetype.com/social/know-20260116/")[The Type — 中文字号解读·知道Know]#footnote[现在该网页的```html <body>```似乎无法正常加载，但```html <head>```正常。]，2026年1月16日],
+    via: [#link("https://mp.weixin.qq.com/s/q9bkC4q-K3JAkUIkiNcDMw")[微信公众号推送《The Type Know · 中文字号解读》]或 #link("https://www.instagram.com/p/DTkErnAEYar/")[Instagram《The Type Know · 中文字号解读》]],
+    notes: [
+      原文有「头号」而无一号，这里将头号理解为一号。原文还有「6点」，这里未记录。
+
+      #figure(grid(
+        columns: 3,
+        gutter: 0.5em,
+        ..range(6).map(n => image("assets/thetype-know-20260116.pdf", page: n + 1)),
+      ))
+
+      定义范围、数值与@source:京新厂1981 并不相同。新华厂在很多地方都有，根据相关情况#footnote[我于2026年5月私下用邮件询问，作者表示：「不同时期的点、号不一致，而同一时期的不同地区也不一致。……对于一号字来说，北京新华厂就是 $27.5 pt$，上海无论是新华厂、商务厂还是中华厂都是 $28 pt$。」]，此处很可能是指上海的。
+    ],
+  ),
+  商务厂TTK: (
+    brief: [The Type Know 末页表格的「商务厂」列],
+    notes: [
+      见@source:沪新厂TTK。原文有「头号」而无一号，这里将头号理解为一号。
+
+      有六号、八号，但无七号，原文如此。
+    ],
+  ),
+  中华厂TTK: (
+    brief: [The Type Know 末页表格的「中华厂」列],
+    notes: [
+      见@source:沪新厂TTK。原文有「头号」而无一号，这里将头号理解为一号。原文还有「6点」，这里未记录。
+    ],
+  ),
 )

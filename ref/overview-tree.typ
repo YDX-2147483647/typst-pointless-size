@@ -5,11 +5,17 @@
 树叶上小图的细节可单击数据源跳转到后页查看。
 
 #let excluded = (
+  // 以下数值太小众
   "老CCT",
   "天元",
   "方正跨媒介",
+  // 以下无初号
+  "沪新厂TTK",
+  "商务厂TTK",
+  "中华厂TTK",
 )
 未包含奇葩数据源（#excluded.map(s => ref(label("source:" + s))).join[、]）。
+#v(2em) // 避让小图
 
 #{
   // 补全 CLReq
