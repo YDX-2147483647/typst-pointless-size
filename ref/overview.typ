@@ -25,6 +25,7 @@
   "Ken-2-JP",
   "jawiki-旧",
   "神田",
+  "东京1942",
   "曹洪奎1979",
   "CLReq-extra",
   "周承民1988",
@@ -48,6 +49,7 @@
   "enwiki",
   "jawiki-新",
   "Ken-1",
+  "申报1935",
   "姜别利",
 )
 #assert.eq(source-keys.first(), data.keys().first())
@@ -181,7 +183,8 @@
       table.hline(stroke: 0.5pt),
       ..row("特大", "特号", "小特"),
       ..row("特中", "特初"),
-      ..row("七行", "六行", "五行"),
+      ..row("七行", "六行"),
+      ..row("五行", "四行"),
       ..row("大一", "九号", "十号"),
       table.hline(),
     )

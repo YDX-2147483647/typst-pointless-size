@@ -13,6 +13,7 @@
   "沪新厂TTK",
   "商务厂TTK",
   "中华厂TTK",
+  "申报1935",
 )
 未包含奇葩数据源（#excluded.map(s => ref(label("source:" + s))).join[、]）。
 #v(2em) // 避让小图
@@ -334,7 +335,10 @@
     place(branches)
 
     for (y, (_, source-list)) in grouped.enumerate() {
-      let text = source-list.map(s => ref(label("source:" + s))).join[\ ]
+      let text = {
+        set text(0.8em) if source-list.len() >= 4
+        source-list.map(s => ref(label("source:" + s))).join[\ ]
+      }
       place(dx: w + 0.5em, dy: y * dy - 2em, grid(
         columns: (6em, auto),
         gutter: 0.5em,
