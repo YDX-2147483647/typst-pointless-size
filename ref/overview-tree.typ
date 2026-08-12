@@ -108,19 +108,29 @@
                       (
                         value: (27.5, 13.75),
                         match: (
-                          name: [有小号],
-                          fn: pairs => pairs.keys().position(g => g.starts-with("小")) != none,
+                          name: [有八号],
+                          fn: pairs => "八号" in pairs,
                         ),
                         cases: (
                           (
-                            value: false,
+                            value: true,
                             match: (name: [八号], fn: pairs => pairs.八号),
                             cases: (
                               (value: 4.),
                               (value: 5.25),
                             ),
                           ),
-                          (value: true),
+                          (
+                            value: false,
+                            match: (
+                              name: [有小号],
+                              fn: pairs => pairs.keys().position(g => g.starts-with("小")) != none,
+                            ),
+                            cases: (
+                              (value: true),
+                              (value: false),
+                            ),
+                          ),
                         ),
                       ),
                     ),
