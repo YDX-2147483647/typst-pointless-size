@@ -50,6 +50,7 @@
   "jawiki-新",
   "Ken-1",
   "申报1935",
+  "秀英1903",
   "姜别利",
 )
 #assert.eq(source-keys.first(), data.keys().first())

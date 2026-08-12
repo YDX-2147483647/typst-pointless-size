@@ -160,10 +160,17 @@
           ),
           (
             value: true,
-            match: (name: [四号], fn: pairs => pairs.四号),
+            match: (name: [六号], fn: pairs => pairs.六号),
             cases: (
-              (value: 14.),
-              (value: 13.5),
+              (
+                value: 8.,
+                match: (name: [一号], fn: pairs => pairs.一号),
+                cases: (
+                  (value: 28.),
+                  (value: 24.),
+                ),
+              ),
+              (value: 7.5),
             ),
           ),
         ),

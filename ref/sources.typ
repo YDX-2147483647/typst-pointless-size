@@ -1043,6 +1043,27 @@
       )))
     ],
   ),
+  秀英1903: (
+    brief: [ZIP 0008–0009页，Price List of Printing Type 歐文角及定價，株式會社秀英舍鑄造部·活版製造所·#link("https://archive.org/details/seibundo1903specimen")[製文堂《活版見本帖》]，明治三十六年二月（1903年2月#footnote[日本从明治六年（1873年）开始，月份与公历完全同步，不再是日月共同影响的阴阳历月份。]）],
+    via: [Internet Archive 的#link("https://archive.org/download/seibundo1903specimen/seibundo1903specimen_images.zip/")[`seibundo1903specimen_images.zip`]#footnote[Internet Archive 亦提供PDF，但不如`*_images.zip`清晰。]],
+    notes: [
+      这是个三百多页的非卖品小册子，设计比较特殊。左侧封面写 Type Specimens，开头是「歐文角及定價」和各种西文字体样张；右侧封面写「活版見本帖」与「和漢字體」，开头是各种汉字与假名字体样张；中间还有围棋盘、装饰线、花形图案等的样张，以及位于ZIP 0106页的版权页。
+
+      原文中七号的点数使用 $5 1/2$ 这种带分数而非 $5.5$ 这种小数，不存在精度问题；另外原文将一号写作「壹號」，但二号至八号的数字并未写成贰叁肆伍陆柒捌。
+
+      #figure({
+        grid(
+          columns: 5,
+          gutter: 0.5em,
+          ..(1, 2, 5, 6, 7).map(p => image("assets/seibundo1903spec-节选.pdf", page: p)),
+        )
+        grid(
+          columns: 2,
+          ..(3, 4).map(p => image("assets/seibundo1903spec-节选.pdf", page: p))
+        )
+      })
+    ],
+  ),
   京新厂1981: (
     brief: [北京新华字模厂《雕刻字字模字体——样本》，1981],
     via: [山东一位老师傅赠与 r，r 扫描了 PDF 并提供#footnote[此PDF从内部资料节选而来，所以存在一些断链。]；扫描时还摆放了黑白双色比例尺#footnote[r在 commit message 中提示：「测量时请优先以色块宽度为准，最好避免使用刻线。」]],
