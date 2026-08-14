@@ -14,6 +14,8 @@
   "商务厂TTK",
   "中华厂TTK",
   "申报1935",
+  "王益1946",
+  "何继曾1959",
 )
 未包含奇葩数据源（#excluded.map(s => ref(label("source:" + s))).join[、]）。
 #v(2em) // 避让小图
@@ -86,7 +88,14 @@
                       ),
                     ),
                   ),
-                  (value: 13.75),
+                  (
+                    value: 13.75,
+                    match: (name: [一号], fn: pairs => pairs.一号),
+                    cases: (
+                      (value: 27.5),
+                      (value: 27.),
+                    ),
+                  ),
                 ),
               ),
               (

@@ -12,7 +12,7 @@
     .replace("小（新）", "小")
     .replace("新", "小")
     .trim(regex("[字号號]"), at: end)
-    .replace(regex("[头壹]"), "一")
+    .replace(regex("[头頭壹]"), "一")
     .replace(regex("^(小)?大$"), m => m.captures.first() + "一")
     .replace(regex("^.$"), m => m.text + "号") // 统一成两个字
 }
@@ -40,6 +40,8 @@
   七行字,七行
   新大號,小一
   壹號,一号
+  七号大,七号大
+  七号小,七号小
   ```.text,
 )) {
   let actual = normalize-g(input)
