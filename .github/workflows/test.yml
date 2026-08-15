@@ -18,5 +18,4 @@ jobs:
         with:
           typst-versions-file: .github/typst-versions.yaml
 
-      - run: just install
       - run: just test
