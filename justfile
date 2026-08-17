@@ -12,18 +12,22 @@ VERSION := `yq .package.version typst.toml`
 
 [private]
 target-dir:
-    @mkdir -p target/
+    @mkdir -p target/assets/
 
 # Run tests
-test:
+test: target-dir
     typst compile src/zihao.test.typ - --format svg > /dev/null
-    typst compile docs/conversion-table.typ - --format svg --root . > /dev/null
-    typst compile docs/multiples.typ - --format svg --root . > /dev/null
+    typst compile docs/conversion-table.typ target/assets/conversion-table.svg --root .
+    typst compile docs/multiples.typ target/assets/multiples.svg --root .
 
 # Create package.7z for submission
 package: target-dir
     sd --fixed-strings './' 'https://github.com/YDX-2147483647/typst-pointless-size/blob/main/' README.md
     7z a target/package.7z LICENSE README.md typst.toml src/ -x!src/*test*
+
+# Build target/ for GitHub Pages
+gh-pages: test ref-build
+    typst compile docs/export-readme.typ target/index.html --root . --features html
 
 # Format *.typ and check for unused files
 [env("TYPST_FEATURES", "bundle")]
