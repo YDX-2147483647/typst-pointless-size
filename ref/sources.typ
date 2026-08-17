@@ -1,3 +1,5 @@
+#import "template.typ": link
+
 #let pt = "pt"
 // 描述点数时，优先使用原文说法，若不针对特定原文，则写成 $1 pt$。不要写成 #1pt，因为这种写法会缩减精度，例如 #7.875pt 会被显示成 7.88pt。
 
@@ -769,6 +771,8 @@
     brief: [309页表2我国现用活字大小称谓、种数及其点数规格一览表，300–312页（PDF 354–366页）何步云《中国活字小史》，#link("https://z-lib.sk/book/Gz3M7GWm5E/中国印刷年鉴-1981.html")[《中国印刷年鉴1981》]],
     via: [Z-Library 影印PDF],
     notes: [
+      根据#link("https://blog.sina.com.cn/s/blog_59d194650100zi5z.html")[高鸿儒《毕生奉献于出版印刷事业——访印刷界老前辈何步云先生》]（张弥迪2011年11月15日转载自《印刷杂志》1994年03期），作者何步云曾任上海新华印刷厂第一任副厂长、上海印刷学校教务主任。
+
       按照 @高洋2025 的引用，《中国活字小史》也收录于上海新四军历史研究会印刷印钞分会《活字印刷源流》（印刷工业出版社，1990）。不清楚两版是否有区别。
 
       表2记录了正方、狭长、扁宽三种字身形式的活字，这里只记录正方#footnote[狭长、扁宽的号数覆盖范围小于正方，而且纵向点数与正方一致，唯一例外是狭长小初号有 $31.5 times 24$ 与 $30 times 24$ 两种规格，前者的纵向点数与正方小初号 $30$ 不同。]。另外，表2中初号与二号之间是「大号」，但正文似无此说法，所以这里将大号当作一号理解（仅限大号、小大号；特大号不当作「特一号」理解）。
@@ -915,7 +919,7 @@
 
       + #link-diff("diff=28417336&oldid=25433395")[2013年8月30日119.161.132.13]将小四的毫米数从 $4.32$ 修改为 $4.23$，但「排版磅数」保持 $12$ 不变。
 
-      + #link-diff("diff=31578373&oldid=28417336")[2014年6月13日Pengyanan]移动页面「點 (印刷)」至「字型大小」，随后又移回去。根据编辑摘要，「字型大小」会被繁简转换处理成「字号」，所以做了这番修改。今日「#link("https://zh.wikipedia.org/wiki/字号")[字号]」是个消歧义页，指向商业字号、老字号、字号（印刷）、表字与别号。
+      + #link-diff("diff=31578373&oldid=28417336")[2014年6月13日Pengyanan]移动页面「點 (印刷)」至「字型大小」，几分钟后又移回去。根据编辑摘要，「字型大小」会被繁简转换处理成「字号」，所以做了这番修改。今日「#link("https://zh.wikipedia.org/wiki/字号")[字号]」是个消歧义页，指向商业字号、老字号、字号（印刷）、表字与别号。
 
       + #link-diff("diff=32801423&oldid=31578373")[2014年9月28日49.196.4.237]向「中国相对」一节添加了首段正文，并引用了 @source:Ken-2-JP 对应的 Adobe CJK Type Blog，尽管词条中的数值、定义范围与Adobe页面中日两列均有差异。
 
@@ -975,15 +979,212 @@
 
       另外，表中点数使用 $7 1/2$ 这种带分数而非 $7.5$ 这种小数，不存在精度问题。
 
+      #quote(attribution: [该词条的序言章节])[
+        Note that the Chinese font sizes use American points; the Continental systems traditionally used the Fournier or Didot points. The Fournier points, being smaller than Didot's, were associated with the names of the Didot type closest in size rather than identical in number of points.#super(link("https://en.wikipedia.org/wiki/Wikipedia:Citation_needed", "[citation needed]"))
+      ]
+
       #figure(image("assets/enwiki - Comparison table - Traditional point-size names.pdf"))
 
       #link("https://en.wikipedia.org/wiki/East_Asian_typography#Font_sizes")[Font sizes - East Asian typography - Wikipedia] 也列表展示了号数制，数值、定义范围完全相同，不过引用的是 @张小衡2006。
+
+      该词条中文相关内容的简要历史如下。（日期按UTC+8）
+      #let link-diff(query, body, title: "Point_(typography)") = link(
+        // 即使`title`错误，URL也有效，不过最好还是用正确的
+        "https://en.wikipedia.org/w/index.php?title=" + title + "&" + query,
+        body,
+      )
+      #let link-diff-traditional = link-diff.with(title: "Traditional_point-size_names")
+
+      + #link-diff("diff=266963824&oldid=262864111")[2009年1月28日Silas S. Brown]在 Point (typography) 词条添加了 Correspondence to Chinese font sizes 一节，内容如下。
+
+        #quote[
+          #set text(0.8em)
+
+          In China, point size is not used much; instead the following Chinese size names#super[[1]] are used (e.g. in the Chinese version of Microsoft Word):
+
+          #figure(table(
+            columns: 3,
+            align: start,
+            table.hline(),
+            [Chinese size name], [Translation], [  Equivalent point size],
+            table.hline(stroke: 0.5pt),
+            [chū (出)], ["excessive"], [42 points],
+            [xiǎochū (小出)], ["small excessive"], [36 points],
+            [yī (一)], ["one"], [28 points],
+            [èr (二)], ["two"], [21 points],
+            [xiǎo'èr (小二)], ["small two"], [18 points],
+            [sān (三)], ["three"], [15.75 points],
+            [sì (四)], ["four"], [14 points],
+            [xiǎosì (小四)], ["small four"], [12 points],
+            [wǔ (五)], ["five"], [10.5 points],
+            [xiǎowǔ (小五)], ["small five"], [9 points],
+            [liù (六)], ["six"], [7.875 points],
+            [qī (七)], ["seven"], [5.25 points],
+            table.hline(),
+          ))
+
+          The syllable 号 (hào, "size") is appended to the Chinese name when it is not obvious that a font size is being referred to.
+        ]
+        注意尽管第一段说是 MS Word，但表格内容与 MS Word（@source:基准）不全相同。同时表格中的「出」和excessive原文如此，明显写错了。
+
+        这两个疑点都可用第一段的 [1] 解释。它指向 #link("http://bbs.ctex.org/viewthread.php?tid=2641")[bbs.ctex.org 一篇帖子]（现已失效），是该词条首条参考文献。根据 #link("https://web.archive.org/web/20110315061518/http://bbs.ctex.org/viewthread.php?tid=2641")[Internet Archive 2011年3月15日存档]，该帖内容如下。
+
+        #quote[
+          #let by(body) = {
+            // https://forum.typst.app/t/how-can-i-place-text-in-the-same-line-on-the-right-side-unless-there-is-no-space-left/5405/4
+            h(1fr) // 让前一行右端不必对齐
+            box()
+            h(1fr)
+            sym.wj
+            box(text(0.8em, "——" + body))
+          }
+          #set enum(numbering: "1#")
+          #show raw.where(block: true): set text(0.8em)
+
+          CTeX 论坛 » TeX 研究讨论区
+
+          + [中文处理] word中的小四号字体对应于latex是多少pt？
+            #by[happytoday，初级会员，发表于2003年5月17日14:20]
+
+          + CCT定义13pt
+            #by[docpost，初级会员，发表于当日17:50]
+
+          + 谢谢。CJK好像没有中文字号的。那么各种汉字字号到底与pt是怎么对应的？
+            #by[happytoday，初级会员，发表于次日23:04]
+
+          + 可以参考cct的定义，或者直接用cct，新版的cct挺好用的。
+            #by[docpost，初级会员，发表于次日23:25]
+
+          + ```latex
+            \newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
+            \newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
+            \newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}
+            \newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}
+            \newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont}
+            \newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}
+            \newcommand{\sihao}{\fontsize{14pt}{1.5\baselineskip}\selectfont}
+            \newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}
+            \newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}
+            \newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}
+            \newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}
+            \newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}
+            ```
+            From Happytex.
+
+            My installation: \
+            Win2k+Miktex/Latex+CJK+Winedt+Distiller/Acrobat5 \
+            Ghostview4.4+Ghostscript8
+
+            #by[tutuma，中级会员，发表于当月19日08:27]
+        ]
+
+        可见此帖从 MS Word 问起，但后续讨论CCT与CJK（参考@source:老CCT、@source:新CCT\以及@source:天元\的脚注），所以 Silas S. Brown 所写正文提到 MS Word，但所写表格与之不全相同。同时此帖只提到`\chuhao`、`\xiaochuhao`而未写明「初」这个汉字，所以 Silas S. Brown 误解成了「出」excessive。
+
+        总之，Silas S. Brown 所写表格的内容整理如下。
+        #draw(
+          ```csv
+          出,42
+          小出,36
+          一,28
+          二,21
+          小二,18
+          三,15.75
+          四,14
+          小四,12
+          五,10.5
+          小五,9
+          六,7.875
+          七,5.25
+          ```.text,
+        )
+
+      + #link-diff("diff=281288727&oldid=277025414")[2009年4月2日Hanson2010]将「出」「小出」改为「初」「小初」，#link-diff("diff=281639321&oldid=281288727")[同月4日R.O.C]将它们的英文翻译从excessive、small excessive改为initial、small initial。
+
+      + #link-diff("diff=306486903&oldid=281871421")[2009年8月7日130.132.247.170]将小二的拼音从xiǎo'èr改为xiǎoèr；#link-diff("diff=310756461&oldid=306486903")[同月30日Silas S. Brown]改回，并解释撇号必须保留。
+
+      + #link-diff("diff=320014419&oldid=319268297")[2009年10月15日Umofomia]在指向 bbs.ctex.org 的引用后标注了#link("https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources")[unreliable source?]，编辑摘要写 "a thread on a discussion forum is not a reliable source"。#link-diff("diff=320035750&oldid=320014419")[几小时后SmackBot]补充了标注 unreliable source? 的日期 October 2009。
+
+      + #link-diff("diff=328787055&oldid=324392159")[2009年11月30日61.135.165.174]向表格添加了小一 $24 pt$ 与小三 $15 pt$，并将一号、二号、三号、六号、七号分别改为 $26 pt, 22 pt, 16 pt, 7.5 pt, 5.5 pt$。修改后的数值与@source:基准\无矛盾，但定义范围缺少小六、八号。
+        #draw(
+          ```csv
+          初,42
+          小初,36
+          一,26
+          小一,24
+          二,22
+          小二,18
+          三,16
+          小三,15
+          四,14
+          小四,12
+          五,10.5
+          小五,9
+          六,7.5
+          七,5.5
+          ```.text,
+        )
+
+      + #link-diff("diff=343221413&oldid=342667334")[2010年2月11日71.167.236.209]将表格中的一号、二号、三号、六号、七号分别改回 $28 pt, 21 pt, 15.75 pt, 7.875 pt, 5.25 pt$。
+        #draw(
+          ```csv
+          初,42
+          小初,36
+          一,28
+          小一,24
+          二,21
+          小二,18
+          三,15.75
+          小三,15
+          四,14
+          小四,12
+          五,10.5
+          小五,9
+          六,7.875
+          七,5.25
+          ```.text,
+        )
+
+      + #link-diff("diff=368707055&oldid=363450749")[2010年6月18日218.10.237.9]向表格添加了小六 $6.5 pt$ 与八号 $5 pt$，并将一号、二号、三号、六号、七号又分别改回 $26 pt, 22 pt, 16 pt, 7.5 pt, 5.5 pt$。修改后的数值、定义范围与@source:基准\完全相同。
+        #draw(
+          ```csv
+          初,42
+          小初,36
+          一,26
+          小一,24
+          二,22
+          小二,18
+          三,16
+          小三,15
+          四,14
+          小四,12
+          五,10.5
+          小五,9
+          六,7.5
+          小六,6.5
+          七,5.5
+          八,5
+          ```.text,
+        )
+
+      + #link-diff("diff=383856654&oldid=383527815")[2010年9月10日219.234.81.138]删除了指向 bbs.ctex.org 的引用。
+
+      + #link-diff("diff=418368309&oldid=412915856")[2011年3月12日Philg88]更改了拼音写法，例如将 xiǎo'èr 改为 xiǎo èr 并用斜体。
+
+      + #link-diff("diff=660423965&oldid=660235949")[2015年5月2日LlywelynII]将 Correspondence to Chinese font sizes 小节与描述英美欧陆的 Traditional point-size  names 小节合并为 Point-size names 小节，并将各种数据合并为一张大表格。合并时未改动号数与点数的映射关系，但更改了拼音与英文翻译写法，例如将 xiǎo èr 与 "small two" 分别改为 Xiǎoèr 与 "Little Two"。
+
+        此外，还删除了中国表格前面的 "In China, point size is not used much; instead the following Chinese size names are used (e.g., in the Chinese version of Microsoft Word)" 这段介绍，并增加了 "Note that the Chinese font sizes use American points" 的说法（增加时自己标注了 citation needed）。
+
+      + #link-diff-traditional("diff=827757013&oldid=659981776")[2018年2月26日Любослов Езыкин]将 Point (typography) 词条 Point-size names 小节的表格及相关内容移动到 Traditional point-size names 词条。后者自#link-diff-traditional("oldid=659981776")[2015年4月30日LlywelynII]创建以来一直重定向到 Point (typography) 词条的 Traditional point-size names 小节，直到这次编辑。
+
+      + #link-diff-traditional("diff=868349604&oldid=868345557")[2018年11月12日Sauer202]向表格添加了毫米数 Metric size 一列。
+
+      + #link-diff-traditional("diff=1325458041&oldid=1285228800")[2025年12月3日Kzhr]在表头 Chinese system 引用了@source:CLReq-main。
     ],
   ),
   jawiki-旧: (
     brief: [1967年以前，#link("https://ja.wikipedia.org/w/index.php?title=活字&oldid=108907778#号数活字")[号数活字 - 活字の大きさ（活字大小） - 活字 - 日文维基百科，2026-03-26版]],
     notes: [
-      分了「旧号数，1967年以前」「新号数，1967年以后」两个表格，不过无引注，文中也没介绍1967年发生了什么。两表只有初号这一行相同，此处记录前者，@source:jawiki-新\记录后者。
+      分了「旧号数，1967年以前」「新号数，1967年以后」两个表格，都是#link("https://ja.wikipedia.org/w/index.php?title=活字&diff=prev&oldid=74365704")[2019年9月24日153.237.169.253]添加的，不过无引注，文中也没介绍1967年发生了什么。两表只有初号这一行相同，此处记录前者，@source:jawiki-新\记录后者。
 
       表格注释说是按美式点，不过本文件记录时没有和 $1/72 "in"$ 区分。
 
@@ -1022,7 +1223,7 @@
       }
       Anna's Archive `upload/wikilib_2025_01/Republican_Era_Books_in_the_National_Library_of_China`影印PDF#footnote[
         此文件目前缺少许多元数据，连标题都没有。此书在Anna's Archive另有元数据完善的影印DjVu，但缺少16、17两页之间的「點數體鉛字大小字樣」和最后的「讀者意見表」。
-      ]；#link("https://taiwanebook.ncl.edu.tw/zh-tw/book/NCL-9910010362")[臺灣華文電子書庫NCL-9910010362]亦有彩色影印PDF，#link("https://commons.wikimedia.org/wiki/File:NCL-9910010362_%E6%B4%BB%E7%89%88%E5%8D%B0%E5%88%B7%E8%A1%93.pdf")[Wikimedia Commons同名文件]可下载
+      ]；#link("https://taiwanebook.ncl.edu.tw/zh-tw/book/NCL-9910010362")[臺灣華文電子書庫NCL-9910010362]亦有彩色影印PDF，#link("https://commons.wikimedia.org/wiki/File:NCL-9910010362_活版印刷術.pdf")[Wikimedia Commons同名文件]可下载
     ],
     notes: [
       此书6页（PDF 25页）译者注还提及小五是 $9 pt$，不过并非专门介绍東京，故未抄录。
