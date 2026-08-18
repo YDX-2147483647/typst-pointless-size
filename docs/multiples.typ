@@ -33,7 +33,7 @@
 
 #let scale = 1.3
 
-#grid(
+#let large-grid = grid(
   columns: 3,
   row-gutter: 0.5pt,
   grid.cell(colspan: 3, {
@@ -106,7 +106,7 @@
   cell(zh(0) * scale, [*号*], size: zh(0), height: zh(1) * scale * 3 / 2),
 )
 
-#grid(
+#let small-grid = grid(
   columns: 3,
   column-gutter: 0.5pt,
   grid.cell(colspan: 2, cell((zh(-3) + zh(-1)) * scale, [*小*], size: zh(0), height: zh("-0") * scale)),
@@ -169,4 +169,13 @@
       ),
     )
   },
+)
+
+#grid(
+  columns: 2,
+  column-gutter: 2em,
+  large-grid,
+  grid.cell(align: bottom, box(
+    align(top, small-grid),
+  )),
 )

@@ -1,6 +1,8 @@
 # Typst Pointless Size——字号 zìhào
 
-[![Typst Universe](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Ftypst.app%2Funiverse%2Fpackage%2Fpointless-size&query=%2Fhtml%2Fbody%2Fdiv%2Fmain%2Fdiv%5B2%5D%2Faside%2Fsection%5B2%5D%2Fdl%2Fdd%5B3%5D&logo=typst&label=Universe&color=%23239DAE)](https://typst.app/universe/package/pointless-size)
+[![Typst Universe](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Ftypst.app%2Funiverse%2Fpackage%2Fpointless-size&query=%2Fhtml%2Fbody%2Fdiv%2Fmain%2Fdiv%5B2%5D%2Faside%2Fsection%5B2%5D%2Fdl%2Fdd%5B3%5D&logo=typst&label=universe&labelColor=white&color=%23239DAE)](https://typst.app/universe/package/pointless-size)
+[![GitHub Repo stars](https://img.shields.io/github/stars/YDX-2147483647/typst-pointless-size?style=flat&logo=github)](https://github.com/YDX-2147483647/typst-pointless-size)
+[![Changelog](https://img.shields.io/badge/changelog-gray?logo=github)](./CHANGELOG.md)
 
 中文字号的号数制及字体度量单位。
 Chinese size system (hào-system) and type-related measurements units.
@@ -45,3 +47,14 @@ Chinese size systems were not standardized. By default, this package is consiste
 ```
 
 [docs-ref]: ./docs/ref.md
+
+## 参考资料 References
+
+- [基本参考链接 Basic Reference Links][docs-ref]（中文 + English）
+
+- 资料汇编：汉字号数与点数的映射关系 Reference Compilation: Mapping Between the Chinese Size System and the Point Unit（中文 only）
+
+  [分章版首页 per-chapter homepage][ref-one-pdf] (~0.2 MB) / [合集版 all-in-one][ref-split-pdf] (~30 MB)
+
+[ref-one-pdf]: https://ydx-2147483647.github.io/typst-pointless-size/ref/index.pdf
+[ref-split-pdf]: https://ydx-2147483647.github.io/typst-pointless-size/ref.pdf

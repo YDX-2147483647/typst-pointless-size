@@ -2,6 +2,7 @@
   title: [Typst Pointless Size——字号 zìhào],
   description: [中文字号的号数制及字体度量单位 Chinese size system (hào-system) and type-related measurements units],
 )
+#let gh-pages = "https://ydx-2147483647.github.io/typst-pointless-size/"
 
 #html.style(
   ```css
@@ -34,7 +35,6 @@
   set-document-title: false,
   scope: (
     image: (source, alt: none) => {
-      let gh-pages = "https://ydx-2147483647.github.io/typst-pointless-size/"
       html.img(
         src: if source.starts-with(gh-pages) {
           "./"
@@ -46,19 +46,23 @@
       )
     },
     link: (dest, body) => {
+      let href = if dest.starts-with("./") {
+        "https://github.com/YDX-2147483647/typst-pointless-size/blob/HEAD/"
+        dest.trim("./", at: start)
+      } else if dest.starts-with(gh-pages) {
+        "./"
+        dest.trim(gh-pages, at: start)
+      } else {
+        dest
+      }
       html.a(
-        href: if dest.starts-with("./") {
-          "https://github.com/YDX-2147483647/typst-pointless-size/blob/HEAD/"
-          dest.trim("./", at: start)
-        } else {
-          dest
-        },
-        ..if dest.starts-with("https://") {
+        href: href,
+        ..if href.starts-with("https://") {
           (target: "_blank", rel: "noopener")
         },
         body,
       )
-      if body.func() == html.elem and body.tag == "img" {
+      if body.func() == html.elem and body.tag == "img" and not body.attrs.src.starts-with("https://img.shields.io") {
         parbreak()
       }
     },
