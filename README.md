@@ -8,7 +8,7 @@
 Chinese size system (hào-system) and type-related measurements units.
 
 ```typst
-#import "@preview/pointless-size:0.1.2": zh, zihao
+#import "@preview/pointless-size:0.1.3": zh, zihao
 
 #set text(size: zh(5)) // 五号（10.5pt）
 // or
@@ -38,7 +38,7 @@ Chinese size systems were not standardized. By default, this package is consiste
 如想覆盖定义：If you want to override:
 
 ```typst
-#import "@preview/pointless-size:0.1.2": zh as _zh
+#import "@preview/pointless-size:0.1.3": zh as _zh
 
 #let zh = _zh.with(overrides: ((7, 5.25pt),))
 
