@@ -22,7 +22,7 @@ test: target-dir
 
 # Create package.7z for submission
 package: target-dir
-    sd --fixed-strings './' 'https://github.com/YDX-2147483647/typst-pointless-size/blob/main/' README.md
+    sd --fixed-strings './' 'https://github.com/YDX-2147483647/typst-pointless-size/blob/v{{VERSION}}/' README.md
     7z a target/package.7z LICENSE README.md typst.toml src/ -x!src/*test*
 
 # Build target/ for GitHub Pages
