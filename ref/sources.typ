@@ -11,6 +11,22 @@
   height: height,
 ))
 
+/// 填充若干行图片，保证每行内所有图片缩放到相同高度，但行之间各图片未必对齐
+#let grid-fit-columns(..rows, gutter: 0.5em) = {
+  assert.eq(rows.named(), (:))
+  grid(
+    columns: 1,
+    row-gutter: gutter,
+    ..for images in rows.pos() {
+      assert(type(images) == array and images.len() >= 1)
+      let columns = images.map(img => {
+        let (height, width) = measure(img)
+        width / height * 1fr
+      })
+      (grid(columns: columns, column-gutter: gutter, ..images),)
+    },
+  )
+}
 
 /// 数据源
 #let sources = (
@@ -496,7 +512,7 @@
       #set math.frac(style: "horizontal")
       这样算下来三号字的宽度不超过 $156 "mm" / 28 = 15.793 pt$（按 $1 pt = 1/72 "in"$ 计算）。
 
-      又，#link("https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D78446D3A7E05397BE0A0AB82A&review=true")[GB/T 12200.2—1994《汉语信息处理词汇　02部分：汉语和汉字》]「4 术语和定义 → 4.1 汉语和汉字 → 4.1.2 文字 → 4.1.2.9 字号 character number」展示了字号大小，不过未定义点数。手工测量像素数的话，比例大约是 $36.1 : 32.0 : 28.1 : 21.2 : 16.1 : 14.2 : 12.4 : 10.5 : 9.28$。若假设五号是 $10.5 pt$，则数值比较接近@source:方正书版（特别是初号、小初），但定义范围只有初号到六号与小初、小四、小五。
+      又，#link("https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D78446D3A7E05397BE0A0AB82A&review=true")[GB/T 12200.2—1994《汉语信息处理词汇　02部分：汉语和汉字》]「4 术语和定义 → 4.1 汉语和汉字 → 4.1.2 文字 → 4.1.2.9 字号 character number」展示了字号大小，不过未定义点数。手工测量像素数的话，比例大约是 $36.1 : 32.0 : 28.1 : 21.2 : 16.1 : 14.2 : 12.4 : 10.5 : 9.28$。若假设五号是 $10.5 pt$，则数值比较接近@source:方正书版（特别是初号、小初），但定义范围只有初号到六号与小初、小四、小五。另外，此国标给小四、小五括注了「新四号」「新五号」，却未给小初括注，有些蹊跷。
 
       #figure({
         image("assets/GB_T 12200.2—1994-a.png", width: 80%)
@@ -773,7 +789,7 @@
     notes: [
       根据#link("https://blog.sina.com.cn/s/blog_59d194650100zi5z.html")[高鸿儒《毕生奉献于出版印刷事业——访印刷界老前辈何步云先生》]（张弥迪2011年11月15日转载自《印刷杂志》1994年03期），作者何步云曾任上海新华印刷厂第一任副厂长、上海印刷学校教务主任。
 
-      按照 @高洋2025 的引用，《中国活字小史》也收录于上海新四军历史研究会印刷印钞分会《活字印刷源流》（印刷工业出版社，1990）。不清楚两版是否有区别。
+      按照 @高洋2025 的引用，《中国活字小史》也收录于#link("https://annas-archive.gl/md5/53d2e86326c995192316ec3a31806611")[上海新四军历史研究会印刷印钞分会《活字印刷源流》]（《中国印刷史料选辑》之二，印刷工业出版社，1990年8月第一版第一次印刷，ISBN 7-80000-054-0）。两版看起来内容相同，只是排版不同。例如年鉴把字样全部推到文后，而《源流》把前四种字样插入了「我国1961年开始设计的活字字体有下列三个特点……」正文旁边。
 
       表2记录了正方、狭长、扁宽三种字身形式的活字，这里只记录正方#footnote[狭长、扁宽的号数覆盖范围小于正方，而且纵向点数与正方一致，唯一例外是狭长小初号有 $31.5 times 24$ 与 $30 times 24$ 两种规格，前者的纵向点数与正方小初号 $30$ 不同。]。另外，表2中初号与二号之间是「大号」，但正文似无此说法，所以这里将大号当作一号理解（仅限大号、小大号；特大号不当作「特一号」理解）。
 
@@ -1282,6 +1298,8 @@
     brief: [ZIP 0008–0009页，Price List of Printing Type 歐文角及定價，株式會社秀英舍鑄造部·活版製造所·#link("https://archive.org/details/seibundo1903specimen")[製文堂《活版見本帖》]，明治三十六年二月（1903年2月#footnote[日本从明治六年（1873年）开始，月份与公历完全同步，不再是日月共同影响的阴阳历月份。]）],
     via: [Internet Archive 的#link("https://archive.org/download/seibundo1903specimen/seibundo1903specimen_images.zip/")[`seibundo1903specimen_images.zip`]#footnote[Internet Archive 亦提供PDF，但不如`*_images.zip`清晰。]],
     notes: [
+      #link("https://archives.ichigaya-letterpress.jp/library/items/a9d8a5381b99/")[活版見本帖 Type Specimens｜秀英体・活版印刷デジタルライブラリー]（秀英体・活版印刷数字图书馆）有明治四十三年（1910年）七月一日印刷、同年八月十日发行的版本，「Price List of Printing Type 歐文角及定價」看起来完全相同。不过这家图书馆收藏的#link("https://archives.ichigaya-letterpress.jp/library/items/084cef1f7ddc/")[大日本印刷株式会社《主要活字見本帖》]（封底写昭和二十三年十月，即1948年10月）#footnote[資料の説明：「ベントン彫刻機による彫刻母型導入前の電胎母型で鋳造された活字を使用した最後の活字見本帳。発行日は手書きメモによる。」（中文翻译：导入Benton雕刻机雕刻母型前，使用由电胎母型铸造的活字的最后的活字样本册。发行日期根据手写备忘录。）]就完全不同，号数制与点数制分开列出（先列初号至六号宋体和黑体，再列 $36 pt, 32 pt, 18 pt, 13 pt, 12 pt, 9 pt, 8 pt, 6 pt$ 宋体和黑体，然后列 $18 pt, 9 pt$「清朝」），似乎未提号数和点数的映射关系。
+
       这是个三百多页的非卖品小册子，设计比较特殊。左侧封面写 Type Specimens，开头是「歐文角及定價」和各种西文字体样张；右侧封面写「活版見本帖」与「和漢字體」，开头是各种汉字与假名字体样张；中间还有围棋盘、装饰线、花形图案等的样张，以及位于ZIP 0106页的版权页。
 
       原文中七号的点数使用 $5 1/2$ 这种带分数而非 $5.5$ 这种小数，不存在精度问题；另外原文将一号写作「壹號」，但二号至八号的数字并未写成贰叁肆伍陆柒捌。
@@ -1315,11 +1333,36 @@
       ))
     ],
   ),
+  华丰厂1963: (
+    brief: [各类字模售价及用料参攷表，#link("https://book.kongfz.com/14133/9533907008")[上海華豐铸字製模厰《銅模鉛字样本》]，1963年],
+    via: [孔夫子旧書网图文详情，北京市丰台区友情书店，2026年1月25日上书，售价￥168.00],
+    notes: [
+      此文件、@source:沪一厂1972、@source:沪一厂1978、@source:沪一厂1988 是同一厂不同年代的文件，比较如下。
+
+      - 四份文件都是样本册，但*名称与版式*不同。原因可能是技术进步，也可能是文件不完全对应。
+
+        1963年《銅模鉛字样本》是横版，内页黑白；1972年《字模与铅字样本》仍是横版，内页很可能仍是黑白（也不排除原件彩色，影印时转为黑白）；1978年《字模与铅字》变为竖版，内页像「铅字规格」这样的页边是彩色；1988年《字模与铅字（中西字模）》保持竖版，内页整版都是彩色。
+
+      - 点数*数值*都存在明显的倍数关系，且1972年、1978年、1988年三份文件无矛盾，但它们与1963年文件差异较大。
+
+        1972年、1978年、1988年文件均是五号 $10.5 pt$、三号 $15.75 pt$，但1963年文件五号 $10 pt$、三号 $16 pt$。
+
+      - 号数*定义范围*不全相同，不过都有特号、特大。
+
+        1963年文件无小初，有小二、七号；1972年文件有小初、小二，无七号；1978年文件小初、小二、七号均有；1988年小初、小二、七号均无。至于带「特」字的号数，1963年文件只有特大、特号，1972年、1978年文件均有特大、特中、特号、小特，而1988年文件只有特大、特号、小特。
+
+        注意1963年、1972年、1978年文件已知规格页，定义范围比较明确；而1988年文件仅知样本页，定义范围很可能漏掉了一些。
+
+      #figure(
+        range(2).map(p => image("assets/华丰厂1963-节选.pdf", page: p + 1, width: 80%)).join(),
+      )
+    ],
+  ),
   沪一厂1972: (
     brief: [「各体铅字字型、字数、供应品种参照表」，上海字模一厂（华丰铸字制模厂）《字模与铅字样本》，1972],
     via: [同@source:京新厂1981，r 提供影印 PDF；Anna's Archive `duxiu/initial_release`亦有#link("https://annas-archive.gl/md5/6b6959ea87efa54c653edb08cee4d241")[上海字模一厂《字模与铅字样本》全文影印PDF]],
     notes: [
-      与@source:沪一厂1978 是同一厂不同年代的文件。
+      @source:华丰厂1963、此文件、@source:沪一厂1978、@source:沪一厂1988 是同一厂不同年代的文件，但数值、定义范围不全相同，详见@source:华丰厂1963 中的比较。
 
       该表是产品名录，所以很多点数、号数映射关系描述了多次。正方的字号前后一致；长体、扁体字号的纵向点数前后一致，而横向点数未必一致；正方、长体、扁体都有时，三者纵向点数一致。例如对应24页的四号仿宋是 $14$，对应28页的四号长仿宋是 $14 times 10.5$，二者纵向点数相同；而同样是小特，对应34页的长牟是 $42 times 36$，对应47页的隶书是 $42 times 63$，对应51页的黑变是 $42 times 31.5$，三种纵向点数相同但横向点数不同。另外，对应28页的五号长仿宋，不知为何只给了一个点数，表格和样本页都如此。
 
@@ -1342,7 +1385,7 @@
     brief: [「铅字品种规格参照表」，上海字模一厂（华丰铸字制模厂）《字模与铅字》，1978],
     via: [同@source:京新厂1981，r 提供影印 PDF],
     notes: [
-      与@source:沪一厂1972 是同一厂不同年代的文件，1978年文件只是增加了七号 $6 pt$ 和数学符号 $5.25 pt$（后者未计入 data）。
+      @source:华丰厂1963、@source:沪一厂1972、此文件、@source:沪一厂1988 是同一厂不同年代的文件，但数值、定义范围不全相同，详见@source:华丰厂1963 中的比较。与1972年文件相比，1978年文件只是增加了七号 $6 pt$ 和数学符号 $5.25 pt$（后者未计入 data）。
 
       该表原文出现了「七行（特大号）」「五行（特号）」「四行（初号）」，这里按括号中的号数录入。
 
@@ -1354,13 +1397,63 @@
         columns: 2,
         ..range(10, 12).map(p => image("assets/京沪印刷厂.pdf", page: p)),
       ))
+
+      另外，孔夫子旧書网#link("https://book.kongfz.com/40101/6470813250")[山东省青岛市生明亮书店]（2023年11月17日上书，售价￥8.00）有此文件的彩色照片，规格页如下图；其它很多店铺也有。
+      #figure(
+        image("assets/沪一厂1978-彩色.jpg", width: 60%),
+      )
+    ],
+  ),
+  沪一厂1988: (
+    brief: [#link("https://book.kongfz.com/399379/7995286800")[上海字模一厂《字模与铅字（中西字模）#footnote[书脊写「字模与铅字」，封面插图中写「中西字模」。]》]，上海市美術印刷厂印刷，1988年],
+    via: [孔夫子旧書网图文详情，封面、书脊、封底与1、7、33页取自甘肃省甘南藏族自治州自知书斋（2025年3月11日上书，售价￥120.00），11页取自#link("https://book.kongfz.com/323574/1717725727")[云南省昆明市源鹏书屋]（2019年12月27日上书，售价￥180.00）],
+    notes: [
+      @source:华丰厂1963、@source:沪一厂1972、@source:沪一厂1978、此文件是同一厂不同年代的文件，但数值、定义范围不全相同，详见@source:华丰厂1963 中的比较。
+
+      「大号」「小大号」按一号、小一理解。已知页面中只有11页扁的隶书体有「小特号 42×36点」，这里记录其纵向点数 $42 pt$。
+
+      #figure({
+        let page(p) = image("assets/沪一厂1988-节选.pdf", page: p)
+        context grid-fit-columns(
+          (1, 7, 6).map(page),
+        )
+        grid(
+          columns: 2,
+          gutter: 0.5em,
+          ..range(2, 6).map(page)
+        )
+      })
+    ],
+  ),
+  丹江厂1975: (
+    brief: [末页整付铅字应备字数及铅字重量参考表以及正文样本，#link("https://book.kongfz.com/364303/6621665391")[湖北丹江文字六〇五厂《字模及铅字 临时样本》]，说明页落款1975年9月],
+    via: [孔夫子旧書网图文详情，封面、8–9页、规格页取自辽宁省沈阳市明枫居的书摊（2024年1月2日上书，售价￥80.00），说明页至1页取自#link("https://book.kongfz.com/261367/10022840631")[云南省大理白族自治州将军故里]（2026年5月11日上书，售价￥30.00）],
+    notes: [
+      与@source:丹江厂1980 是同一厂不同年代的文件。
+
+      末页规格页存在无对应号数的 $48 pt$、$30 pt$，未计入 data；1页扁的隶书体字样存在规格页没有的「24×36点 新大号」，这里记录其纵向点数 $24 pt$。
+
+      9页宋（一）体字样中，$6 pt$ 标注「又称七号」，但其它只注某某号而不写「又称」。
+
+      #quote(attribution: [说明])[
+        这次编印《临时样本》，由于时间仓卒，尚有“四合一”外文（正体、斜体、黑体）、汉语拼音文、数学符号，装饰花边等字模，未编入《临时样本》内。上述品种，亦可订购。
+      ]
+
+      #figure({
+        let page(p) = image("assets/丹江厂1975-节选.pdf", page: p)
+        context grid-fit-columns(
+          (1, 2).map(page),
+          (3, 4).map(page),
+          (5,).map(page),
+        )
+      })
     ],
   ),
   丹江厂1980: (
     brief: [「铅字品种规格参照表」，湖北丹江文字六〇五厂（上海字模二厂）《字模与铅字样本》，1980年11月],
     via: [同@source:京新厂1981，r 提供影印 PDF],
     notes: [
-      与@source:沪一厂1972 及@source:沪一厂1978 是临近地区不同厂不同年代的文件。该厂旧称上海字模二厂，不过三线建设时期就迁去了湖北，字模实物上的铭文也写丹江而非上海。
+      与@source:丹江厂1975 是同一厂不同年代的文件，与@source:华丰厂1963 及@source:沪一厂1972 等是临近地区不同厂不同年代的文件。据 r 描述，该厂旧称上海字模二厂，不过三线建设时期就迁去了湖北，字模实物上的铭文也写丹江而非上海。
 
       该表号数全部标在括号内，但个别行还在括号外标注了行数，包括「七行（特大号）」「五行（特号）」「四行（初号）」。这里按括号中的号数录入。
 
@@ -1678,6 +1771,291 @@
         ..range(4).map(p => image("assets/手册1989-节选.pdf", page: p + 1)),
         ..range(4, 8).map(p => grid.cell(colspan: 2, image("assets/手册1989-节选.pdf", page: p + 1))),
       ))
+    ],
+  ),
+  CSS: (
+    brief: [CSS `font-size`相关习惯],
+    notes: [
+      #let rem = 16 / 96 * 72
+      #assert.eq(rem, 12)
+
+      #let draw-rel(pairs, width: 20em) = figure(draw-as-log-period(
+        pairs,
+        width: width,
+        height: 12em,
+        p-ref: rem,
+        mark-scale: 1.4, // 避免 Tailwind 9xl 太挤
+      ))
+
+      CSS针对网页与屏幕显示，最初又只考虑英语，所以谈不上汉字号数与点数的映射关系。不过CSS也有分级设置`font-size`的习惯，故顺便记录一下。
+
+      CSS规定默认`font-size`是medium。对于当前主流平台（现代主流浏览器、高分辨率屏幕），这个默认值相当于CSS中的`16px`，等于CSS中的`12pt`，也等于物理长度 $12 pt$；不过对于其它平台，只能保证CSS中的`16px`等于CSS中的`12pt`，而无法保证`font-size`默认值、物理长度 $12 pt$ 与它的关系。为便于理解，以下画图时均以默认值作为 $12 pt$。
+
+      #link("https://drafts.csswg.org/css-fonts-4/#absolute-size-mapping")[§2.5.1. Absolute Size Keyword Mapping Table - CSS Fonts Module Level 4 | W3C编辑草稿]（2026-08-18版）规定了几种absolute-size关键字。这些关键字可用于设置`font-size`，不过实际并不常用。此节内容如下。
+
+      #quote[
+        #set text(font: "Liberation Serif", bottom-edge: "baseline")
+        The following table provides user agent guidelines for the absolute-size scaling factor and their mapping to HTML heading and absolute font-sizes. The "medium" value is used as the reference middle value. The user agent may fine-tune these values for different fonts or different types of display devices.
+
+        #figure({
+          set text(0.8em)
+          set par(justify: false)
+          set raw(lang: "html")
+          set math.frac(style: "skewed")
+          table(
+            columns: 9,
+            table.header(
+              ..(
+                [CSS absolute-size values],
+                [xx-small],
+                [x-small],
+                [small],
+                [medium],
+                [large],
+                [x-large],
+                [xx-large],
+                [xxx-large],
+              ).map(strong),
+            ),
+            table.hline(),
+            table.vline(x: 1, start: 1),
+
+            [*scaling factor*],
+            $ 3/5 $, $ 3/4 $, $ 8/9 $, $ 1 $, $ 6/5 $, $ 3/2 $, $ 2/1 $, $ 3/1 $,
+            table.hline(stroke: 0.5pt + gray),
+
+            [*HTML headings*],
+            `h6`, [], `h5`, `h4`, `h3`, `h2`, `h1`, [],
+            table.hline(stroke: 0.5pt + gray),
+
+            [*HTML #link("https://html.spec.whatwg.org/multipage/obsolete.html#font", `<font>`) sizes*],
+            [1], [], [2], [3], [4], [5], [6], [7],
+          )
+        })
+
+        #block(width: 100%, stroke: (left: rgb("#52e052") + 2pt), inset: (left: 0.5em), outset: (y: 0.5em))[
+          *#upper[Note:]* #h(1em, weak: true) In CSS1, the suggested scaling factor between adjacent indexes was 1.5, which user experience proved to be too large. In CSS2, the suggested scaling factor for computer screen between adjacent indexes was 1.2 which still created issues for the small sizes. The new scaling factor varies between each index to provide a better readability.
+        ]
+
+        To preserve readability, an UA applying these guidelines should nevertheless avoid creating font sizes of less than 9 device pixels per EM unit.
+      ]
+
+      若以 medium 作为 $#rem pt$，则这些absolute-size关键字对应的点数如下图。
+      #draw-rel(
+        (
+          xx-small: 3 / 5,
+          x-small: 3 / 4,
+          small: 8 / 9,
+          medium: 1,
+          large: 6 / 5,
+          x-large: 3 / 2,
+          xx-large: 2,
+          xxx-large: 3,
+        )
+          .pairs()
+          .map(((g, p)) => (g, calc.round(p * rem, digits: 4))),
+        width: 24em,
+      )
+
+      #link("https://tailwindcss.com/docs/font-size")[Tailwind CSS 提供了设置`font-size`的工具类]，例如`text-sm`、`text-lg`。这些工具类的默认效果定义于#link("https://github.com/tailwindlabs/tailwindcss/blob/90f8ff41c8e2a4d17bc76921e23e9d672123da76/packages/tailwindcss/theme.css#L347-L372")[源代码`theme.css`]，具体如下。注意字号、行距其实会同时变化，尽管此处只关心字号。
+
+      #figure({
+        set text(0.6em)
+        grid(
+          columns: 3,
+          gutter: 1fr,
+          inset: (x: 2em),
+          ```css
+          --text-xs: 0.75rem;
+          --text-xs--line-height: calc(1 / 0.75);
+          --text-sm: 0.875rem;
+          --text-sm--line-height: calc(1.25 / 0.875);
+          --text-base: 1rem;
+          --text-base--line-height: calc(1.5 / 1);
+          --text-lg: 1.125rem;
+          --text-lg--line-height: calc(1.75 / 1.125);
+          --text-xl: 1.25rem;
+          --text-xl--line-height: calc(1.75 / 1.25);
+          ```,
+          ```css
+          --text-2xl: 1.5rem;
+          --text-2xl--line-height: calc(2 / 1.5);
+          --text-3xl: 1.875rem;
+          --text-3xl--line-height: calc(2.25 / 1.875);
+          --text-4xl: 2.25rem;
+          --text-4xl--line-height: calc(2.5 / 2.25);
+          --text-5xl: 3rem;
+          --text-5xl--line-height: 1;
+          ```,
+          ```css
+          --text-6xl: 3.75rem;
+          --text-6xl--line-height: 1;
+          --text-7xl: 4.5rem;
+          --text-7xl--line-height: 1;
+          --text-8xl: 6rem;
+          --text-8xl--line-height: 1;
+          --text-9xl: 8rem;
+          --text-9xl--line-height: 1;
+          ```,
+        )
+      })
+
+      若以 base 作为 $#rem pt$，则这些工具类对应的点数如下图。
+
+      #draw-rel(
+        csv(bytes(
+          ```csv
+          xs,0.75
+          sm,0.875
+          base,1
+          lg,1.125
+          xl,1.25
+          2xl,1.5
+          3xl,1.875
+          4xl,2.25
+          5xl,3
+          6xl,3.75
+          7xl,4.5
+          8xl,6
+          9xl,8
+          ```.text,
+        )).map(((g, p)) => (g, float(p) * rem)),
+        width: 28em,
+      )
+
+      以上是 Tailwind CSS v4 的情况，不过这套设置也是逐渐发展而来的。（日期按UTC−4，作者默认 Adam Wathan）
+
+      #let pull(num) = link("https://github.com/tailwindlabs/tailwindcss/pull/" + str(num), "#" + str(num))
+      #let commit(sha, ..git-describe, author-date) = {
+        assert.eq(git-describe.named(), (:))
+        assert(git-describe.len() <= 1)
+        let short = git-describe.pos().first(default: sha.slice(0, 7))
+
+        link("https://github.com/tailwindlabs/tailwindcss/commit/" + sha, raw(short))
+        [~(#author-date)]
+      }
+
+      行距的历史比较简单。#pull(2143) (`v1.6.2-26-g4d2e4119`, 2020-08-07) 添加了实验性支持，#pull(2609) (`v1.9.2-66-g7d102598`, 2020-10-17) 原样转正。此后仅 #pull(15216) 为规避Safari异常动画效果而修改了行距设置的具体写法，而正常效果从未变化。
+
+      字号的历史则十分曲折，简要罗列如下。（画图时均以 base 作为 $12 pt$）
+
+      + #commit("421c1b0d7d121f94dac4c2d2534830aba0b0bff1", "2017-07-20") 创建仓库时，就已有设置`font-size`的工具类，具体如下图。
+        #draw-rel(
+          (
+            xs: 12 / 16,
+            sm: 14 / 16,
+            base: 1,
+            lg: 18 / 16,
+            xl: 22 / 16,
+            "2xl": 30 / 16,
+            "3xl": 40 / 16,
+          )
+            .pairs()
+            .map(((g, p)) => (g, p * rem)),
+        )
+
+      + #commit("d03f093c0637cf9b1eb6e5cee64919ad4bd84cfd", "2017-08-18") 缩小xl、2xl、3xl，新增4xl，commit message 写 "Steal Marvel's font size scale 👀"。这大约是指 #link("https://marvel.marvelapp.com/styleguide/design/typography")[Styleguide — Marvel]，不过Marvel还定义了 extra extra small `10px = 7.5pt`，并且管small、large之间的叫medium。总之 Tailwind CSS 修改后如下图。
+        #draw-rel(
+          (
+            xs: 12 / 16,
+            sm: 14 / 16,
+            base: 1,
+            lg: 18 / 16,
+            xl: 20 / 16,
+            "2xl": 28 / 16,
+            "3xl": 38 / 16,
+            "4xl": 46 / 16,
+          )
+            .pairs()
+            .map(((g, p)) => (g, p * rem)),
+        )
+
+      + #commit("422cac073384b462ccdfa957aeff49227329db11", "2017-08-27") 将`text.less`等价转换为`defaultConfig.js`，commit message 写 "Add PostCSS text size utilities"。
+
+      + Jonathan Reinink 于 #commit("6b204cf0dd2494eaefcb9468e0a236596459e4b5", "2017-10-02") 给base添加了别名md。不久 Adam Wathan 又于 #commit("0bbe669cd62169ebd3dd3d31ebfc8ea151329b74", "2017-10-20") 删除了别名，commit message 写 "Remove md text size alias (🖕🏻) and align pixel comments"（后半句是指通过添加空格对齐源代码各行注释写的`px`数）。
+
+      + #commit("751bfe681b977bd407a188ac5785dc125b0c1fc9", "2017-10-25") 缩小2xl、3xl、4xl，新增5xl，commit message 写 "Switch to Schoger-approved default font size scale"。其中Schoger大约指#link("https://www.steveschoger.com/")[Steve Schoger]。在二人合著的 _Refactoring UI_ 中，Establish a type scale 介绍了如何设计字号系统：选取整`px`数以避免浏览器次像素渲染，选取适当比例以保证总有合适字号可选。总之修改后如下图。
+        #draw-rel(
+          csv(bytes(
+            ```csv
+            xs,0.75
+            sm,0.875
+            base,1
+            lg,1.125
+            xl,1.25
+            2xl,1.5
+            3xl,1.875
+            4xl,2.25
+            5xl,3
+            ```.text,
+          )).map(((g, p)) => (g, float(p) * rem)),
+        )
+
+      + 2017-11-01 发布首个版本 #link("https://github.com/tailwindlabs/tailwindcss/releases/tag/v0.1.0")[v0.1.0]。
+
+      + #pull(755) (`v0.7.3-406-gd0576d65`, 2019-03-13) 新增6xl，解释 "Felt like we needed something really huge."。修改后如下图。
+        #draw-rel(
+          csv(bytes(
+            ```csv
+            xs,0.75
+            sm,0.875
+            base,1
+            lg,1.125
+            xl,1.25
+            2xl,1.5
+            3xl,1.875
+            4xl,2.25
+            5xl,3
+            6xl,4
+            ```.text,
+          )).map(((g, p)) => (g, float(p) * rem)),
+        )
+
+      + #pull(2145) (`v1.6.2-28-gaa810673`, 2020-08-07) 添加了实验性功能extendedFontSizeScale，包含7xl至9xl，解释 "The goal here is to make sure Tailwind's default design system is capable of keeping up with modern design trends, which lately includes huge text on landing pages."。修改后如下图。
+        #draw-rel(
+          csv(bytes(
+            ```csv
+            xs,0.75
+            sm,0.875
+            base,1
+            lg,1.125
+            xl,1.25
+            2xl,1.5
+            3xl,1.875
+            4xl,2.25
+            5xl,3
+            6xl,4
+            7xl,5
+            8xl,6
+            9xl,8
+            ```.text,
+          )).map(((g, p)) => (g, float(p) * rem)),
+          width: 24em,
+        )
+
+      + #pull(2609) (`v1.9.2-79-g322d3664`, 2020-10-18) 将这一实验性功能原样转正，解释 "Some things in here we may fine tune (the font-size scale is something Steve and I plan to triple-check that we're happy with) but we can do that in another pass before the release of 2.0."。
+
+      + #pull(2619) (`v1.9.2-95-g16fac7e5`, 2020-10-20) 缩小6xl、7xl，解释 "These feel like better defaults in our testing. The 6xl change is a breaking change but not a high effort one."。修改后如下图。
+        #draw-rel(
+          csv(bytes(
+            ```csv
+            xs,0.75
+            sm,0.875
+            base,1
+            lg,1.125
+            xl,1.25
+            2xl,1.5
+            3xl,1.875
+            4xl,2.25
+            5xl,3
+            6xl,3.75
+            7xl,4.5
+            8xl,6
+            9xl,8
+            ```.text,
+          )).map(((g, p)) => (g, float(p) * rem)),
+          width: 24em,
+        )
     ],
   ),
 )

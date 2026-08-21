@@ -94,10 +94,11 @@
 ///
 /// - pairs: 一串 (号数, 点数)
 /// - p-ref: 代表原点的参考点数，一般保留默认即可
+/// - mark-scale: 数据点的放大倍数，p-ref 非默认时可一同调整
 /// - start: 周期起始，详见`factorize`文档；一般保留默认即可
 /// - width, height: lilaq 绘图尺寸
 /// - tiny: 是否简化标注
-#let draw-as-log-period(pairs, p-ref: 10.5, start: 4 / 5, width: 6cm, height: 4cm, tiny: false) = {
+#let draw-as-log-period(pairs, p-ref: 10.5, mark-scale: 1.8, start: 4 / 5, width: 6cm, height: 4cm, tiny: false) = {
   let if-not-tiny(v) = if not tiny { (v,) }
 
   let base = 2
@@ -114,11 +115,11 @@
     if is-small(g) {
       small-n.push(n)
       small-m.push(m)
-      if not tiny { small-sizes.push(1.8 * p) }
+      if not tiny { small-sizes.push(mark-scale * p) }
     } else {
       large-n.push(n)
       large-m.push(m)
-      if not tiny { large-sizes.push(1.8 * p) }
+      if not tiny { large-sizes.push(mark-scale * p) }
     }
   }
 
