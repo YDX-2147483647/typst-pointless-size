@@ -32,6 +32,33 @@
     ))
     .sorted(key: ((_, (host, ..))) => host.split(".").rev())
 
+  {
+    // 检查重复链接
+    let expected-duplicates = (
+      // 这条评论回复了多个问题，分属两个数据源，因此链接了两回
+      "https://github.com/CTeX-org/ctex-kit/issues/813#issuecomment-4412583072": 2,
+      // 这个PR既加了行距，又改了字号，因此被链接了两回
+      "https://github.com/tailwindlabs/tailwindcss/pull/2609": 2,
+    )
+    let urls = targets.map(((it, ..)) => it.dest)
+    let duplicate-urls = urls
+      .enumerate()
+      .filter(((i, a)) => i != urls.position(b => b == a))
+      .map(((.., url)) => url)
+      .dedup()
+    assert.eq(
+      duplicate-urls
+        .map(url => (url, targets.filter(((it, ..)) => it.dest == url)))
+        .filter(((url, targets)) => targets.len() != expected-duplicates.at(url, default: none))
+        .to-dict(),
+      (:),
+    )
+    assert.eq(expected-duplicates.keys().filter(k => k not in duplicate-urls), ())
+  }
+
+  // Export for `just check-web-archive`
+  [#metadata(targets.map(((it, ..)) => it.dest).dedup())<external-links>]
+
   set list(spacing: 1em)
   set heading(outlined: false, bookmarked: true)
   let last-host = none

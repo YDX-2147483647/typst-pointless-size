@@ -512,7 +512,7 @@
       #set math.frac(style: "horizontal")
       这样算下来三号字的宽度不超过 $156 "mm" / 28 = 15.793 pt$（按 $1 pt = 1/72 "in"$ 计算）。
 
-      又，#link("https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D78446D3A7E05397BE0A0AB82A&review=true")[GB/T 12200.2—1994《汉语信息处理词汇　02部分：汉语和汉字》]「4 术语和定义 → 4.1 汉语和汉字 → 4.1.2 文字 → 4.1.2.9 字号 character number」展示了字号大小，不过未定义点数。手工测量像素数的话，比例大约是 $36.1 : 32.0 : 28.1 : 21.2 : 16.1 : 14.2 : 12.4 : 10.5 : 9.28$。若假设五号是 $10.5 pt$，则数值比较接近@source:方正书版（特别是初号、小初），但定义范围只有初号到六号与小初、小四、小五。另外，此国标给小四、小五括注了「新四号」「新五号」，却未给小初括注，有些蹊跷。
+      又，#link("https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D78446D3A7E05397BE0A0AB82A")[GB/T 12200.2—1994《汉语信息处理词汇　02部分：汉语和汉字》]「4 术语和定义 → 4.1 汉语和汉字 → 4.1.2 文字 → 4.1.2.9 字号 character number」展示了字号大小，不过未定义点数。手工测量像素数的话，比例大约是 $36.1 : 32.0 : 28.1 : 21.2 : 16.1 : 14.2 : 12.4 : 10.5 : 9.28$。若假设五号是 $10.5 pt$，则数值比较接近@source:方正书版（特别是初号、小初），但定义范围只有初号到六号与小初、小四、小五。另外，此国标给小四、小五括注了「新四号」「新五号」，却未给小初括注，有些蹊跷。
 
       #figure({
         image("assets/GB_T 12200.2—1994-a.png", width: 80%)
@@ -598,7 +598,7 @@
         ]
       ]
 
-      另外，按照#link("https://www.thetype.com/typechat/ep-135/")[《字谈字畅 \#135：显明解行号号珍》]的说法，姜别利那时点的概念还比较模糊，选择字号并不是按点数选的。不过根据以下西野嘉章编《歴史の文字　記載·活字·活版》（東京大学総合研究博物館）#link("https://web.archive.org/web/20070901124726/https://www.um.u-tokyo.ac.jp/publish_db/1996Moji/05/5901.html")[第三部「活版の世界」]表4印刷品实测结果，以上点数还是比较靠谱的。
+      另外，按照#link("https://www.thetype.com/typechat/ep-135/")[《字谈字畅 \#135：显明解行号号珍》]的说法，姜别利那时点的概念还比较模糊，选择字号并不是按点数选的。不过根据以下西野嘉章编《歴史の文字　記載·活字·活版》（東京大学総合研究博物館）#link("https://umdb.um.u-tokyo.ac.jp/DKankoub/Publish_db/1996Moji/05/5901.html")[第三部「活版の世界」]表4印刷品实测结果，以上点数还是比较靠谱的。
 
       #quote[
         #set text(lang: "ja")
@@ -677,13 +677,13 @@
         )
       }))
 
-      另外，#link("https://github.com/CTeX-org/ctex-kit/issues/543")[tanukihee 曾提供「1993年」周承民《活字排版工艺》的照片]，不过#link("https://github.com/CTeX-org/ctex-kit/issues/813#issuecomment-4412583072")[后来沟通发现很可能不是1993年版]。具体而言，#link("http://opac.nlc.cn/F/RU3P8SNJEGUCQDY58XIF2P2MUK36IGNT5QSCCPGILGVLUNLL22-04993?func=short")[在国家图书馆馆藏目录只能查到@source:周承民1988、@source:曹洪奎1979 两版《活字排版工艺》，而无1993年任何版本]，而且 tanukihee 当时所发两组照片也与这两版分别一致。
+      另外，#link("https://github.com/CTeX-org/ctex-kit/issues/543#issue-720302389")[tanukihee 曾提供「1993年」周承民《活字排版工艺》的照片]，不过#link("https://github.com/CTeX-org/ctex-kit/issues/813#issuecomment-4412583072")[后来沟通发现很可能不是1993年版]。具体而言，#link("http://opac.nlc.cn/F/RU3P8SNJEGUCQDY58XIF2P2MUK36IGNT5QSCCPGILGVLUNLL22-04993?func=short")[在国家图书馆馆藏目录只能查到@source:周承民1988、@source:曹洪奎1979 两版《活字排版工艺》，而无1993年任何版本]，而且 tanukihee 当时所发两组照片也与这两版分别一致。
     ],
   ),
   曹洪奎1979: (
     brief: [曹洪奎《活字排版工艺》，轻工业出版社出版，张家口地区印刷厂印制，封面写1979年，内页写1983年9月第一版第三次印刷#footnote[二者相差四年，不知何故。]，统一书号15042·1509],
     via: [#link(
-        "https://ss.zhizhen.com/detail_38502727e7500f2685813c708ce0786ae71c99137e1f57f01921b0a3ea25510134114c969f2eae5c409d083e1d75cb511ee4bf8e7dfbe7254ed60b8f61ffee76030c1ddc408afcba31a0e7397ecd1407?&apistrclassfy=0_18_19",
+        "https://ss.zhizhen.com/detail_38502727e7500f2685813c708ce0786ae71c99137e1f57f01921b0a3ea25510134114c969f2eae5c409d083e1d75cb511ee4bf8e7dfbe7254ed60b8f61ffee76030c1ddc408afcba31a0e7397ecd1407",
       )[汇雅电子书影印PDF]#footnote[该地址是我校图书馆统一检索页面，不确定校外能否访问。]],
     notes: [
       题名与@source:周承民1988 相同，内容也高度接近，不清楚是什么原因。
@@ -829,7 +829,7 @@
 
       此文明确指出比例关系按照字心计算。按照 @林川1991#footnote[该文恐怕非常不靠谱。文中表一「对比4#super[[7]]」一列转录了《中国活字小史》（@source:小史1981），但将五号10.5点误作11.5，将特号45点、特初号48点、特中号56点乱作小特42,45、特48、特大56，且无任何说明。在此文末，参考文献列表还将文献 [7] 题名误作「汉字活字小史」，英文介绍更是出现了 theorelical、printting、calaulating 等多处拼写错误与 These foze the writer considers、by way of futes calculation 等莫名其妙的表达。]的说法，字身的比例关系略有不同。
 
-      @林川1991 的依据是#link("https://ss.zhizhen.com/detail_38502727e7500f2685813c708ce0786aa70a95c0efb4cab51921b0a3ea25510134114c969f2eae5cee61fba22a1d40b6bc023b74f5f06b6013b4623dba6cf47e255ac44419becabe9e23de8d5bbbe850?&apistrclassfy=0_18_17")[郭平欣、张淞芝《汉字信息处理技术》]（国防工业出版社，1985年12月第一版，1985年12月第一次印刷，统一书号#footnote[这个「统一书号」似乎是「全国统一书号」，并非ISBN。]15034·2973）中由王选、陈堃𨱇执笔的第十三章「精密汉字编辑排版系统」。此书节选如下，存在以下三处谈及字号。
+      @林川1991 的依据是#link("https://ss.zhizhen.com/detail_38502727e7500f2685813c708ce0786aa70a95c0efb4cab51921b0a3ea25510134114c969f2eae5cee61fba22a1d40b6bc023b74f5f06b6013b4623dba6cf47e255ac44419becabe9e23de8d5bbbe850")[郭平欣、张淞芝《汉字信息处理技术》]（国防工业出版社，1985年12月第一版，1985年12月第一次印刷，统一书号#footnote[这个「统一书号」似乎是「全国统一书号」，并非ISBN。]15034·2973）中由王选、陈堃𨱇执笔的第十三章「精密汉字编辑排版系统」。此书节选如下，存在以下三处谈及字号。
 
       - 433页表13-1「印刷用汉字字号与字身点阵的关系」的「字号」「磅数」与王选《计算机学报》文章上的数值、定义范围一致，但「字身点阵大小」比《计算机学报》上的「字心点阵」系统性地大一圈。此外前一页说该表是「按 $29.2 thick frac("线", "毫米", style: "skewed")$ 计算」得出的，似乎暗示还有其它可能。
       - 443页表13-6「字号及其比例关系」与《计算机学报》上的表格雷同，只不过五号一行上方加了条横线。
@@ -1759,7 +1759,7 @@
     ],
   ),
   手册1989: (
-    brief: [40–41页（PDF 42–43页）八、常用字体、字号及字样，《#link("https://annas-archive.gl/md5/303bebbb4b412b2e163a860267a351fd")[印刷技术手册]·#link("https://annas-archive.gl/md5/303bebbb4b412b2e163a860267a351fd")[第五篇 管理篇]》，上海科学技术出版社，1989年11月第1版，1989年11月第1次印刷，ISBN 7-5323-0603-8 / TS·44],
+    brief: [40–41页（PDF 42–43页）八、常用字体、字号及字样，《#link("https://annas-archive.gl/md5/f456a2b04d1ed044e92a10d48075cfbf")[印刷技术手册]·#link("https://annas-archive.gl/md5/303bebbb4b412b2e163a860267a351fd")[第五篇 管理篇]》，上海科学技术出版社，1989年11月第1版，1989年11月第1次印刷，ISBN 7-5323-0603-8 / TS·44],
     via: [Anna's Archive `duxiu/initial_release`影印PDF（每篇是独立文件，仅第一篇有版权信息）],
     notes: [
       此书每篇各编页码，第五篇的页码前缀5，但此处记录时省略。
