@@ -29,6 +29,7 @@
   4G,四号
   七行,七行
   特大号,特大
+  大特号,大特
   特号,特号
   小特号,小特
   大号,一号
@@ -54,4 +55,4 @@
 }
 
 /// 判断g是「□号」还是「小□」，只用于绘图分类
-#let is-small(g) = (g.starts-with("小") and g != "小特") or g.ends-with("行")
+#let is-small(g) = (g.starts-with("小") and g != "小特") or g.ends-with(regex("[行倍]"))
