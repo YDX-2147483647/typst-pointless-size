@@ -1,6 +1,107 @@
 #import "@preview/lure:0.2.0"
 #show heading.where(level: 1): it => pagebreak(weak: true) + it
 
+= 附录：号数名称认同规则
+各个号数有很多名称，不同数据源的写法未必一致，同一数据源多次枚举时也未必一致。
+
+为简洁，本文件的号数名称统一按「四号」「小初」形式。例如4号、四、四号、四號都认作是同一号数，而小初、小初号、新初号也认作是同一号数；行文时若不关心原始形式，则分别把它们统一记作「四号」与「小初」。
+
+号数名称认同原则与示例如下。各原则矛盾时，优先考虑靠前的原则。
+
+// 以下参考了 Unicode core specification §18.1.5 (Han) Unification Rules
+// https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-18/#G29313
+
++ *不区分字形差异。*像「号/號」「一/壹」等字，都不作区分。
+
+  - @source:秀英1903 的一号用「壹」但二号并未用「贰」，只在notes中指出，而不作区分。
+
++ *保留原文差异。*若某数据源每次枚举号数都保持多种写法，则这些写法应予以区分。
+
+  - @source:津报厂1971 在一张表格中同时出现了「大一号」与「一号」，那么二者应予以区分。
+  - @source:何继曾1959 在一张表格中同时出现了「小四号」与「七号小」，后续解释时前者始终保持「小四号」，而后者始终保持「七号（小）」或「七小」，那么七号小、七号（小）、七小可认作相同，但它们不可理解为小七。
+
++ *接受原文认同规则。*若某数据源多次枚举号数，前后几次的不同写法明显指相同号数，则这些写法可认作相同。若数据源正文直接描述某几种写法指相同号数，则也可接受。
+
+  - @source:曹洪奎1979 的36页写「有的也把点数铅字按号数字的大小，叫成小几号或是新几号」，那么「小□号」与「新□号」均可认作相同。
+  - @source:手册1989 的40页写「……制成七种号数的铅字，即：一号字、二号字……，后又添制了大于一号的初号字……」，而41页表格枚举「……初，大，二……」，那么一号、大号可认作相同。
+  - @source:王益1946 的12页正文写「頭號、二號……」，而同页插图标「特號」「大號」「二號」等，那么头号、大号也可认作相同。
+
+  注意认同规则不可类推。一号、大号认作相同，小一、小大认作相同，并不代表特大号、大初号能当作「特一号」「一初号」理解。
+
++ *其余情况变通决定。*名称相似可作为认同依据，对应点数不同可作为区分依据。名称既相似，对应点数又不同时，按具体情况综合考虑。
+
+  - @source:Ken-2-JP 是英文资料，正文写0G是初号，0G small是小初，但未明说5G、4G small等。按常理判断，把5G、4G small等理解为五号、小四等。
+  - @source:沪一厂1978 表格中出现了「七行（特大号）」「五行（特号）」「四行（初号）」，但「特中号」「小特号」「小初号」未注括号。考虑到@source:沪一厂1972 写作「特大」「特」「初」与「特中」「小特」「小初」，为方便对比，@source:沪一厂1978 按特大、特号、初号而非七行、五行、四行记录。
+  - @source:津报厂1971 有七倍、六倍、五倍，但并不像其它数据源的七行、六行、五行那样线度成 $7:6:5$ 比例，所以「□倍」应与「□行」区分。
+  - @source:jawiki-新\只有「新□号」，并且对应点数与@source:jawiki-旧\的「□号」很接近。因此@source:jawiki-新\的「新□号」当作「□号」而非「小□号」处理，并在notes中注明。
+
+
+根据以上原则，总结出以下具体规则。（不适用于@source:jawiki-新\这种notes另外注明规则的数据源）
+#v(1em)
+#{
+  import "data.typ": g-raw
+  import "util.typ": is-small, normalize-g
+
+  // 从g的标准形式映射到原始形式
+  let norm = (:)
+  for raw in g-raw {
+    if raw.starts-with("\\") {
+      continue // 忽略天元
+    }
+
+    let g = normalize-g(raw)
+    if g not in norm {
+      norm.insert(g, ())
+    }
+    norm.at(g).push(raw)
+  }
+
+  // 人为指定号数顺序
+  let cells = (
+    ("初号",) + range(10).map(n => numbering("一号", n + 1)),
+    ("小初",) + range(7).map(n => numbering("小一", n + 1)),
+    ("大初", "大一", "七号大", "七号小"),
+    ("特大", "特中", "特初", "特号", "大特", "小特"),
+    ("七行", "六行", "五行", "四行"),
+    ("七倍", "六倍", "五倍"),
+  )
+  let g-expected-list = cells.flatten()
+  assert.eq(g-expected-list.filter(g => g not in norm), ())
+  assert.eq(norm.keys().filter(g => g not in g-expected-list), ())
+
+  set text(0.8em)
+  let cell(n) = {
+    assert(0 <= n and n < cells.len())
+    context {
+      set par(spacing: par.leading, hanging-indent: 3em)
+      for g in cells.at(n) {
+        strong[#g：]
+        norm
+          .at(g)
+          // 调整出现顺序和折行位置
+          .sorted(key: raw => ("大" in raw, raw))
+          .map(raw => {
+            if raw in ("头号", "小大") {
+              linebreak()
+            }
+            raw
+          })
+          .join[、]
+        parbreak()
+      }
+    }
+  }
+  grid(
+    columns: (auto, 1fr),
+    column-gutter: 3em,
+    row-gutter: 2em,
+    ..(0, 1).map(cell),
+    grid.cell(colspan: 2, cell(2)),
+    cell(3),
+    grid(columns: (1fr,) * 2, ..(4, 5).map(cell)),
+  )
+}
+
 = 附录：相关文献 <sec:bibliography>
 有些文献是数据源，前面已经引用；而另一些文献主要是分析历史、讲解如何辨别活字印刷品，前面未必引用过。
 #v(1em)

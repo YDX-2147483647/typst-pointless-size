@@ -8,7 +8,7 @@
 /// 特殊情况：
 /// - 如果某号明确无定义，比如列出全部字号但跳过了个别几号，那么直接不记录。
 /// - 如果某号可能有定义，但无明文直接提及，则也不记录。
-#let data = {
+#let (data, g-raw) = {
   let key-pattern = regex("^=== (.+) ===$")
   let raw = ```csv
   === 基准 ===
@@ -875,7 +875,13 @@
     data.push((current.key, current.value))
   }
 
-  data
+  let g-raw = for (key, value) in data {
+    value.map(line => {
+      let (g, p) = line.split(",")
+      g
+    })
+  }.dedup()
+  let data = data
     .map(((key, value)) => (
       key,
       value.map(line => {
@@ -884,4 +890,5 @@
       }),
     ))
     .to-dict()
+  (data, g-raw)
 }
