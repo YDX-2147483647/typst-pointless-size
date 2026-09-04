@@ -34,6 +34,12 @@ jobs:
       - uses: typst-community/setup-typst@v5
         with:
           typst-versions-file: .github/typst-versions.yaml
+          zip-packages-yaml: |
+            # See https://github.com/solstice23/typst-ribbony/issues/2
+            local:
+              ribbony:
+                0.1.1: https://github.com/solstice23/typst-ribbony/archive/ea97d10a48e71c875bc8dd09f51fec2ba880f6d4.zip
+            preview: {}
 
       - name: Restore cached fonts
         uses: actions/cache@v5

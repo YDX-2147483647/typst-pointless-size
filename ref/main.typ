@@ -10,6 +10,7 @@
       "sources.typ",
       "data.typ",
       "overview.typ",
+      "overview-sankey.typ",
       "overview-tree.typ",
       "main-matter.typ",
       "appendices.typ",
