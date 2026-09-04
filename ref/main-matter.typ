@@ -3,9 +3,100 @@
 #import "visualize.typ": build-table, draw-as-log-period
 #import "template.typ": doc, title-page
 
+#let category-meta = (
+  "1-spec": [工厂规格],
+  "1-code": [软件源码],
+  "1-doc": [自身描述],
+  "2-doc": [他人转述],
+)
+
+#doc("source-index.pdf", page[
+  = 数据源索引
+  本文件记录的数据源按年代与类别总结如下表，单击绿色文字可跳转到后页查看详情。注意@source:基准\未列入下表，因为它混合自多份资料，跨越多个年代且包含多个类别，无法收入表中。
+
+  #figure({
+    let simplify(edtf) = int(edtf.slice(0, 4).replace("X", "9"))
+    assert.eq(("1990", "199X", "1996~").map(simplify), (1990, 1999, 1996))
+
+    let group-meta = (
+      "1-spec+1-code": ("1-spec", "1-code").map(c => category-meta.at(c)).join[与],
+      "1-doc": category-meta.at("1-doc"),
+      "2-doc": category-meta.at("2-doc"),
+    )
+    let groups = (
+      "1-spec+1-code": (),
+      "1-doc": (),
+      "2-doc": (),
+    )
+    assert.eq(group-meta.keys(), groups.keys())
+
+    // Collect into groups
+    for (source, fields) in sources.pairs() {
+      if "categories" not in fields {
+        assert.eq(source, "基准")
+        continue
+      }
+
+      let (group, edtf) = fields.categories
+      if group in ("1-spec", "1-code") {
+        group = "1-spec+1-code"
+      }
+      groups.at(group).push((source, simplify(edtf)))
+    }
+    for group in groups.keys() {
+      // Sort by years
+      groups.at(group) = groups.at(group).sorted(key: array.last)
+    }
+
+    let list-range(start, end) = {
+      for items in groups.values() {
+        let matched = for (source, year) in items {
+          if year < start { continue }
+          if year >= end { break }
+          (source,)
+        }
+        if matched == none {
+          (none,)
+        } else {
+          (matched.map(s => box(ref(label("source:" + s)))).join[、],)
+        }
+      }
+    }
+    set par(justify: false)
+    table(
+      columns: (auto, 1fr, 0.7fr, 1fr),
+      align: start + top,
+      table.hline(),
+      table.header(
+        table.cell(rowspan: 2, align: center + horizon)[*年代*],
+        table.cell(colspan: groups.len(), h(1fr) + box(width: 0.7fr, inset: (x: 5%))[#h(1em)*类别*] + h(1fr)),
+        table.hline(stroke: 0.5pt),
+        ..group-meta.values().map(strong),
+      ),
+      table.hline(),
+
+      [早期], ..list-range(1800, 1930),
+      ..for start in range(1930, 2020, step: 10, inclusive: true) {
+        (
+          table.hline(stroke: 0.5pt),
+          str(start).slice(0, 3) + "X",
+          ..list-range(start, start + 10),
+        )
+      },
+      table.hline(),
+    )
+  })
+
+  #set terms(separator: h(1em, weak: true), hanging-indent: 3em)
+
+  / 年代: 以上只是粗略划分。实际情况比较复杂：@source:zhwiki 的年代是段区间，@source:老CCT 的年代只是估算，@source:津报厂1971 的年代存在疑点，而@source:神田\的年代即使估算也存疑……详情页categories中会按 #link("https://www.loc.gov/standards/datetime/")[Extended Date Time Format (EDTF)] 给出更具体的描述。
+
+  / 类别: *工厂规格、软件源码*是最原始的一手资料，不同时代体现为不同形式。*自身描述*是指工人、开发者、印刷厂、出版社、书店自身的描述，也是比较原始的一手资料。*他人转述*则是二手资料，通常更全面，但也更容易出现传抄错误与无依据外推。有些转述会承认号数与点数映射关系不统一，并给出多种版本。对于这种情况，本文件会在详情页notes中说明，合适时还会拆分为多个数据源。
+])
+
 #doc("source-title.pdf", title-page[
   = 数据源详情
-  逐一展示每个数据源的字号定义范围与点数数值（data），介绍出处及来源（brief、via），并补充数据原貌、疑点等情况（notes）。
+  逐一展示每个数据源的字号定义范围与点数数值（data），介绍出处及来源、类别（brief、via、categories），并补充数据原貌、疑点等情况（notes）。
 
   data 部分提供了图、表两种展示方式。
 
@@ -56,6 +147,9 @@
 
   #for (k, v) in fields.pairs() [
     == #k
-    #v
+    #if k == "categories" {
+      let (category, edtf) = v
+      [#category-meta.at(category)，#edtf]
+    } else [#v]
   ]
 ]

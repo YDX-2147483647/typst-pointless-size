@@ -35,8 +35,7 @@
   - @source:津报厂1971 有七倍、六倍、五倍，但并不像其它数据源的七行、六行、五行那样线度成 $7:6:5$ 比例，所以「□倍」应与「□行」区分。
   - @source:jawiki-新\只有「新□号」，并且对应点数与@source:jawiki-旧\的「□号」很接近。因此@source:jawiki-新\的「新□号」当作「□号」而非「小□号」处理，并在notes中注明。
 
-
-根据以上原则，总结出以下具体规则。（不适用于@source:jawiki-新\这种notes另外注明规则的数据源）
+根据以上原则，总结出以下具体规则。注意以下并不适用于@source:jawiki-新\这种notes另外注明规则的数据源；此外「老□号」与「□号」也应认作相同，不过各数据源描述号数与点数映射关系时，恰好无一写作「老□号」，因此省略。
 #v(1em)
 #{
   import "data.typ": g-raw
@@ -123,9 +122,13 @@
         (host,)
 
         let m = lure.parse-supplementary(it.dest).path-segments.last().match(regex("\.([^.]+)$"))
-        if host != "doi.org" and m != none {
+        if host != "doi.org" and host != "github.com" and m != none {
           let suffix = upper(m.captures.first())
-          if suffix not in ("html", "jhtml", "php", "csp", "sty", "dtx", "cxx").map(upper) {
+          if suffix not in ("html", "jhtml", "php", "pl", "csp", "dtx", "def").map(upper) {
+            assert(
+              suffix in ("pdf", "zip").map(upper),
+              message: "please add the unknown suffix (" + suffix + ") to either the ignore list or the allow list",
+            )
             (suffix,)
           }
         }

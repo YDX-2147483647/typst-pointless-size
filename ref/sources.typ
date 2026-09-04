@@ -29,6 +29,22 @@
   )
 }
 
+/// W3C文档中的绿色NOTE
+///
+/// 历史上W3C有多种NOTE样式。抄录黑色样式请直接写，抄录绿色样式（无论NOTE独行与否）请用此函数。
+#let w3c-note(body) = block(
+  width: 100%,
+  stroke: (left: rgb("#52e052") + 2pt),
+  inset: (left: 0.5em),
+  outset: (y: 0.5em),
+  {
+    text(color.hsl(120deg, 70%, 30%), upper[Note:])
+    h(1em, weak: true)
+    body
+  },
+)
+
+
 /// 数据源
 #let sources = (
   基准: (
@@ -184,6 +200,7 @@
   ),
   CTeX新: (
     brief: [CTeX 宏包新增加的实验性规则],
+    categories: ("1-code", "2026"),
     notes: [
       #set par(justify: false) // font-size-system 那段太难对齐了
 
@@ -192,6 +209,7 @@
   ),
   新CCT: (
     brief: [新版CCT所用规则],
+    categories: ("1-code", "2005"),
     via: [#link("https://mirrors.cernet.edu.cn/ctex/cct/cct-0.618033-3-win32.zip")[从校园网联合镜像站下载`/ctex/cct/cct-0.618033-3-win32.zip`]，解压，查看`files/tex/latex/cct/CCT.cfg`],
     notes: [
       CCT 是#link("https://zh.wikipedia.org/wiki/LaTeX#CCT")[「最早支持简体中文的TeX」，「由中国科学院数学与系统科学研究院的张林波研究员编写」]，#link("https://liam.page/2013/10/15/LaTeX-CCT-template/")[在2013年左右就已经过时]。根据#link("http://maths.nju.edu.cn/~meijq/tex/NewCCTreadme.pdf")[张林波《关于新版CCT的说明》（2006年2月3日）]，CCT有新老两个版本，老版最终版本号为 5.14，新版版本号类似 0.6180-3。《说明》还指出，新版CCT支持以下两种排版流程。
@@ -237,6 +255,7 @@
   ),
   老CCT: (
     brief: [老版CCT所用规则],
+    categories: ("1-code", "1997~"),
     via: [同@source:新CCT，但查看`files/tex/latex/cct/cct.dat-dist`],
     notes: [
       CCT有新老两个版本，此处是老版。详见@source:新CCT。
@@ -284,6 +303,7 @@
   ),
   天元: (
     brief: [天元（TY）2.62 版所用规则],
+    categories: ("1-doc", "2002~"),
     via: [前往#link("https://web.archive.org/web/20210418112817/http://wims.math.ecnu.edu.cn/ty/tydownload.php")[「天元（TY）下载之页」网页存档]，下载「TYWIN (TY for Windows) 2.62 版」中的#link("https://web.archive.org/web/20210418112817/http://wims.math.ecnu.edu.cn/ty/tywin263.zip")[`tywin263.zip`]，解压，查看其中的`TYWIN.HLP`文件#footnote[#link("https://en.wikipedia.org/wiki/WinHelp")[WinHelp文件`*.hlp`]是微软的一种专有格式帮助文件，相关支持已于2015年Windows 10 移除。可以通过#link("https://www.herdsoft.com/ftp/downloads.html#hlp2rtf")[`hlp2rtflx-2.16.tar.gz`等软件]转为RTF查看。]],
     notes: [
       天元是和CCT同时代的中文TeX系统，同样早已过时。#link("https://ask.latexstudio.net/ask/article/92.html")[网传天元初始作者肖刚已于2014年病逝。]
@@ -353,6 +373,7 @@
     via: link(
       "https://github.com/CTeX-org/ctex-kit/issues/543#issuecomment-2848708469",
     )[「宁波，晓舟」提供照片，Explorer-cc 转发],
+    categories: ("2-doc", "2003~"),
     notes: [
       有可能是高萍2003年（中国环境科学出版社，ISBN 7-80163-577-9）版本。
 
@@ -375,6 +396,7 @@
   朱永和1999: (
     brief: [表1，#link("https://doi.org/10.16811/j.cnki.1001-4314.1999.02.004")[朱永和《排字的点数制与号数制探讨》]，1999年第2期《编辑学报》],
     via: [@朱永和1999],
+    categories: ("2-doc", "1999"),
     notes: [
       表1「号数制与点数制的换算关系」有号数制、字身尺寸（mm）、点数（P）、点数制尺寸（P）四列，这里只用第一列和第四列。最后两列的区别是精确度不同，第三列精确到千分位（例：18.197），而第四列精确到 0.25（例：18.25）。
 
@@ -388,6 +410,7 @@
   方正飞某: (
     brief: [方正飞腾和方正飞翔的官方资料],
     via: [Z-Library 影印PDF和#link("https://www.founderfx.cn/product/1012.jhtml")[方正飞翔产品中心]],
+    categories: ("1-doc", "2000~"),
     notes: [
       北大方正电子有限公司#link("https://z-lib.sk/book/M9W6g7ml53/飞腾实例教程.html")[史晓岩、陈明《北大方正飞腾排版系统教学丛书——飞腾实例教程》]（2000年2月第1版第1次印刷，电子工业出版社，ISBN 7-5053-5727-1 / TP·2951）大部分按磅数（甚至精确到百分位），不过19页（PDF 29页）提到1号是27.5磅。
       #figure(grid(
@@ -410,6 +433,7 @@
   方正跨媒介: (
     brief: [15页（PDF 23页）表1-2-1「常用号数对应的磅数」，#link("https://www.tup.tsinghua.edu.cn/upload/books/yz/095514-01.pdf")[杨雷鸣、贾皓、梅林、李谦《方正飞翔跨媒介出版实用教程》]，清华大学出版社，2022年12月第1版，2022年12月第1次印刷，ISBN 978-7-302-61595-8],
     via: [#link("https://www.tup.tsinghua.edu.cn/booksCenter/book_09551401.html")[清华大学出版社图书详情] → 资源下载 → 样章下载；国家图书馆总馆北馆开架阅览TS8亦有],
+    categories: ("1-doc", "2022~"),
     notes: [
       此书介绍方正飞翔，由北京北大方正电子有限公司组织编写，网传杨雷鸣曾任方正开发部部长。
 
@@ -432,6 +456,7 @@
   石家庄2001: (
     brief: [表一，#link("https://doi.org/10.3969/j.issn.1000-663X.2001.11.017")[刘韬、师彦茹《方正书版应用杂谈》]，2001年第11期《中国印刷》],
     via: [@刘韬2001],
+    categories: ("1-doc", "2001"),
     notes: [
       作者单位是石家庄陆军学院印刷厂。
 
@@ -468,6 +493,7 @@
   政府: (
     brief: [国家标准 #link("https://std.samr.gov.cn/gb/search/gbDetailed?id=BBE32B661B7E8FC8E05397BE0A0AB906")[GB 40070—2021《儿童青少年学习用品近视防控卫生要求》]和行业推荐性标准 #link("https://std.samr.gov.cn/hb/search/stdHBDetailed?id=8B1827F23645BB19E05397BE0A0AB44A")[CY/T 154—2017《中文出版物夹用英文的编辑规范》]],
     via: [#link("https://std.samr.gov.cn")[全国标准信息公共服务平台]可看],
+    categories: ("2-doc", "2017/2021"),
     notes: [
       #quote(attribution: [CY/T 154—2017])[
         11.2.1 中文文本中夹用英文时，英文字号应与中文字号匹配。常用的为：中文“小五号”与英文“9P”相对应，中文“五号”与“10.5P”相对应。
@@ -539,6 +565,7 @@
   ),
   CLReq-main: (
     brief: [#link("https://www.w3.org/TR/clreq/#considerations_in_designing_type_area")[§7.1.1.5 基本版式设计的注意事项 - 中文排版需求 | W3C 小组备忘草稿]，2026-05-03 版],
+    categories: ("2-doc", "2013~/2019"),
     notes: [
       #quote[“号”由于当年金属活字各地厂家的规范不一而不尽相同……不作为规范性规定。]
 
@@ -552,10 +579,217 @@
         In hot metal era, the type size are also different from different type foundries. See the values shown in the book below, it just showed one of the variations. Some of the values go with Word, some of them not.
         #figure(image("assets/clreq-issue-142.png", width: 4em))
       ]
+
+      CLReq这段内容的历史如下。（日期按UTC+8）
+
+      #let issue(num, anchor: none) = link(
+        "https://github.com/w3c/clreq/issues/" + str(num) + if anchor != none { anchor },
+        "#" + str(num),
+      )
+      #let commit(sha, author-date, pull: none, sub: false) = {
+        // 多次提及同一PR中的不同提交时，首次 sub: false，之后 sub: true
+        if sub {
+          assert.ne(pull, none)
+          link(
+            "https://github.com/w3c/clreq/pull/{pull}/commits/{sha}".replace("{pull}", str(pull)).replace("{sha}", sha),
+            raw(sha.slice(0, 7)),
+          )
+          [~(#author-date)]
+        } else {
+          link("https://github.com/w3c/clreq/commit/" + sha, raw(sha.slice(0, 7)))
+          [~(#author-date]
+          if pull != none {
+            [, ]
+            link("https://github.com/w3c/clreq/pull/" + str(pull), "#" + str(pull))
+          }
+          [)]
+        }
+      }
+      #set enum(full: true)
+      #show quote: set text(0.8em)
+      + 2013年董福興以*繁体中文*起草*初稿*，按美式点，新旧号数截然分开；2014年W3C建立CLReq仓库；2015年繁体中文版先后被*翻译到英文、简体中文*。
+
+        + #commit("29d4ee27cc1042260fbe603d446f9c130f3faaa4", "2014-02-19") 是master分支首个有实质性内容的提交#footnote[
+            当前主分支是gh-pages，master分支已不存在。当前gh-pages分支有两个根提交，分别是#commit("d9a29c6aea10d38171b831ba5096583f8adec06e", "2014-02-19") "create the repo" 与#commit("3edbcf52d82b2ac165dcc9ab106ab334713ca21f", "2014-05-14") "Sync with master"，前者只创建了`.gitignore`与`.gitattributes`。根据这些情况，推测前者是当时的master分支，后者是当时的gh-pages分支。`29d4ee2`的父提交是前者，所以说它是master分支首个有实质性内容的提交。
+          ]，siusin（吴小倩#footnote[
+            判断siusin是吴小倩的依据是#commit("692543dd39f000653c5aed2c10faaa040239b3af", "2015-08-06") 和 #link("https://www.w3.org/staff/")[Staff | W3C]。她当时是W3C若干小组的联络人。
+          ]）在commit message中写 "Add Traditional Chinese Layout Req by Bobby Tung"，其中Bobby Tung是指董福興。这次提交上传了`TCLREQ/TCLREQ_Bobby/Ch 2 中文繁體字排版/2.5 設計版心.html`，其中有段写到字号：
+          #quote(attribution: [2.5.2 設計版心的注意點 → b（重新分过段，但未改动文字及标点符号）])[
+            以成人為讀者製作書籍時，文字尺寸一般為10.5pt（≒3.7mm）與9pt（≒3.2mm）為多。除了特殊書籍外，最小也要有8pt（≒2.8mm）。
+
+            註1）中文活字尺寸以「號」作為單位，又分新舊兩種寸法#footnote[
+              原文如此。「寸法」是日语词汇，汉语基本没有这种说法。据#link("https://www.thetype.com/2015/04/9171/")[董福兴《从〈中文排版需求〉开始》]（2015年4月2日），他写中文初稿前曾花数月翻译JLReq。那么「寸法」大约是受JLReq所提 JIS Z 8305:1962 活字の基準寸法（其内容见@source:jawiki-新）影响。
+            ]。可完整對應美制的「點（Point, pt）」，分別如下：初號＝42pt、一號＝27.5pt、二號＝21pt、三號＝15.75pt、四號＝13.75pt、五號＝10.5pt、六號＝7.875pt、七號＝5.25pt。新五號四行＝36pt、新一號＝24pt、新二號＝18pt、新三號字＝16pt、新四號＝12pt、新五號＝9pt
+
+            註2）一般中文繁體字內文主要使用五號字（10.5pt≒3.7mm），而報紙、雜誌則使用新五號字（9pt≒3.2mm），兩種皆常為使用。而一般內文字最小使用到六號字（7.875pt≒2.8mm），若小於此號，由於漢字結構複雜，則難以閱讀。
+          ]
+          这版描述写明了 $pt$ 为美制点，号数有新旧两种规格，$36 pt$ 称作「新五號四行」，「新三號字」有「字」字而其余「新□號」并无，而且「三號」$15.75 pt$ 与「新三號字」$16 pt$ 十分接近。这套映射关系总结如下。
+          #draw(
+            ```csv
+            四行,36
+            小一,24
+            小二,18
+            　　　　　新三号字,16
+            小四,12
+            小五,9
+
+            初号,42
+            一号,27.5
+            二号,21
+            三号,15.75
+            四号,13.75
+            五号,10.5
+            六号,7.875
+            七号,5.25
+            ```.text,
+            width: 28em,
+          )
+          另外，#commit("67cbf92b9dff2e6b228178f1f7f6595ce2f2242a", "2014-03-03") siusin错误将TCREQ#footnote[页眉如此。该文件正文也称「中文繁體字」，而非「中文」或「繁体中文」。估计后来才有CLReq、TCLREQ的说法。] PDF上传到`JLREQ-Translation/Draft (Composite) - Ch 1.pdf`，其页眉和元数据中修改日期均为2013-12-03#footnote[
+            直到#commit("5bceba7760e04bdb6a7a95680e0f18e6ac7446bb", "2014-03-23") "wrong file last time" 才换成真正的JLReq翻译PDF，其页眉和元数据中修改日期为2013-11-28。
+          ]。此PDF比仓库更早，其14–15页也有以上这段描述。
+
+        + #commit("be20672da88cae1d9f533d71da4c6863070264d4", "2015-03-28") siusin把TCLREQ的内容复制到了`zh/{index,respec-draft}.html`，commit message写 "Add the Editor's Draft on 2015-03-28"。随后她于#commit("6dfe00d7d2b87863a02122a410aa3ef59ad426fc", "2015-04-02") 移动`TCLREQ/`为`others/TCLREQ/`，于#commit("9e769cda26e6a6519852c9de599d4a2d42079ae4", "2015-04-02") 删除了`zh/respec-draft.html`。
+
+          复制时略微改了措辞，比如将「若小於此號」改为「若小於此尺寸」，再比如删去「註1）」几字并把注1、注2一起拿出来作为一个NOTE；不过号数、点数无变化。
+
+        + #commit("c5912d1c1c5cc5d52491c5bcff27ce3056c01486", "2015-04-07") Chen Yijun（陳奕鈞）删除了「註2）」几字并把原注1、注2拆成两个NOTE，commit message写 "Fix a bug mentioned in #issue(2, anchor: "#issuecomment-89493502")"。一小时后他于#commit("8ca4f6c67bc53577d5cc689ac7f3f3d7cdf8c0c3", "2015-04-07") 把“美制的「點（Point, pt）」”改为“美制的「點」（point）”，commit message写 "Omit some unnecessary English terms, etc"。
+
+        + #commit("cc3e044c6140c92d256ee098c00fca908be6fb9f", "2015-05-28") r12a (Richard Ishida) 从中文版`zh/index.html`翻译了大段内容到英文版`index.html`，commit message写 "first draft of complete translation as baseline; imported markup from zh version; still needs much work, this is just a new baseline"。此前英文版未提及字号，这次增加了以下这段。注意两个NOTE未翻译，并且第一个NOTE添加了中文版没有的「请问在两岸这是通用的做法吗？还是各自不同？」。另外 "except for" 的except错拼成了expect。
+
+          #quote[
+            Character size. With the audits as the main target audience of the publications, generally the size of the character usually is 10.5pt（≒3.7mm）x 9pt（≒3.2mm）. The acceptable minimum size of type is 8pt（≒2.8mm）, expect for specialized publications.
+            #w3c-note[
+              【请问在两岸这是通用的做法吗？还是各自不同？】中文活字尺寸以「號」為單位，又分新舊兩種寸法。可完整對應美制的「點」（point），分別如下：初號＝42pt、一號＝27.5pt、二號＝21pt、三號＝15.75pt、四號＝13.75pt、五號＝10.5pt、六號＝7.875pt、七號＝5.25pt。新五號四行＝36pt、新一號＝24pt、新二號＝18pt、新三號字＝16pt、新四號＝12pt、新五號＝9pt。
+            ]
+            #w3c-note[
+              一般內文主要使用五號字（10.5pt≒3.7mm），而報紙、雜誌則使用新五號字（9pt≒3.2mm），兩種皆常為使用。而一般內文字最小使用到六號字（7.875pt≒2.8mm），若小於此尺寸，由於漢字結構複雜，則難以閱讀。
+            ]
+          ]
+
+          次日他又于#commit("1a7989de5158278953738e209db98dd91d7cbc9a", "2015-05-29") "post-edits for first half of document" 修改英文版措辞，改正错拼的except，并在 With the audits 后标注issue "not clear what 'audits' means"，在 10.5pt (≒3.7mm) x 9pt (≒3.2mm) 后标注issue "10.5x9 is not square - should this read 10.5 to 9?"。
+
+        + #commit("d3e0b45ddffcbb139c7a0708558bf8d8fea444bf", "2015-06-17") r12a 将英文版改为以下内容，commit message 写 "updated per today's translation review (Angel & r12a)"。根据此时文档开头的信息栏，Angel应该是指李安琪。这次解决了之前标注的两处issue，但又针对新五号四行标注了ednote。另外注意，英文版把美式点制翻译成了Western point system，而「新□號」与「新□號字」都翻译成了 New Size ○，同时 "an old one and a new one" 的an错写成了and。
+
+          #quote[
+            #set text(bottom-edge: "baseline")
+            Character size. For the main target audience of publications, ie. the adult population, most commonly the character size is 10.5pt (≒3.7mm) or 9pt (≒3.2mm). The minimum acceptable size of type is 8pt (≒2.8mm), except for specialized publications.
+            #w3c-note[
+              There are two traditional size systems for Chinese characters, and old one and a new one. The following shows the equivalence in the Western point system. In the Old size system, Size 0 = 42pt, Size 1 = 27.5pt, Size 2 = 21pt, Size 3 = 15.75pt, Size 4 = 13.75pt, Size 5 = 10.5pt, Size 6 = 7.875pt, and Size 7 = 5.25pt; while 4 lines of New Size 5 is 36pt *(ednote: don't understand the foregoing)*, New Size 1 = 24pt, New Size 2 = 18pt, New Size 3 = 16pt, New Size 4 = 12pt, New Size 5 is 9pt.
+            ]
+            #w3c-note[
+              Size 5 is usually used for text content. Newspapers and magazines use both Size 5 and New Size 5. The acceptable minimal size for the text in content is Size 6 (7.875pt≒2.8mm). If a smaller size is used, it will be difficult to read due to the complex structure of the Chinese characters.
+            ]
+          ]
+
+        + #commit("e9a6d17b666e2ea33abdf143afd90f51b0db391b", "2015-07-09") r12a把`zh/index.html`融进`index.html`，`index.html`改为繁体中文、英文逐段对照。此后`zh/index.html`再无实质性内容编辑，但文件保留至今。
+
+        + #commit("bfa1ca6bfe2707ff885139aa8973e86992bf58a7", "2015-07-13") r12a把英文版的 "while 4 lines of New Size 5 is 36pt" 改为 "in the new size system, New Size 0 = 36pt" 并删除ednote，但中文版保持「新五號四行」不变，commit message写 "latest batch of translations from Angel, post-edited"。
+
+        + #commit("8e29a09af50dfab7e6059a9c79866c4353846041", "2015-07-24") r12a把逐段对照改为英文、简体中文、繁体中文。其中简体中文最初原样复制自繁体中文，几天后#commit("386b5ae3019547ef3a1dbf9e91ea4a10a87db148", "2015-07-27") r12a真正改为简体，不过编辑简体版时未保留繁体版「寸法」二字，还意外加了若干空格。#commit("3b85359ed4ce268aeb29aaea7c2f939d08713b4e", "2015-07-30") Ryukeikun清除了空格。
+
+      + 2017年陈慧晶从段落*改为表格*。
+
+        + #commit("94b050c2588e61bade0aea731f971dfc5ecc8aed", "2017-03-27") Chen Yijun略微修改了简体版的措辞，特别是加回了「寸法」二字。半天后#commit("cf0ee75e04911aa7e2b3a16e601f4601c61c2f70", "2017-03-28", pull: 139) huijing（陈慧晶）又略微修改了英文版的措辞，特别是把and改正为了an。
+
+        + 2017-03-28 huijing 建议用表格展示字号等价关系（#issue(141)），并于#commit("4ffd42d3c93035d58022006cd5a58b671cd24fd1", "2017-04-03", pull: 150) 实现，英文版与简体中文版见下。另外根据 #"#139" 中的对话，当时陈慧晶的分支乱了，所以还出现了 #commit("c09ec7a3b4241feead2dd945280e005ff70a6377", "2017-09-22", pull: 144)，内容相同，日期晚半年，作者是 Chen Hui Jing 而非huijing。
+          #quote[
+            There are two traditional size systems for Chinese characters, an old one and a new one. The following tables shows the equivalence of the old size system and the new size system in the Western point system respectively.
+            #context v(par.leading, weak: true)
+            #figure(grid(
+              columns: (1fr,) * 2,
+              table(
+                columns: 2,
+                align: left,
+                table.header[*Old size system*][*Western point system*],
+                [Size 0], [42pt],
+                [Size 1], [27.5pt],
+                [Size 2], [21pt],
+                [Size 3], [15.75pt],
+                [Size 4], [13.75pt],
+                [Size 5], [10.5pt],
+                [Size 6], [7.875pt],
+                [Size 7], [5.25pt],
+              ),
+              table(
+                columns: 2,
+                align: left,
+                table.header[*New size system*][*Western point system*],
+                [New Size 0], [36pt],
+                [New Size 1], [24pt],
+                [New Size 2], [18pt],
+                [New Size 3], [16pt],
+                [New Size 4], [12pt],
+                [New Size 5], [9pt],
+              ),
+            ))
+          ]
+          #quote[
+            中文活字尺寸以「号」为单位，又分新旧两种寸法。可完整对应美制的「点」（point），分别如下：
+            #context v(par.leading, weak: true)
+            #figure(grid(
+              columns: (1fr,) * 2,
+              table(
+                columns: 2,
+                align: left,
+                table.header[*旧印刷字号*][*点数*],
+                [初号], [42pt],
+                [一号], [27.5pt],
+                [二号], [21pt],
+                [三号], [15.75pt],
+                [四号], [13.75pt],
+                [五号], [10.5pt],
+                [六号], [7.875pt],
+                [七号], [5.25pt],
+              ),
+              table(
+                columns: 2,
+                align: left,
+                table.header[*新印刷字号*][*点数*],
+                [新五号四行], [36pt],
+                [新一号], [24pt],
+                [新二号], [18pt],
+                [新三号字], [16pt],
+                [新四号], [12pt],
+                [新五号], [9pt],
+              ),
+            ))
+          ]
+
+      + 2019年陈慧晶*重写*，认为点数有多种制式，号数与点数的映射关系也不一，表格中号数只按大小排列而不再分新旧。
+
+        + #commit("0ff70482f12a5772e9d0ce525436a044048d9164", "2019-04-02", pull: 208) Chen Hui Jing 将新旧号数合并为一张表，表头的「新/旧印刷字号」改为「号数」#footnote[
+            繁简中文都同步修改了，此处为简洁而只描述简体中文。此节后同。
+          ]，New/Old size system改为Chinese size system。旧号数中，一号、二号、三号、四号、六号对应的点数添加斜线并分别补充 $28 pt, 22 pt, 16 pt, 14 pt, 8 pt$；新号数中，「新五号四行」与「新三号字」被删除，其余「新□号」改为「小□号」，New Size ○ 改为 Size Small ○。同时将表格附近的正文配套修改为：
+          #quote[
+            #set text(bottom-edge: "baseline")
+            There have been different size systems for Chinese characters. The size system in traditional metal type utilized hào (literally No. ) units, while in the phototypesetting era, Q were used as the sizing units instead. When it came to desktop publishing, font sizes were determined by the DTP point system which was built into the software itself. Currently, the traditional hào-system are still used for typesetting in many Chinese publications.
+
+            These hào-system were not standardized by the various foundries in the past. In addition, point-systems were also different in Anglo-Americas, Europe Continental, DTP and so on, which resulted in numerous conversion methods between hào-system and point-system. The following table lists their most common corresponding conversions as a reference. It is not normative information.
+          ]
+          #quote[
+            中文活字大小有不同单位。在金属活字时代，传统中文活字尺寸以「号」为单位，故称作「字号」；在照相排版时代沿用照排机尺寸的单位「级」，故称作「字级」；在桌面排版时代，直接使用桌面排版软件中的「点」（DTP point）。目前，很多场合的中文排版依旧习惯沿用「号」。
+
+            「号」由于当年金属活字各地厂家的规范不一而不尽相同，「号」也有英美、欧陆、DTP等多种制式，导致「号」与「点」的换算有不同方法。下表仅列出常见的一些换算数值，仅供参考，不作为规范性规定：
+          ]
+
+          十几分钟后，#commit("071a82cedf27d3bf59d717c497c05e7c785e87e4", "2019-04-02", pull: 208, sub: true) Chen Hui Jing 又把表中「小□号」改为「小（新）□号」。
+
+        + #commit("815a02e855b1dd246b6ab15705fca96a82feeca6", "2019-05-14", pull: 208, sub: true) Chen Hui Jing 针对r12a等人的意见，调整了英文版的措辞。例如 "Anglo-American, Europe Continental, DTP and so on" 改为 "Anglo-American point systems, Europe Continental point systems, DTP point systems and other systems"，明确是指「英美、欧陆、DTP等」而非「英美DTP、欧陆DTP等」。
+
+      + 2020年起此节还陆续有几次编辑，但*实质性内容未再变化*。
+
+        + #commit("92c32a74d639338248d6451513e915c3f45fb11c", "2020-05-21") Fuqiao Xue（薛富侨）严格落实了逐段对照。之前 #"#208" 是两段和图整体对照。
+
+        + #commit("2b8f9ccc80c7731bb1662e05d1aea086a9c82b4b", "2022-06-17", pull: 464) Zhengyu Qian（钱争予）把 $pt$ 等单位前的普通空格改为`&nbsp;`。
+
+        + #commit("eb53f9c1aaed76b6bd18f247f4d17f11a0f0d86b", "2022-12-12", pull: 504) Zhengyu Qian 调整英文版措辞，把此节 Chinese characters 按语境改为更合适的 Chinese fonts 或 Han characters。
+
+        + #commit("7d94540a296e031717f3596110e49e59f5d3d478", "2024-07-11") 至 #commit("e7bde6172d1488bd3c1d5965a6dc4c272c7258b0", "2024-12-19") r12a与Fuqiao Xue调整了章节顺序，但未修改此节内容。
     ],
   ),
   CLReq-extra: (
     brief: [CLReq 表格另一种],
+    categories: ("2-doc", "2013~/2019"),
     notes: [
       详见 @source:CLReq-main。
     ],
@@ -563,6 +797,7 @@
   Ken-2-JP: (
     brief: [480页 Table 7-3. The G typographic unit 的 Japan 部分，Ken Lude _CJKV Information Processing_，2008年12月第二版，O'Reilly Media，ISBN 978-0-596-51447-1],
     via: [ArchiBC 买过这本书，提供了2009年的PDF],
+    categories: ("2-doc", "2008"),
     notes: [
       那张表的 China 部分和@source:基准\完全相同，无定义的情况也相同。
 
@@ -586,6 +821,7 @@
   Ken-1: (
     brief: [342页 Table 7-2. The G Typographic Unit，@source:Ken-2-JP 那本书的第一版（推测是1999年那版，但未验证）],
     via: [r 买过纸书，提供了照片],
+    categories: ("2-doc", "1999?"),
     notes: [
       与第二版 @source:Ken-2-JP 相比，此处第一版没有区分中国和日本，并且7G、8G的位置、数值不同。
 
@@ -594,6 +830,7 @@
   ),
   姜别利: (
     brief: [十九世纪西人设计重要中文字体号数对照表，#link("https://www.thetype.com/2016/12/11232/")[罗佳洋《从「拼合」到「格致」：有关西人汉字认知的设计史叙述——以「拼音」「拼合字」为例》第三章]，2016年12月7日],
+    categories: ("2-doc", "1834/1862"),
     notes: [
       另有 $36 pt$ Two-line Great Primer《华英字典》大号字体（马礼逊，1815年）和 $9 pt$ Bourgeois（柯尔，1851年）。
 
@@ -668,6 +905,7 @@
   周承民1988: (
     brief: [表1-2　几种常用字号，#link("https://z-lib.sk/book/3zje0vQX9j/活字排版工艺.html")[周承民等《活字排版工艺——凸制专业》]，1988年2月第一版第一次印刷，印刷工业出版社],
     via: [Z-Library 影印PDF],
+    categories: ("2-doc", "1988"),
     notes: [
       题名与@source:曹洪奎1979 相同，内容也高度接近，不清楚是什么原因。
 
@@ -702,6 +940,7 @@
     via: [#link(
         "https://ss.zhizhen.com/detail_38502727e7500f2685813c708ce0786ae71c99137e1f57f01921b0a3ea25510134114c969f2eae5c409d083e1d75cb511ee4bf8e7dfbe7254ed60b8f61ffee76030c1ddc408afcba31a0e7397ecd1407",
       )[汇雅电子书影印PDF]#footnote[该地址是我校图书馆统一检索页面，不确定校外能否访问。]],
+    categories: ("1-doc", "1979"),
     notes: [
       题名与@source:周承民1988 相同，内容也高度接近，不清楚是什么原因。
 
@@ -741,6 +980,7 @@
     via: [Anna's Archive `duxiu/initial_release`影印PDF#footnote[
         此书在Anna's Archive有多份文件，各版本似乎是相同影印本的不同包装。此文件元数据相对较全，PDF有书签目录，尽管不分层级。
       ]；Z-Library亦有二进制相同的文件],
+    categories: ("1-doc", "1975"),
     notes: [
       这本书是同作者@source:曹洪奎1979 的基础，因此内容高度重合，尽管题名不同。
 
@@ -762,6 +1002,7 @@
   叶重光1996: (
     brief: [87页（PDF 101页）表5「铅字规格大小对照表」，#link("https://z-lib.sk/book/r9bD6YveqB/印刷出版插图与版式设计.html")[叶重光、叶朝阳《印刷出版插图与版式设计》]，1996年6月第一版第一次印刷，印刷工业出版社，ISBN 7-80000-207-1 / TS·146],
     via: [Z-Library 影印PDF],
+    categories: ("2-doc", "1996"),
     notes: [
       这本书大量描述了字号之间的倍数关系，提到新1号、新2号而未明确给出点数。
 
@@ -803,6 +1044,7 @@
   小史1981: (
     brief: [309页表2我国现用活字大小称谓、种数及其点数规格一览表，300–312页（PDF 354–366页）何步云《中国活字小史》，#link("https://z-lib.sk/book/Gz3M7GWm5E/中国印刷年鉴-1981.html")[《中国印刷年鉴1981》]],
     via: [Z-Library 影印PDF],
+    categories: ("2-doc", "1981"),
     notes: [
       根据#link("https://blog.sina.com.cn/s/blog_59d194650100zi5z.html")[高鸿儒《毕生奉献于出版印刷事业——访印刷界老前辈何步云先生》]（张弥迪2011年11月15日转载自《印刷杂志》1994年03期），作者何步云曾任上海新华印刷厂第一任副厂长、上海印刷学校教务主任。
 
@@ -838,6 +1080,7 @@
   王选1982: (
     brief: [北京大学、潍坊电子计算机厂等于约1982年研发完成的计算机-激光汉字编辑排版系统的改进型#footnote[此前1979年有原理性样机。]],
     via: [《计算机学报》1982年12月23日收到、1984年11月发布的 @王选1984],
+    categories: ("1-doc", "1982"),
     notes: [
       #figure(grid(
         columns: 2,
@@ -877,6 +1120,7 @@
   ),
   zhwiki: (
     brief: [#link("https://zh.wikipedia.org/w/index.php?title=字号_(印刷)&oldid=92592966#相关换算")[相关换算 - 字号 (印刷) - 中文维基百科，2026-05-09版]以及更早版本],
+    categories: ("2-doc", "2008/2017"),
     notes: [
       此词条经过多人编辑，目前比较混乱，只好忽略了。历史大概如下。（日期按UTC+8）
 
@@ -1005,6 +1249,7 @@
   ),
   enwiki: (
     brief: [Comparison table 的 Chinese system 一栏，#link("https://en.wikipedia.org/w/index.php?title=Traditional_point-size_names&oldid=1347503780")[Traditional point-size names - 英文Wikipedia，2026-04-07版]],
+    categories: ("2-doc", "2009/2010"),
     notes: [
       此栏引用了@source:CLReq-main，但与@source:CLReq-main 和@source:CLReq-extra 都有差异（比如 CLReq 未定义八号，而这里却定义了），反而与@source:基准\的数值、定义范围完全相同。
 
@@ -1216,6 +1461,7 @@
   ),
   jawiki-旧: (
     brief: [1967年以前，#link("https://ja.wikipedia.org/w/index.php?title=活字&oldid=108907778#号数活字")[号数活字 - 活字の大きさ（活字大小） - 活字 - 日文维基百科，2026-03-26版]],
+    categories: ("2-doc", "2019"),
     notes: [
       分了「旧号数，1967年以前」「新号数，1967年以后」两个表格，都是#link("https://ja.wikipedia.org/w/index.php?title=活字&diff=prev&oldid=74365704")[2019年9月24日153.237.169.253]添加的，不过无引注，文中也没介绍1967年发生了什么。两表只有初号这一行相同，此处记录前者，@source:jawiki-新\记录后者。
 
@@ -1228,12 +1474,13 @@
   ),
   jawiki-新: (
     brief: [日文维基百科所记1967年以后的版本],
+    categories: ("2-doc", "2019"),
     notes: [
       见@source:jawiki-旧。
 
       由于新旧点数十分接近，*此处将「新□号」当作「□号」处理*，而未像其它数据源那样当作「小□号」处理。
 
-      此外，#link("https://kikakurui.com/z8/Z8305-1962-01.html")[JIS Z 8305：1962 活字の基準寸法]（活字的标准尺寸）规定了活字的点数、毫米数和允差，如下图。表中点数分两列：左列全部为整数；右列有零有整，并且与日文维基百科所记新点数完全对应（尽管这份标准本身完全没有出现「号」字，更未描述点数与号数如何对应）。另外，表下的注释好像说右列尽量不要使用，但该文件此处图文分割乱了，难以看清。
+      此外，#link("https://kikakurui.com/z8/Z8305-1962-01.html")[JIS Z 8305:1962 活字の基準寸法]（活字的标准尺寸）规定了活字的点数、毫米数和允差，如下图。表中点数分两列：左列全部为整数；右列有零有整，并且与日文维基百科所记新点数完全对应（尽管这份标准本身完全没有出现「号」字，更未描述点数与号数如何对应）。另外，表下的注释好像说右列尽量不要使用，但该文件此处图文分割乱了，难以看清。
 
       #figure(image("assets/JIS Z 8305-1962.png"))
     ],
@@ -1241,6 +1488,7 @@
   神田: (
     brief: [日本东京神田的株式会社錦精社《各種活字標準規格表》],
     via: [#link("https://github.com/CTeX-org/ctex-kit/issues/543#issuecomment-747950396")[tanukihee 提供照片]，但#link("https://github.com/CTeX-org/ctex-kit/issues/813#issuecomment-4412583072")[具体来源、年代已不清楚]],
+    categories: ("1-spec", "196X%"),
     notes: [
       #figure(image("assets/神田.jpg", width: 60%))
 
@@ -1258,6 +1506,7 @@
         此文件目前缺少许多元数据，连标题都没有。此书在Anna's Archive另有元数据完善的影印DjVu，但缺少16、17两页之间的「點數體鉛字大小字樣」和最后的「讀者意見表」。
       ]；#link("https://taiwanebook.ncl.edu.tw/zh-tw/book/NCL-9910010362")[臺灣華文電子書庫NCL-9910010362]亦有彩色影印PDF，#link("https://commons.wikimedia.org/wiki/File:NCL-9910010362_活版印刷術.pdf")[Wikimedia Commons同名文件]可下载
     ],
+    categories: ("2-doc", "1942"),
     notes: [
       此书6页（PDF 25页）译者注还提及小五是 $9 pt$，不过并非专门介绍東京，故未抄录。
 
@@ -1314,6 +1563,7 @@
   东京1931: (
     brief: [13–14页（frame 13–14页）活字の尺度を現はす單位，#link("https://dl.ndl.go.jp/pid/1211260")[小林鶯里《出版の實際知識》]，文藝社#footnote[图书馆网页写作「文芸社」。「#link("https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=85DD")[藝]」这个字在中国简化成「艺」，但在日本简化成「芸」。]，昭和六年九月十二日（1931年9月12日#footnote[日本从明治六年（1873年）开始，年月日与公历完全同步，不再是日月共同影响的阴阳历月份。]）印刷，昭和六年九月十六日发行，DOI 10.11501/1211260],
     via: [日本国立国会図書館デジタルコレクション National Diet Library Digital Collections#footnote[不得不说，日本国立国会图书馆真的十分先进：全文搜索比某些图书馆的题名搜索还快，影印时放置标尺色卡，浏览影印本支持跳转章节、下载指定页码范围，影印本分配了自家永久标识符和DOI……]],
+    categories: ("2-doc", "1931"),
     notes: [
       以下几段引文中，直线前方为日文原文，后方为中文翻译。
 
@@ -1406,6 +1656,7 @@
   秀英1903: (
     brief: [ZIP 0008–0009页，Price List of Printing Type 歐文角及定價，株式會社秀英舍鑄造部·活版製造所·#link("https://archive.org/details/seibundo1903specimen")[製文堂《活版見本帖》]，明治三十六年二月（1903年2月）],
     via: [Internet Archive 的#link("https://archive.org/download/seibundo1903specimen/seibundo1903specimen_images.zip/")[`seibundo1903specimen_images.zip`]#footnote[Internet Archive 亦提供PDF，但不如`*_images.zip`清晰。]],
+    categories: ("1-spec", "1903"),
     notes: [
       #link("https://archives.ichigaya-letterpress.jp/library/items/a9d8a5381b99/")[活版見本帖 Type Specimens｜秀英体・活版印刷デジタルライブラリー]（秀英体・活版印刷数字图书馆）有明治四十三年（1910年）七月一日印刷、同年八月十日发行的版本，「Price List of Printing Type 歐文角及定價」看起来完全相同。不过这家图书馆收藏的#link("https://archives.ichigaya-letterpress.jp/library/items/084cef1f7ddc/")[大日本印刷株式会社《主要活字見本帖》]（封底写昭和二十三年十月，即1948年10月）#footnote[資料の説明：「ベントン彫刻機による彫刻母型導入前の電胎母型で鋳造された活字を使用した最後の活字見本帳。発行日は手書きメモによる。」（中文翻译：导入Benton雕刻机雕刻母型前，使用由电胎母型铸造的活字的最后的活字样本册。发行日期根据手写备忘录。）]就完全不同，号数制与点数制分开列出（先列初号至六号宋体和黑体，再列 $36 pt, 32 pt, 18 pt, 13 pt, 12 pt, 9 pt, 8 pt, 6 pt$ 宋体和黑体，然后列 $18 pt, 9 pt$「清朝」），似乎未提号数和点数的映射关系。
 
@@ -1429,6 +1680,7 @@
   京新厂1981: (
     brief: [北京新华字模厂《雕刻字字模字体——样本》，1981],
     via: [山东一位老师傅赠与 r，r 扫描了 PDF 并提供#footnote[此PDF从内部资料节选而来，所以存在一些断链。]；扫描时还摆放了黑白双色比例尺#footnote[r在 commit message 中提示：「测量时请优先以色块宽度为准，最好避免使用刻线。」]],
+    categories: ("1-spec", "1981"),
     notes: [
       该文件规格页未写明号数，所以 PDF 提供了样本页，并覆盖了所有存在的字号。不过「我厂常用字模规格」表格与样本页略有出入。规格表称「点数」，而样本页称「○磅」；规格表有48点，而样本页最大是「初号 42磅」；规格无24点，而样本页有「新一号 24磅」。
 
@@ -1445,6 +1697,7 @@
   华丰厂1963: (
     brief: [各类字模售价及用料参攷表，#link("https://book.kongfz.com/14133/9533907008")[上海華豐铸字製模厰《銅模鉛字样本》]，1963年],
     via: [孔夫子旧書网图文详情，北京市丰台区友情书店，2026年1月25日上书，售价￥168.00],
+    categories: ("1-spec", "1963"),
     notes: [
       此文件、@source:沪一厂1972、@source:沪一厂1978、@source:沪一厂1988 是同一厂不同年代的文件，比较如下。
 
@@ -1470,6 +1723,7 @@
   沪一厂1972: (
     brief: [「各体铅字字型、字数、供应品种参照表」，上海字模一厂（华丰铸字制模厂）《字模与铅字样本》，1972],
     via: [同@source:京新厂1981，r 提供影印 PDF；Anna's Archive `duxiu/initial_release`亦有#link("https://annas-archive.gl/md5/6b6959ea87efa54c653edb08cee4d241")[上海字模一厂《字模与铅字样本》全文影印PDF]],
+    categories: ("1-spec", "1972"),
     notes: [
       @source:华丰厂1963、此文件、@source:沪一厂1978、@source:沪一厂1988 是同一厂不同年代的文件，但数值、定义范围不全相同，详见@source:华丰厂1963 中的比较。
 
@@ -1493,6 +1747,7 @@
   沪一厂1978: (
     brief: [「铅字品种规格参照表」，上海字模一厂（华丰铸字制模厂）《字模与铅字》，1978],
     via: [同@source:京新厂1981，r 提供影印 PDF],
+    categories: ("1-spec", "1978"),
     notes: [
       @source:华丰厂1963、@source:沪一厂1972、此文件、@source:沪一厂1988 是同一厂不同年代的文件，但数值、定义范围不全相同，详见@source:华丰厂1963 中的比较。与1972年文件相比，1978年文件只是增加了七号 $6 pt$ 和数学符号 $5.25 pt$（后者未计入 data）。
 
@@ -1516,6 +1771,7 @@
   沪一厂1988: (
     brief: [#link("https://book.kongfz.com/399379/7995286800")[上海字模一厂《字模与铅字（中西字模）#footnote[书脊写「字模与铅字」，封面插图中写「中西字模」。]》]，上海市美術印刷厂印刷，1988年],
     via: [孔夫子旧書网图文详情，封面、书脊、封底与1、7、33页取自甘肃省甘南藏族自治州自知书斋（2025年3月11日上书，售价￥120.00），11页取自#link("https://book.kongfz.com/323574/1717725727")[云南省昆明市源鹏书屋]（2019年12月27日上书，售价￥180.00）],
+    categories: ("1-spec", "1988"),
     notes: [
       @source:华丰厂1963、@source:沪一厂1972、@source:沪一厂1978、此文件是同一厂不同年代的文件，但数值、定义范围不全相同，详见@source:华丰厂1963 中的比较。
 
@@ -1537,6 +1793,7 @@
   丹江厂1975: (
     brief: [末页整付铅字应备字数及铅字重量参考表以及正文样本，#link("https://book.kongfz.com/364303/6621665391")[湖北丹江文字六〇五厂《字模及铅字 临时样本》]，说明页落款1975年9月],
     via: [孔夫子旧書网图文详情，封面、8–9页、规格页取自辽宁省沈阳市明枫居的书摊（2024年1月2日上书，售价￥80.00），说明页至1页取自#link("https://book.kongfz.com/261367/10022840631")[云南省大理白族自治州将军故里]（2026年5月11日上书，售价￥30.00）],
+    categories: ("1-spec", "1975"),
     notes: [
       与@source:丹江厂1980 是同一厂不同年代的文件。
 
@@ -1561,6 +1818,7 @@
   丹江厂1980: (
     brief: [「铅字品种规格参照表」，湖北丹江文字六〇五厂（上海字模二厂）《字模与铅字样本》，1980年11月],
     via: [同@source:京新厂1981，r 提供影印 PDF],
+    categories: ("1-spec", "1980"),
     notes: [
       与@source:丹江厂1975 是同一厂不同年代的文件，与@source:华丰厂1963 及@source:沪一厂1972 等是临近地区不同厂不同年代的文件。据 r 描述，该厂旧称上海字模二厂，不过三线建设时期就迁去了湖北，字模实物上的铭文也写丹江而非上海。
 
@@ -1581,6 +1839,7 @@
   沪新厂TTK: (
     brief: [末页表格的「新华厂」列，#link("https://www.thetype.com/social/know-20260116/")[The Type — 中文字号解读·知道Know]#footnote[现在该网页的```html <body>```似乎无法正常加载，但```html <head>```正常。]，2026年1月16日],
     via: [#link("https://mp.weixin.qq.com/s/q9bkC4q-K3JAkUIkiNcDMw")[微信公众号推送《The Type Know · 中文字号解读》]或 #link("https://www.instagram.com/p/DTkErnAEYar/")[Instagram《The Type Know · 中文字号解读》]],
+    categories: ("2-doc", "2026"),
     notes: [
       原文将一号称作「头号」。原文还有「6点」，这里未记录。
 
@@ -1595,6 +1854,7 @@
   ),
   商务厂TTK: (
     brief: [The Type Know 末页表格的「商务厂」列],
+    categories: ("2-doc", "2026"),
     notes: [
       见@source:沪新厂TTK。原文将一号称作「头号」。
 
@@ -1603,6 +1863,7 @@
   ),
   中华厂TTK: (
     brief: [The Type Know 末页表格的「中华厂」列],
+    categories: ("2-doc", "2026"),
     notes: [
       见@source:沪新厂TTK。原文将一号称作「头号」。原文还有「6点」，这里未记录。
     ],
@@ -1610,6 +1871,7 @@
   长新厂1973: (
     brief: [112页（PDF 64页）活字规格化与我厂对照表，#link("https://archive.org/details/printing-changchun-xinhua-1973")[长春新华印刷厂《活版工艺手册》]，1973年5月],
     via: [购买自孔夫子旧書网，#link("https://book.kongfz.com/13796/9982749547")[吉林省长春市轩辕阁，2026年4月29日上书，售价￥10.00]；后扫描为PDF并上传至 Internet Archive],
+    categories: ("1-spec", "1973"),
     notes: [
       该表有「点数」「字号名称」「毫米」「我厂现有规格」四列。其中小二 $18 pt$、七号 $5.25 pt$ 缺少「我厂现有规格」，但记录时只考虑前两列，所以仍记录；$4.5 pt$ 既无「我厂现有规格」，也无对应号数，此处不记录。另外，小二、小四、小五、小六在原文都写作「新□号」，而小初在原文写作「小初号」。
 
@@ -1652,6 +1914,7 @@
   黔灵厂1963: (
     brief: [貴阳市云岩#link("https://book.kongfz.com/453814/9091555776")[黔灵印刷合作工廠《各种新式鉛字及花边样本》]，1963年第一辑],
     via: [孔夫子旧書网图文详情，安徽省安庆市安庆状元堂书店，2025年11月10日上书，售价￥350.00],
+    categories: ("1-spec", "1963"),
     notes: [
       注意样本中有两种四号：17页数字和21页汉字的四号是 $14 pt$，而17页「四号英文及注音符号」是 $13.75 pt$。此处按 $14 pt$ 记录。
 
@@ -1667,6 +1930,7 @@
   哈厂1966: (
     brief: [各号鉛字重量字数参考表，#link("https://book.kongfz.com/515214/10133591263")[哈尔滨铅字铸造厂《铅字及花边样本》]，说明页落款1966年12月1日],
     via: [孔夫子旧書网图文详情，黑龙江省哈尔滨市下雪的哈尔滨，2026年6月9日上书，售价￥99.00],
+    categories: ("1-spec", "1966"),
     notes: [
       #figure({
         let page(p, ..args) = image("assets/哈厂1966-节选.pdf", page: p, ..args)
@@ -1680,6 +1944,7 @@
   常州厂1983: (
     brief: [末页各种机刻铜模（西文）规格以及正文样本，#link("https://book.kongfz.com/27072/6998747224")[常州武进县卢家巷字模厂《铜模铅字 临时样本》]，1983年10月],
     via: [孔夫子旧書网图文详情，江苏省无锡市壮壮古旧书店，2024年5月25日上书，售价￥120.00],
+    categories: ("1-spec", "1983"),
     notes: [
       注意末页规格页目前只找到了透过纸张背面的照片，增强后勉强能认清号数与点数。样本页照片中有大号、二号、三号、四号对应的点数，可辅助验证。
 
@@ -1700,6 +1965,7 @@
         照片中封面年份被撕掉了，只有月份；1971年是卖家的说法，大约由其它页面推断。
       ]],
     via: [孔夫子旧書网图文详情，河北省唐山市红色园地的书摊，2023年8月24日上书，售价￥100.00],
+    categories: ("1-spec", "1971?"),
     notes: [
       此文件有许多少见字号，包括七倍至五倍（注意是「倍」而非「行」）与大初、大一。另外「镑」左边是「钅」而非「石」。
 
@@ -1718,6 +1984,7 @@
   津报厂1987: (
     brief: [各号字体一览表，#link("https://book.kongfz.com/167905/1244427386")[天津日報《各种铅字花边样本》]，1987年3月],
     via: [孔夫子旧書网图文详情，天津市南开区莉莉二手书店，2019年4月26日上书，售价￥200.00],
+    categories: ("1-spec", "1987"),
     notes: [
       表中还有五号、九磅，且前者未写点数。此处未记录二者。
 
@@ -1735,6 +2002,7 @@
   重庆厂1980: (
     brief: [#link("https://book.kongfz.com/19636/9257612879")[重庆字模厂《铅字与花边》]，说明页落款1980年9月],
     via: [孔夫子旧書网图文详情，封面、说明、业务范围与19、67、107页取自北京市昌平区沫若书店（2025年12月12日上书，售价￥800.00），45、77、103页取自#link("https://book.kongfz.com/235145/5139969779")[贵州省遵义市新区旧书店]（2022年8月13日上书，售价￥40.00）],
+    categories: ("1-spec", "1980"),
     notes: [
       已知页面凑不齐字号。
 
@@ -1750,6 +2018,7 @@
   申报1935: (
     brief: [DjVu 27页本館各種鉛字名稱及面積，#link("https://annas-archive.gl/md5/d60b4e040dc7a3109ffa5983d9bedd9b")[《申報槪况》]，民國廿四年五月（1935年5月）],
     via: [Anna's Archive `upload/duxiu_main`影印DjVu],
+    categories: ("1-spec", "1935"),
     notes: [
       影印本封面「民國廿四年五月」中的「廿四」不太清楚，但根据 DjVu 12页《本館印刷機之進步》最后一栏「去年（民國廿三年）」的说法，封面「廿四」应该确凿无疑。其它各页的照片标题、文章落款、统计图坐标轴等也兼容这一判断。
 
@@ -1773,6 +2042,7 @@
       }
       Anna's Archive `upload/wikilib_2025_01/Republican_Era_Books_in_the_National_Library_of_China`影印PDF#footnote[此书在Anna's Archive有多份文件。此文件相对更清晰，尽管目前缺少许多元数据，连标题都没有。]
     ],
+    categories: ("2-doc", "1936"),
     notes: [
       作者刘觉民很可能是参加过辛亥革命的先驱。
 
@@ -1860,6 +2130,7 @@
   王益1946: (
     brief: [13–14页（PDF 15–16页）英文字母的大小和體子，#link("https://annas-archive.gl/md5/b953ac928779c74890726d85357a498a")[王益《出版工作基本知識》]，山东新華書店出版，后记落款1946年7月13日#footnote[影印本没有版权页，本身难以判断出版年份。网传该书出版于1956年，与后记落款相差十年，恐怕是1946年之误；另外，#link("https://annas-archive.gl/md5/726ece2b1e43301112708ea65421fbd7")[王益、周保昌、王文彬等《战争年代的山东新华书店》]（山东人民出版社，1990年9月第1版，1990年9月第1次印刷，ISBN 7-209-00736-9）「附录二：建国前山东新华书店出版图书简目」之242页（PDF 252页）认为此书出版于1946年。]],
     via: [Anna's Archive `duxiu/initial_release`影印PDF],
+    categories: ("1-doc", "1946"),
     notes: [
       据#link("https://www.tup.tsinghua.edu.cn/bookscenter/book_01729501.html")[清华大学出版社相关图书内容简介]，此书作者与@source:曹洪奎1979 提及的王益是同一人，1917年生，1935年考入上海生活书店当练习生，曾任山东新华书店（此书出版社）经理，后来还担任国家出版局局长、顾问#footnote[国家出版局这一机构反复更名、屡次调整，很难查证。]。
 
@@ -1891,6 +2162,7 @@
   李中和1952: (
     brief: [#link("https://annas-archive.gl/md5/dda27accdbca257d6957f4b08f0e24aa")[李中和《現代工業小叢書——鉛印術》]，商務印書館出版，1952年3月初版],
     via: [Anna's Archive `duxiu/initial_release`影印PDF],
+    categories: ("2-doc", "1952"),
     notes: [
       此书有些章节与@source:东京1942 大段雷同。
 
@@ -1938,6 +2210,7 @@
   何继曾1959: (
     brief: [26–27页（PDF 30–31页）表2 鉛字和鉛件身体固定規格推算表及后文「特号字为42点」，#link("https://annas-archive.gl/md5/75e4972187b639cb6df1aa8d5ce029f5")[何继曾《出版、印刷技术丛书——排字浅说》]，商务印书館出版，人民日报印刷厂印刷，宣武装訂厂装訂，1959年12月初版，1959年12月北京第1次印刷，统一书号15017·154],
     via: [Anna's Archive `duxiu/initial_release`影印PDF],
+    categories: ("1-doc", "1959"),
     notes: [
       此书汉字时繁时简，很神奇。比如封面写「何继曾」，而版权页、前言写「何繼曾」；再比如封面写「商务印书館」，而版权页写「商务印書館」，既不同于今日简体「商务印书馆」，也不同于该馆商标用的「商務印書館」。
 
@@ -1966,6 +2239,7 @@
   科学1978: (
     brief: [108页（PDF 115页）附录 11. 印刷字体、字号 →（4）汉字与外文鉛字大小对照表的首末两列，#link("https://annas-archive.gl/md5/12000f8aec868722ccaa9126390dc46e")[科学出版社《著译审校手册》]，1978年#footnote[影印本无版权页，内封写「1978」，前言落款「一九七七年六月」。]],
     via: [Anna's Archive `lgli`影印PDF],
+    categories: ("1-doc", "1978"),
     notes: [
       据前言，此书修改补充自1964年同名手册。
 
@@ -2010,6 +2284,7 @@
   手册1989: (
     brief: [40–41页（PDF 42–43页）八、常用字体、字号及字样，《#link("https://annas-archive.gl/md5/f456a2b04d1ed044e92a10d48075cfbf")[印刷技术手册]·#link("https://annas-archive.gl/md5/303bebbb4b412b2e163a860267a351fd")[第五篇 管理篇]》，上海科学技术出版社，1989年11月第1版，1989年11月第1次印刷，ISBN 7-5323-0603-8 / TS·44],
     via: [Anna's Archive `duxiu/initial_release`影印PDF（每篇是独立文件，仅第一篇有版权信息）],
+    categories: ("2-doc", "1989"),
     notes: [
       此书每篇各编页码，第五篇的页码前缀5，但此处记录时省略。
 
@@ -2023,27 +2298,18 @@
     ],
   ),
   CSS: (
-    brief: [CSS `font-size`相关习惯],
+    brief: [CSS absolute-size关键字],
+    categories: ("1-code", "1996~/2002"),
     notes: [
-      #let rem = 16 / 96 * 72
-      #assert.eq(rem, 12)
-
-      #let draw-rel(pairs, width: 20em) = figure(draw-as-log-period(
-        pairs,
-        width: width,
-        height: 12em,
-        p-ref: rem,
-        mark-scale: 1.4, // 避免 Tailwind 9xl 太挤
-      ))
+      #let quote-en(body) = quote(text(font: "Liberation Serif", bottom-edge: "baseline", body))
 
       CSS针对网页与屏幕显示，最初又只考虑英语，所以谈不上汉字号数与点数的映射关系。不过CSS也有分级设置`font-size`的习惯，故顺便记录一下。
 
-      CSS规定默认`font-size`是medium。对于当前主流平台（现代主流浏览器、高分辨率屏幕），这个默认值相当于CSS中的`16px`，等于CSS中的`12pt`，也等于物理长度 $12 pt$；不过对于其它平台，只能保证CSS中的`16px`等于CSS中的`12pt`，而无法保证`font-size`默认值、物理长度 $12 pt$ 与它的关系。为便于理解，以下画图时均以默认值作为 $12 pt$。
+      CSS规定默认`font-size`是medium。对于当前主流平台（现代主流浏览器、高分辨率屏幕），这个默认值相当于CSS中的`16px`，等于CSS中的`12pt`，也等于物理长度 $12 pt$；不过对于其它平台，只能保证CSS中的`16px`等于CSS中的`12pt`，而无法保证`font-size`默认值、物理长度 $12 pt$ 与它的关系。为便于理解，以下画图时均以默认值作为 $12 pt$，另有说明时除外。
 
       #link("https://drafts.csswg.org/css-fonts-4/#absolute-size-mapping")[§2.5.1. Absolute Size Keyword Mapping Table - CSS Fonts Module Level 4 | W3C编辑草稿]（2026-08-18版）规定了几种absolute-size关键字。这些关键字可用于设置`font-size`，不过实际并不常用。此节内容如下。
 
-      #quote[
-        #set text(font: "Liberation Serif", bottom-edge: "baseline")
+      #quote-en[
         The following table provides user agent guidelines for the absolute-size scaling factor and their mapping to HTML heading and absolute font-sizes. The "medium" value is used as the reference middle value. The user agent may fine-tune these values for different fonts or different types of display devices.
 
         #figure({
@@ -2082,14 +2348,23 @@
           )
         })
 
-        #block(width: 100%, stroke: (left: rgb("#52e052") + 2pt), inset: (left: 0.5em), outset: (y: 0.5em))[
-          *#upper[Note:]* #h(1em, weak: true) In CSS1, the suggested scaling factor between adjacent indexes was 1.5, which user experience proved to be too large. In CSS2, the suggested scaling factor for computer screen between adjacent indexes was 1.2 which still created issues for the small sizes. The new scaling factor varies between each index to provide a better readability.
+        #w3c-note[
+          In CSS1, the suggested scaling factor between adjacent indexes was 1.5, which user experience proved to be too large. In CSS2, the suggested scaling factor for computer screen between adjacent indexes was 1.2 which still created issues for the small sizes. The new scaling factor varies between each index to provide a better readability.
         ]
 
         To preserve readability, an UA applying these guidelines should nevertheless avoid creating font sizes of less than 9 device pixels per EM unit.
       ]
 
+      #let rem = 16 / 96 * 72
+      #assert.eq(rem, 12)
+
       若以 medium 作为 $#rem pt$，则这些absolute-size关键字对应的点数如下图。
+      #let draw-rel(pairs, width: 22em, p-ref: rem) = figure(draw-as-log-period(
+        pairs,
+        width: width,
+        height: 12em,
+        p-ref: p-ref,
+      ))
       #draw-rel(
         (
           xx-small: 3 / 5,
@@ -2105,6 +2380,117 @@
           .map(((g, p)) => (g, calc.round(p * rem, digits: 4))),
         width: 24em,
       )
+
+      CSS规范中这段描述的历史如下。注意W3C网站只能逐一查看每个版本自身的内容，而无法方便地比较版本，因此以下也尽量列出了「前一版本」。
+
+      + #link("https://www.w3.org/TR/REC-CSS1-961217#font-size")[1996-12-17 CSS 1推荐标准]的描述如下。
+
+        #quote-en[
+          An #"<absolute-size>" keyword is an index to a table of font sizes computed and kept by the UA. Possible values are: [ xx-small | x-small | small | medium | large | x-large | xx-large ]. On a computer screen a scaling factor of 1.5 is suggested between adjacent indexes; if the 'medium' font is 10pt, the 'large' font could be 15pt. Different media may need different scaling factors. Also, the UA should take the quality and availability of fonts into account when computing the table. The table may be different from one font family to another.
+        ]
+        若以 medium 作为 $#10 pt$，按公比 $1.5$，则可算得如下图。
+        #draw-rel(
+          ("xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large")
+            .enumerate()
+            .map(((n, g)) => (g, calc.round(10 * calc.pow(1.5, n - 3), digits: 4))),
+        )
+
+      + #link("https://www.w3.org/TR/WD-CSS2-971104/fonts.html#value-def-absolute-size")[1997-11-04 CSS 2工作草稿]把 #text(lang: "en", "[ xx-small … xx-large ]") 放到了单独一行。
+
+      + #link("https://www.w3.org/TR/1998/PR-CSS2-19980324/fonts.html#value-def-absolute-size")[1998-03-24 CSS 2拟推荐标准]的描述如下。（其前一版本#link("https://www.w3.org/TR/1998/WD-css2-19980128/fonts.html#value-def-absolute-size")[1998-01-28]尚按公比 $1.5$。）
+        #quote-en[
+          An #"<absolute-size>" keyword refers to an entry in a table of font sizes computed and kept by the user agent. Possible values are:
+
+          [ xx-small | x-small | small | medium | large | x-large | xx-large ]
+
+          On a computer screen a scaling factor of 1.2 is suggested between adjacent indexes; if the 'medium' font is 12pt, the 'large' font could be 14.4pt. Different media may need different scaling factors. Also, the user agent should take the quality and availability of fonts into account when computing the table. The table may be different from one font family to another.
+
+          *Note: In CSS1, the suggested scaling factor between adjacent indexes was 1.5 which user experience proved to be too large.*
+        ]
+        若以 medium 作为 $#12 pt$，按公比 $1.2$，则可算得如下图。
+        #draw-rel(
+          ("xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large")
+            .enumerate()
+            .map(((n, g)) => (g, calc.round(rem * calc.pow(1.2, n - 3), digits: 4))),
+        )
+
+      + #link("https://www.w3.org/TR/2002/WD-css3-fonts-20020802/#font-size")[2002-08-02 CSS 3工作草稿]的描述如下。这一版将比例改为现值并用表格展示；但xxx-large仍非可能取值，表格末列也只填了比例和 XHTML font sizes，而未填absolute-size。（其前一版本#link("https://www.w3.org/TR/2001/WD-css3-fonts-20010731/#value-def-absolute-size")[2001-07-31]尚按公比 $1.2$。）
+        #quote-en[
+          The following table provides user agent's guideline for the absolute-size scaling factor and their mapping to XHTML heading and absolute font-sizes. The 'medium' value is used as the reference middle value. The user agent may fine tune these values for different fonts or different types of display devices.
+
+          #figure({
+            set text(0.8em)
+            set par(justify: false)
+            set raw(lang: "html")
+            set math.frac(style: "skewed")
+            table(
+              columns: 9,
+              stroke: 0.5pt,
+              table.header(
+                [*CSS absolute-size values*],
+                [xx-small],
+                [x-small],
+                [small],
+                [medium],
+                [large],
+                [x-large],
+                [xx-large],
+                [],
+              ),
+
+              [*scaling factor*],
+              $ 3/5 $, $ 3/4 $, $ 8/9 $, $ 1 $, $ 6/5 $, $ 3/2 $, $ 2/1 $, $ 3/1 $,
+
+              [*XHTML headings*],
+              `h6`, [], `h5`, `h4`, `h3`, `h2`, `h1`, [],
+              table.hline(stroke: 0.5pt + gray),
+
+              [*XHTML font sizes*],
+              [1], [], [2], [3], [4], [5], [6], [7],
+            )
+          })
+
+          _*Note 1.* To preserve readability, an UA applying these guidelines should nevertheless avoid creating font-size resulting in less than 9 pixels per EM unit on a computer display#footnote[原文的display和句号之间有个空格。]._
+
+          _*Note 2.* In CSS1, the suggested scaling factor between adjacent indexes was 1.5 which user experience proved to be too large. In CSS2, the suggested scaling factor for computer screen between adjacent indexes was 1.2 which still created issues for the small sizes. The new scaling factor varies between each index to provide a better readability._
+        ]
+        总结如下图。
+        #draw-rel(
+          (
+            xx-small: 3 / 5,
+            x-small: 3 / 4,
+            small: 8 / 9,
+            medium: 1,
+            large: 6 / 5,
+            x-large: 3 / 2,
+            xx-large: 2,
+            "（空）": 3,
+          )
+            .pairs()
+            .map(((g, p)) => (g, calc.round(p * rem, digits: 4))),
+        )
+
+      + #link("https://www.w3.org/TR/2013/WD-css-fonts-3-20130711/#propdef-font-size")[2013-07-11 CSS 3最后工作草稿]把XHTML的说法改成了HTML。(其前一版本#link("https://www.w3.org/TR/2013/WD-css3-fonts-20130212/#propdef-font-size")[2013-02-12]还是XHTML。）
+
+      + #link("https://www.w3.org/TR/2019/WD-css-fonts-4-20191113/#absolute-size-mapping")[2019-11-13 CSS 4工作草稿]添加了xxx-large。（其前一版本#link("https://www.w3.org/TR/2018/WD-css-fonts-4-20180920/#absolute-size-mapping")[2018-09-20]尚无xxx-large。）
+    ],
+  ),
+  Tailwind: (
+    brief: [Tailwind CSS `font-size`工具类],
+    categories: ("1-code", "2017/2020"),
+    notes: [
+      #let rem = 16 / 96 * 72
+      #assert.eq(rem, 12)
+
+      #let draw-rel(pairs, width: 20em) = figure(draw-as-log-period(
+        pairs,
+        width: width,
+        height: 12em,
+        p-ref: rem,
+        mark-scale: 1.4, // 避免 9xl 太挤
+      ))
+
+      Tailwind CSS 可以理解为一种生成CSS的方式。与@source:CSS 一样，Tailwind CSS也谈不上汉字号数与点数的映射关系，这里只是顺便记录。
 
       #link("https://tailwindcss.com/docs/font-size")[Tailwind CSS 提供了设置`font-size`的工具类]，例如`text-sm`、`text-lg`。这些工具类的默认效果定义于#link("https://github.com/tailwindlabs/tailwindcss/blob/90f8ff41c8e2a4d17bc76921e23e9d672123da76/packages/tailwindcss/theme.css#L347-L372")[源代码`theme.css`]，具体如下。注意字号、行距其实会同时变化，尽管此处只关心字号。
 
