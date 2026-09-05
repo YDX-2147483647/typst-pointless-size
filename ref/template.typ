@@ -3,7 +3,17 @@
 
 /// A wrapper of `document(path, body)`.
 #let doc(path, body) = if mode == "split-pdf" {
-  document(path, body)
+  context {
+    let title = {
+      let outer = document.title
+      let inner = if path == "appendices.pdf" [附录] else {
+        // 除附录以外，分割文件时保证每文件首个标题都是其中唯一顶层标题
+        query(selector(heading).within(here())).first(default: (body: none)).body
+      }
+      if inner != none [#inner | #outer] else { outer }
+    }
+    document(path, body, title: title)
+  }
 } else {
   body
 }
@@ -100,6 +110,15 @@
         raw(revision)
       }
     })
+
+    if mode == "split-pdf" [
+      本文件提供*分章版*与#link("../ref.pdf")[合集版]，前者适合在线浏览，后者适合下载存档。\
+      您当前查看的是分章版。单击此页目录可跳转到各个文件，单击每页页眉页脚可在文件间跳转。
+    ] else [
+      本文件提供#link("./ref/index.pdf")[分章版]与*合集版*，前者适合在线浏览，后者适合下载存档。\
+      您当前查看的是合集版。利用PDF书签目录可在页面间跳转。
+    ]
+    v(1em)
 
     [#outline(title: none, depth: 2)<outline>]
 

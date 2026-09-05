@@ -113,7 +113,7 @@
 #v(1em)
 
 #context {
-  let targets = query(selector(std.link).before(<sec:bibliography>))
+  let targets = query(selector(std.link).after(<outline>).before(<sec:bibliography>))
     .filter(it => type(it.dest) == str)
     .map(it => (
       it,
