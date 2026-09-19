@@ -3,6 +3,14 @@
 #let pt = "pt"
 // 描述点数时，优先使用原文说法，若不针对特定原文，则写成 $1 pt$。不要写成 #1pt，因为这种写法会缩减精度，例如 #7.875pt 会被显示成 7.88pt。
 
+#let open-library(id) = {
+  if type(id) == content {
+    id = id.text
+  }
+  assert(id.starts-with("OL") and id.ends-with("M")) // Use edition (M), not work (W)
+  link("https://openlibrary.org/books/" + id, id)
+}
+
 // 某些资料自身前后不一致，或者情况比较复杂。这时可在 notes 中利用以下`draw`函数描述情况
 #import "visualize.typ": draw-as-log-period
 #let draw(csv, width: 20em, height: 12em) = figure(draw-as-log-period(
@@ -903,7 +911,7 @@
     ],
   ),
   周承民1988: (
-    brief: [表1-2　几种常用字号，#link("https://z-lib.sk/book/3zje0vQX9j/活字排版工艺.html")[周承民等《活字排版工艺——凸制专业》]，1988年2月第一版第一次印刷，印刷工业出版社],
+    brief: [表1-2　几种常用字号，#link("https://z-lib.sk/book/3zje0vQX9j/活字排版工艺.html")[周承民等《活字排版工艺——凸制专业》]，1988年2月第一版第一次印刷，印刷工业出版社，#open-library[OL61807789M]],
     via: [Z-Library 影印PDF],
     categories: ("2-doc", "1988"),
     notes: [
@@ -936,7 +944,7 @@
     ],
   ),
   曹洪奎1979: (
-    brief: [曹洪奎《活字排版工艺》，轻工业出版社出版，张家口地区印刷厂印制，封面写1979年，内页写1983年9月第一版第三次印刷#footnote[二者相差四年，不知何故。]，统一书号15042·1509],
+    brief: [曹洪奎《活字排版工艺》，轻工业出版社出版，张家口地区印刷厂印制，封面写1979年，内页写1983年9月第一版第三次印刷#footnote[二者相差四年，不知何故。]，统一书号15042·1509，#open-library[OL62536590M]],
     via: [#link(
         "https://ss.zhizhen.com/detail_38502727e7500f2685813c708ce0786ae71c99137e1f57f01921b0a3ea25510134114c969f2eae5c409d083e1d75cb511ee4bf8e7dfbe7254ed60b8f61ffee76030c1ddc408afcba31a0e7397ecd1407",
       )[汇雅电子书影印PDF]#footnote[该地址是我校图书馆统一检索页面，不确定校外能否访问。]],
@@ -976,7 +984,7 @@
   曹洪奎1975: (
     brief: [#link("https://annas-archive.gl/md5/f2b5b81fc68d9c05f14b44199c623d95")[曹洪奎《铅印排版技术》]，北京人民出版社#footnote[
         注意「北京人民出版社」并不等于「人民出版社」。在此书版权页，北京人民出版社的「人民出版社」五字确实用了毛泽东题词标准体；不过#link("https://www.dswxyjy.org.cn/n/2014/0512/c222139-25006102.html")[陈有和《毛泽东为人民出版社题词》]（2014年5月12日被转发于中共中央党史和文献研究院网站）援引人民出版社1951年《出版周报》：「地方人民出版社的地名（凡冠在人民出版社之上的，不论印在书刊上，信封、信笺上，刻制图章、招牌），一律用老宋体，以资统一。」根据今日网上说法，人民出版社与地方人民出版社基本没有关系，不过不知1975年时是什么情况。
-      ]出版，冶金工业出版社印刷厂印制，1975年10月第1版，1975年10月第1次印刷，统一书号15071·9],
+      ]出版，冶金工业出版社印刷厂印制，1975年10月第1版，1975年10月第1次印刷，统一书号15071·9，#open-library[OL62536528M]],
     via: [Anna's Archive `duxiu/initial_release`影印PDF#footnote[
         此书在Anna's Archive有多份文件，各版本似乎是相同影印本的不同包装。此文件元数据相对较全，PDF有书签目录，尽管不分层级。
       ]；Z-Library亦有二进制相同的文件],
@@ -1496,7 +1504,7 @@
     ],
   ),
   东京1942: (
-    brief: [17–18页（PDF 37–38页）「把舊有的鉛字，用點數體制精密的計算起來，有如次表（以日本東京鑄地#footnote[原文如此，大约是指築地。]活版所鉛字為標準）……」，#link("https://annas-archive.gl/md5/5e8449c0511568a1edb564020a1bbe7c")[俊山幸男《活版印刷術》，蘇士清译]，國立四川造紙印刷科職業學校出版部，民國三十一年九月（1942年9月）初版，#link("https://openlibrary.org/books/OL62414572M")[OL62414572M]],
+    brief: [17–18页（PDF 37–38页）「把舊有的鉛字，用點數體制精密的計算起來，有如次表（以日本東京鑄地#footnote[原文如此，大约是指築地。]活版所鉛字為標準）……」，#link("https://annas-archive.gl/md5/5e8449c0511568a1edb564020a1bbe7c")[俊山幸男《活版印刷術》，蘇士清译]，國立四川造紙印刷科職業學校出版部，民國三十一年九月（1942年9月）初版，#open-library[OL62414572M]],
     via: [
       #show raw: it => {
         show "_": "_" + sym.zws // Allow line break
@@ -2034,7 +2042,7 @@
     ],
   ),
   报业1936: (
-    brief: [#link("https://annas-archive.gl/md5/9dd6afeae7aa5b47ee1c04e88ddf1ed3")[劉覺民《報業管理概論》]，商務印書館，民國二十五年六月（1936年6月）初版，#link("https://openlibrary.org/books/OL62414970M")[OL62414970M]],
+    brief: [#link("https://annas-archive.gl/md5/9dd6afeae7aa5b47ee1c04e88ddf1ed3")[劉覺民《報業管理概論》]，商務印書館，民國二十五年六月（1936年6月）初版，#open-library[OL62414970M]],
     via: [
       #show raw: it => {
         show "_": "_" + sym.zws // Allow line break
@@ -2128,7 +2136,7 @@
     ],
   ),
   王益1946: (
-    brief: [13–14页（PDF 15–16页）英文字母的大小和體子，#link("https://annas-archive.gl/md5/b953ac928779c74890726d85357a498a")[王益《出版工作基本知識》]，山东新華書店出版，后记落款1946年7月13日#footnote[影印本没有版权页，本身难以判断出版年份。网传该书出版于1956年，与后记落款相差十年，恐怕是1946年之误；另外，#link("https://annas-archive.gl/md5/726ece2b1e43301112708ea65421fbd7")[王益、周保昌、王文彬等《战争年代的山东新华书店》]（山东人民出版社，1990年9月第1版，1990年9月第1次印刷，ISBN 7-209-00736-9）「附录二：建国前山东新华书店出版图书简目」之242页（PDF 252页）认为此书出版于1946年。]],
+    brief: [13–14页（PDF 15–16页）英文字母的大小和體子，#link("https://annas-archive.gl/md5/b953ac928779c74890726d85357a498a")[王益《出版工作基本知識》]，山東新華書店出版，后记落款1946年7月13日#footnote[影印本没有版权页，本身难以判断出版年份。网传该书出版于1956年，与后记落款相差十年，恐怕是1946年之误；另外，#link("https://annas-archive.gl/md5/726ece2b1e43301112708ea65421fbd7")[王益、周保昌、王文彬等《战争年代的山东新华书店》]（山东人民出版社，1990年9月第1版，1990年9月第1次印刷，ISBN 7-209-00736-9，#open-library[OL62542466M]）「附录二：建国前山东新华书店出版图书简目」之242页（PDF 252页）认为此书出版于1946年。]，#open-library[OL62542460M]],
     via: [Anna's Archive `duxiu/initial_release`影印PDF],
     categories: ("1-doc", "1946"),
     notes: [
