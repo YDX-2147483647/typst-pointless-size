@@ -1,4 +1,4 @@
-#import "@local/ribbony:0.1.1": label.default-linear-label-drawer, layout, ribbon-stylizer, sankey-diagram, tinter
+#import "@preview/ribbony:0.1.1": label.default-linear-label-drawer, layout, ribbon-stylizer, sankey-diagram, tinter
 #import "data.typ": data
 
 = 倍数系
